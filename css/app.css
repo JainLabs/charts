@@ -1,0 +1,11 @@
+body {
+	margin-top: 30px;
+	background-image: url('http://subtlepatterns.com/patterns/purty_wood.png');
+}
+
+header .logo {
+	text-align: center;
+	font-family: 'Lobster', Arial, cursive;
+	font-weight: 140;
+	font-size: 64px;
+}
