@@ -9,8 +9,8 @@ Simple.
 1. Include the charting file that you need.  
 ```<script src="chartjs/educhart.js">```  
 2. Insert the following Javascript code where you would like to place the chart  
-```<script>
-var educhart = new Educhart();
-educhart.init();
-educhart.charts.donut.create({'math':1,'science':2});
-</script>```
+`<script>  
+var educhart = new Educhart();  
+educhart.init();  
+educhart.charts.donut.create({'math':1,'science':2});  
+</script>`
