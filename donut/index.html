@@ -1,15 +1,17 @@
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html>
-  <head>
-    <title>Donut Chart</title>
-    <script type="text/javascript" src="../d3.v2.js"></script>
-    <style type="text/css">
-      body {
-        font: 10px sans-serif;
-      }
-    </style>
-  </head>
-  <body>
+<head>
+  <title>Donut Chart</title>
+
+  <script src="../d3.v2.js"></script>
+</head>
+
+<body>
+  <div id="figure"></div>
     <script type="text/javascript" src="donut.js"></script>
-  </body>
+    <script type="text/javascript">
+    donut([172,136,135,10],
+      ["Awesomeness", "Coolness", "Epicness", "Evil-ness"]);
+    </script>
+</body>
 </html>
