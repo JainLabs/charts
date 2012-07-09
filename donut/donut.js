@@ -1,107 +1,56 @@
-function donut(dat,labels,width,height) {
-  width = width || 400;
-  height = height || 400;
-  labels = labels || new Array(dat.length);
-  var outerRadius = Math.min(width, height) / 2,
-      innerRadius = outerRadius * .6,
-      n = dat.length,
-      q = 0,
-      data0 = dat,
-      data1 = d3.range(n).map(Math.random),
-      data,
-      color = d3.scale.category20(),
-      arc = d3.svg.arc(),
-      donut = d3.layout.pie().sort(null);
+function donut(data, cats, w, h) {
+  //Width, Height and radius of Donut Chart
+  if (!cats) cats = [];
+  var w = w || 400,
+    h = h || 400,
+    r = w / 2,
+    //Scale for the arc length of Chart using D3
+      donut = d3.layout.pie().sort(null),
+      arc = d3.svg.arc().innerRadius(r - 120).outerRadius(r);
 
-  var vis = d3.select("body")
-    .append("svg")
-      .attr("width", width)
-      .attr("height", height);
+  
+  //New color function using d3 scale.
+  var color = d3.scale.category20();
+  
+  //Insert an svg element
+  
+  var svg = d3.select("#figure").append("svg:svg")
+    .attr("width", w)
+    .attr("height", h)
+    .append("svg:g")  
+      .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")");
 
-  vis.selectAll("g.arc")
-      .data(arcs(data0, data1))
-    .enter().append("g")
-      .attr("class", "arc")
-      .attr("transform", "translate(" + outerRadius + "," + outerRadius + ")")
-    .append("path")
-      .attr("fill", function(d, i) { return color(i); })
-      .attr("d", arc);
-    //.append("");
-
-  window.addEventListener("keypress", swap, false);
-
-  function arcs(data0, data1) {
-    var arcs0 = donut(data0),
-        arcs1 = donut(data1),
-        i = -1,
-        arc;
-    while (++i < n) {
-      arc = arcs0[i];
-      arc.innerRadius = innerRadius;
-      arc.outerRadius = outerRadius;
-      arc.next = arcs1[i];
+  //Adding the wedges to the chart
+  var g = svg.selectAll("g")
+        .data(donut(data))
+      .enter().append("svg:g");
+  
+  g.append("svg:path")
+        .attr("d", arc)
+        .style("fill",function(d, i) { return color(i); })
+      .style("stroke", '#fff')
+      .append("svg:title")
+        .text(function(d) {return String(d.data) + " votes";})
+  
+  g.append("svg:text")
+    .attr("dy", "0.35em")
+    .attr("text-anchor", "middle")
+    .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")rotate(" + angle(d) + ")"; })
+        .style("font", "10px sans-serif")
+    .text(function(d, i) { return cats[i]; });
+  
+  
+  //adding text to the middle of donut hole
+  svg.append("svg:text")
+      .attr("dy", ".35em")
+        .attr("text-anchor", "middle")
+        .style("font","bold 14px Georgia")
+      .text("Behavior")
+  
+    
+  // Computes the label angle of an arc, converting from radians to degrees.
+    function angle(d) {
+      var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;
+      return a > 90 ? a - 180 : a;
     }
-    return arcs0;
-  }
-
-  function swap() {
-    d3.selectAll("g.arc > path")
-        .data(++q & 1 ? arcs(data0, data1) : arcs(data1, data0))
-        .each(transitionSplit);
-  }
-
-  // 1. Wedges split into two rings.
-  function transitionSplit(d, i) {
-    d3.select(this)
-      .transition().duration(1000)
-        .attrTween("d", tweenArc({
-          innerRadius: i & 1 ? innerRadius : (innerRadius + outerRadius) / 2,
-          outerRadius: i & 1 ? (innerRadius + outerRadius) / 2 : outerRadius
-        }))
-        .each("end", transitionRotate);
-  }
-
-  // 2. Wedges translate to be centered on their final position.
-  function transitionRotate(d, i) {
-    var a0 = d.next.startAngle + d.next.endAngle,
-        a1 = d.startAngle - d.endAngle;
-    d3.select(this)
-      .transition().duration(1000)
-        .attrTween("d", tweenArc({
-          startAngle: (a0 + a1) / 2,
-          endAngle: (a0 - a1) / 2
-        }))
-        .each("end", transitionResize);
-  }
-
-  // 3. Wedges then update their values, changing size.
-  function transitionResize(d, i) {
-    d3.select(this)
-      .transition().duration(1000)
-        .attrTween("d", tweenArc({
-          startAngle: d.next.startAngle,
-          endAngle: d.next.endAngle
-        }))
-        .each("end", transitionUnite);
-  }
-
-  // 4. Wedges reunite into a single ring.
-  function transitionUnite(d, i) {
-    d3.select(this)
-      .transition().duration(1000)
-        .attrTween("d", tweenArc({
-          innerRadius: innerRadius,
-          outerRadius: outerRadius
-        }));
-  }
-
-  function tweenArc(b) {
-    return function(a) {
-      var i = d3.interpolate(a, b);
-      for (var key in b) a[key] = b[key]; // update data
-      return function(t) {
-        return arc(i(t));
-      };
-    };
-  }
 }
