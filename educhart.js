@@ -46,7 +46,7 @@ function Educhart() {
 }
 
 Educhart.prototype.init = function() {
-	this.charts = {'donut':
+	this.charts = {'donut': // call donut.create({'SUBJECT':ARBITRARY_DATA_POINT})
 					{
 						'scale': function(a,b) {
 							/* return (a-b.min())/(b.max()-b.min()); // Calculate position in range of data */
@@ -65,7 +65,7 @@ Educhart.prototype.init = function() {
 							log('Creating donut chart with data: ');
 							log([labels,values]);
 							importJS('donut/donut.js');
-
+							
 						}
 					}
 				};
