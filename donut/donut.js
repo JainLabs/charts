@@ -1,11 +1,11 @@
-function chart() {
+function donut(dat) {
   var width = 400,
       height = 400,
       outerRadius = Math.min(width, height) / 2,
       innerRadius = outerRadius * .6,
-      n = 10,
+      n = dat.length,
       q = 0,
-      data0 = d3.range(n).map(Math.random),
+      data0 = dat,
       data1 = d3.range(n).map(Math.random),
       data,
       color = d3.scale.category20(),
@@ -103,5 +103,3 @@ function chart() {
     };
   }
 }
-
-chart();
