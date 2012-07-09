@@ -28,6 +28,18 @@ Array.sum = function(array) {
 	return total
 }
 
+function importJS(file, callback) {
+	callback = typeof callback !== 'undefined' ? callback : function(argument) {};
+	var head= document.getElementsByTagName('head')[0];
+	var script= document.createElement('script');
+	script.type= 'text/javascript';
+	script.onload= callback
+	script.src= file;
+	head.appendChild(script);
+	log('loaded: ' + file);
+	return true;
+}
+
 function Educhart() {
 	var this_var = this;
 	log('Educhart loaded');
@@ -36,20 +48,24 @@ function Educhart() {
 Educhart.prototype.init = function() {
 	this.charts = {'donut':
 					{
-						'map': function (a) {
-							return a;
-						},
 						'scale': function(a,b) {
 							/* return (a-b.min())/(b.max()-b.min()); // Calculate position in range of data */
 							return Math.round(a/Array.sum(b)*100)/100; // Percentage of dataset
 						},
 						'create': function(data) {
-							var chartData = {};
+							var labels = [];
+							var values = [];
+							j=0;
 							for(var i in data) {
-								chartData[i] = this.scale(data[i],data);
+								labels[j] = i;
+								values[j] = this.scale(data[i],data);
+								j++;
 							}
 							// donut function passing chartData
-							log(chartData);
+							log('Creating donut chart with data: ');
+							log([labels,values]);
+							importJS('donut/donut.js');
+
 						}
 					}
 				};
@@ -62,3 +78,4 @@ Educhart.prototype.createChart = function(chartType,data) {
 
 var educhart = new Educhart();
 educhart.init();
+educhart.charts.donut.create({'math':1,'science':2});
