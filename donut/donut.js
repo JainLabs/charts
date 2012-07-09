@@ -1,7 +1,8 @@
-function donut(dat) {
-  var width = 400,
-      height = 400,
-      outerRadius = Math.min(width, height) / 2,
+function donut(dat,labels,width,height) {
+  width = width || 400;
+  height = height || 400;
+  labels = labels || new Array(dat.length);
+  var outerRadius = Math.min(width, height) / 2,
       innerRadius = outerRadius * .6,
       n = dat.length,
       q = 0,
@@ -25,6 +26,7 @@ function donut(dat) {
     .append("path")
       .attr("fill", function(d, i) { return color(i); })
       .attr("d", arc);
+    //.append("");
 
   window.addEventListener("keypress", swap, false);
 
