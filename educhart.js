@@ -28,12 +28,12 @@ Array.sum = function(array) {
 	return total
 }
 
-function importJS(file, callback) {
+function importJS(file, callback) { // file is relative to the document that you include educhart.js
 	callback = typeof callback !== 'undefined' ? callback : function(argument) {};
 	var head= document.getElementsByTagName('head')[0];
 	var script= document.createElement('script');
 	script.type= 'text/javascript';
-	script.onload= callback
+	script.onload= callback;
 	script.src= file;
 	head.appendChild(script);
 	log('loaded: ' + file);
@@ -64,8 +64,9 @@ Educhart.prototype.init = function() {
 							// donut function passing chartData
 							log('Creating donut chart with data: ');
 							log([labels,values]);
-							importJS('donut/donut.js');
-							
+							importJS('./donut/donut.js',function() {
+								donut(values,labels,'subjects','body');
+							});
 						}
 					}
 				};

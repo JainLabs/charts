@@ -1,4 +1,4 @@
-function donut(data, cats, w, h) {
+function donut(data, cats, centerLabel, sel, w, h) {
   //Width, Height and radius of Donut Chart
   if (!cats) cats = [];
   var w = w || 400,
@@ -14,7 +14,7 @@ function donut(data, cats, w, h) {
   
   //Insert an svg element
   
-  var svg = d3.select("#figure").append("svg:svg")
+  var svg = d3.select(sel).append("svg:svg")
     .attr("width", w)
     .attr("height", h)
     .append("svg:g")  
@@ -45,7 +45,7 @@ function donut(data, cats, w, h) {
       .attr("dy", ".35em")
         .attr("text-anchor", "middle")
         .style("font","bold 14px Georgia")
-      .text("Behavior")
+      .text(centerLabel)
   
     
   // Computes the label angle of an arc, converting from radians to degrees.
