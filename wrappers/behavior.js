@@ -6,7 +6,7 @@ charts.extend({
 		for(var i in data) {
 			labels[j] = i;
 			values[j] = data[i];
-			j++
+			j++;
 		}
 		this.donut({
 			data: values,

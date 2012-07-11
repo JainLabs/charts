@@ -10,7 +10,7 @@ charts.extend({
         r = w / 2,
         // Scale for the arc length of Chart using D3
         donut = d3.layout.pie().sort(null),
-        arc = d3.svg.arc().innerRadius(r - 120).outerRadius(r);
+        arc = d3.svg.arc().innerRadius(1.2*r/3).outerRadius(r);
 
     
     //New color function using d3 scale.
@@ -34,13 +34,13 @@ charts.extend({
           .style("fill",function(d, i) { return color(i); })
         .style("stroke", '#fff')
         .append("svg:title")
-          .text(function(d) {return String(d.data) + " votes";})
+          .text(function(d) {return String(d.data) + " votes";});
     
     g.append("svg:text")
       .attr("dy", "0.35em")
       .attr("text-anchor", "middle")
       .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")rotate(" + angle(d) + ")"; })
-          .style("font", "10px sans-serif")
+          .style("font", r/13+"px sans-serif")
       .text(function(d, i) { return cats[i]; });
     
     
@@ -48,7 +48,7 @@ charts.extend({
     svg.append("svg:text")
         .attr("dy", ".35em")
           .attr("text-anchor", "middle")
-          .style("font","bold 14px Georgia")
+          .style("font","bold "+r/10+"px Helvetica, Georgia")
         .text(centerLabel)
     
       
