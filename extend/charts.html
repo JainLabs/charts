@@ -7,21 +7,30 @@
 	<script>
 	window.onload = function() {
 		charts.extend({
-			behavior: function(data,sel) {
-				var labels = [],
-					values = [],
-					j=0;
+			behavior: function(data,sel,w,h) {
+				var labels = [], values = [], j=0;
 				for(var i in data) {
 					labels[j] = i;
 					values[j] = data[i];
-					j++;
+					j++
 				}
-				this.donut(values,labels,'Behavior',sel)
+				this.donut({
+					data: values,
+					labels: labels,
+					centerLabel: 'Behavior',
+					container: sel
+				});
 			}
 		});
 
-		charts.donut([172,136,135,10],
-      ["a", "b", "c", "d"],'Label','body',400,400);
+		charts.donut({
+			data: [172,136,135,10],
+			labels: ["a", "b", "c", "d"],
+			centerLabel: 'Label',
+			container: 'body',
+			width: 400,
+			height: 400
+		});
 
 		charts.behavior({
 			'participation':1,

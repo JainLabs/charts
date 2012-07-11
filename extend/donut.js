@@ -1,11 +1,14 @@
 charts.extend({
-  donut: function(data, cats, centerLabel, sel, w, h) {
-    if (!cats) cats = [];
+  donut: function(obj) {
     //Width, Height and radius of Donut Chart
-    var w = w || 400,
-      h = h || 400,
-      r = w / 2,
-      //Scale for the arc length of Chart using D3
+    var data = obj.data,
+        cats = obj.labels || [];
+        centerLabel = obj.centerLabel || "",
+        sel = obj.container || 'body',
+        w = obj.width || 400,
+        h = obj.height || 400,
+        r = w / 2,
+        // Scale for the arc length of Chart using D3
         donut = d3.layout.pie().sort(null),
         arc = d3.svg.arc().innerRadius(r - 120).outerRadius(r);
 
