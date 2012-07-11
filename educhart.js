@@ -52,7 +52,7 @@
 							'create': function(data) {
 								var labels = [];
 								var values = [];
-								j=0;
+								var j=0;
 								for(var i in data) {
 									labels[j] = i;
 									values[j] = this.scale(data[i],data);
