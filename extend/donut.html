@@ -1,28 +1,12 @@
 <html>
 <head>
-	<title>Charts test</title>
+	<title>Donut Chart</title>
 	<script type="text/javascript" src="../d3.v2.js"></script>
 	<script type="text/javascript" src="charts.js"></script>
-	<script type="text/javascript" src="donut.js"></script>
+	<script type="text/javascript" src="charts/donut.js"></script>
+	<script type="text/javascript" src="wrappers/behavior.js"></script>
 	<script>
 	window.onload = function() {
-		charts.extend({
-			behavior: function(data,sel,w,h) {
-				var labels = [], values = [], j=0;
-				for(var i in data) {
-					labels[j] = i;
-					values[j] = data[i];
-					j++
-				}
-				this.donut({
-					data: values,
-					labels: labels,
-					centerLabel: 'Behavior',
-					container: sel
-				});
-			}
-		});
-
 		charts.donut({
 			data: [172,136,135,10],
 			labels: ["a", "b", "c", "d"],
