@@ -13,23 +13,9 @@
 	<script type="text/javascript" src="../charts.js"></script>
 	<script type="text/javascript" src="../charts/gauge.js"></script>
 	<script>
-	function createGauge(config)
-	{
-		config.redZones = [];
-		config.redZones.push(config.zones.red);
-
-		config.yellowZones = [];
-		config.yellowZones.push(config.zones.yellow);
-		
-		config.greenZones = [];
-		config.greenZones.push(config.zones.green);
-		
-		window.gauge = charts.gauge(config);
-	}
-
 	window.onload = function()
 	{
-		createGauge({
+		charts.gauge({
 			container: 'mem',
 			value: 50,
 			size: 240,

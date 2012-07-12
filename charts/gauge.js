@@ -17,6 +17,16 @@ charts.extend({
         this.config.range = this.config.max - this.config.min;
         this.config.majorTicks = configuration.majorTicks || 5;
         this.config.minorTicks = configuration.minorTicks || 2;
+
+        this.config.redZones = [];
+        this.config.redZones.push(configuration.zones.red);
+
+        this.config.yellowZones = [];
+        this.config.yellowZones.push(configuration.zones.yellow);
+        
+        this.config.greenZones = [];
+        this.config.greenZones.push(configuration.zones.green);
+
         this.config.greenColor = configuration.greenColor || "#109618";
         this.config.yellowColor = configuration.yellowColor || "#FF9900";
         this.config.redColor = configuration.redColor || "#DC3912";
