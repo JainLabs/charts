@@ -3,12 +3,6 @@
 <head>
 	<meta charset="utf-8">
 	<title>Gauge Chart</title>
-	<style>
-		body
-		{
-		  	font: 10px arial;
-		}
-	</style>
 	<script type="text/javascript" src="../d3.v2.js"></script>
 	<script type="text/javascript" src="../charts.js"></script>
 	<script type="text/javascript" src="../charts/gauge.js"></script>
@@ -16,7 +10,7 @@
 	window.onload = function()
 	{
 		charts.gauge({
-			container: 'mem',
+			container: '#mem',
 			value: 50,
 			size: 240,
 			label: 'Memory',

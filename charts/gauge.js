@@ -32,7 +32,7 @@ charts.extend({
         this.config.redColor = configuration.redColor || "#DC3912";
       }
       this.render = function () {
-        this.body = d3.select("#" + this.placeholderName).append("svg:svg").attr("class", "gauge").attr("width", this.config.size).attr("height", this.config.size);
+        this.body = d3.select(this.placeholderName).append("svg:svg").attr("class", "gauge").attr("width", this.config.size).attr("height", this.config.size);
         this.body.append("svg:circle").attr("cx", this.config.cx).attr("cy", this.config.cy).attr("r", this.config.raduis).style("fill", "#ccc").style("stroke", "#000").style("stroke-width", "0.5px");
         this.body.append("svg:circle").attr("cx", this.config.cx).attr("cy", this.config.cy).attr("r", 0.9 * this.config.raduis).style("fill", "#fff").style("stroke", "#e0e0e0").style("stroke-width", "2px");
         for (var index in this.config.greenZones) {
@@ -46,7 +46,7 @@ charts.extend({
         }
         if (undefined != this.config.label) {
           var fontSize = Math.round(this.config.size / 9);
-          this.body.append("svg:text").attr("x", this.config.cx).attr("y", this.config.cy / 2 + fontSize / 2).attr("dy", fontSize / 2).attr("text-anchor", "middle").text(this.config.label).style("font-size", fontSize + "px").style("fill", "#333").style("stroke-width", "0px");
+          this.body.append("svg:text").attr("x", this.config.cx).attr("y", this.config.cy / 2 + fontSize / 2).attr("dy", fontSize / 2).attr("text-anchor", "middle").text(this.config.label).style("font-size", fontSize + "px").style("font-family", "Arial").style("fill", "#333").style("stroke-width", "0px");
         }
         var fontSize = Math.round(this.config.size / 16);
         var majorDelta = this.config.range / (this.config.majorTicks - 1);
@@ -62,7 +62,7 @@ charts.extend({
           this.body.append("svg:line").attr("x1", point1.x).attr("y1", point1.y).attr("x2", point2.x).attr("y2", point2.y).style("stroke", "#333").style("stroke-width", "2px");
           if (major == this.config.min || major == this.config.max) {
             var point = this.valueToPoint(major, 0.63);
-            this.body.append("svg:text").attr("x", point.x).attr("y", point.y).attr("dy", fontSize / 3).attr("text-anchor", major == this.config.min ? "start" : "end").text(major).style("font-size", fontSize + "px").style("fill", "#333").style("stroke-width", "0px");
+            this.body.append("svg:text").attr("x", point.x).attr("y", point.y).attr("dy", fontSize / 3).attr("text-anchor", major == this.config.min ? "start" : "end").text(major).style("font-size", fontSize + "px").style("font-family", "Arial").style("fill", "#333").style("stroke-width", "0px");
           }
         }
         var pointerContainer = this.body.append("svg:g").attr("class", "pointerContainer");
@@ -104,7 +104,7 @@ charts.extend({
         //.ease("linear")
         //.duration(5000);
         var fontSize = Math.round(this.config.size / 10);
-        pointerContainer.selectAll("text").data([value]).text(Math.round(value)).enter().append("svg:text").attr("x", this.config.cx).attr("y", this.config.size - this.config.cy / 4 - fontSize).attr("dy", fontSize / 2).attr("text-anchor", "middle").text(Math.round(value)).style("font-size", fontSize + "px").style("fill", "#000").style("stroke-width", "0px");
+        pointerContainer.selectAll("text").data([value]).text(Math.round(value)).enter().append("svg:text").attr("x", this.config.cx).attr("y", this.config.size - this.config.cy / 4 - fontSize).attr("dy", fontSize / 2).attr("text-anchor", "middle").text(Math.round(value)).style("font-size", fontSize + "px").style("font-family", "Arial").style("fill", "#000").style("stroke-width", "0px");
       }
       this.valueToDegrees = function (value) {
         return value / this.config.range * 270 - 45;
