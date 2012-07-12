@@ -6,19 +6,24 @@ charts.extend({
 
         var data = obj.data,
             margin = {};
-        
+
         obj.margin = obj.margin || {};
-        margin.top    = typeof obj.margin.top    === 'number' ? obj.margin.top    : 10;
+        margin.top    = typeof obj.margin.top    === 'number' ? obj.margin.top    : 20;
         margin.right  = typeof obj.margin.right  === 'number' ? obj.margin.right  : 10;
-        margin.bottom = typeof obj.margin.bottom === 'number' ? obj.margin.bottom : 20;
+        margin.bottom = typeof obj.margin.bottom === 'number' ? obj.margin.bottom : 30;
         margin.left   = typeof obj.margin.left   === 'number' ? obj.margin.left   : 40;
+
+        obj.width     = (obj.width && typeof obj.width === 'number') ? obj.width : 500;
+        obj.height    = (obj.height && typeof obj.height === 'number') ? obj.height : 400;
 
         obj.container = (obj.container && obj.container !== '' && obj.container !== 'undefined') ? obj.container : 'body';
         obj.color     = (obj.color && obj.color !== '' && obj.color !== 'undefined') ? obj.color : 'steelblue';
-        console.log(obj.color);
 
-        
-        var width = obj.width - margin.left - margin.right,
+        obj.title     = (obj.title && obj.title !== '' && obj.title !== 'undefined') ? obj.title : '';
+        obj.xlabel    = (obj.xlabel && obj.xlabel !== '' && obj.xlabel !== 'undefined') ? obj.xlabel : '';
+        obj.ylabel    = (obj.ylabel && obj.ylabel !== '' && obj.ylabel !== 'undefined') ? obj.ylabel : '';
+
+        var width  = obj.width - margin.left - margin.right,
             height = obj.height - margin.top - margin.bottom;
 
         var xMax = 0, yMax = 0;
@@ -30,7 +35,6 @@ charts.extend({
                 if (point.y > yMax) yMax = point.y;
             }
         })();
-        console.log(xMax, yMax);
 
         var x = d3.scale.linear()
             .domain([0, xMax])
@@ -54,15 +58,44 @@ charts.extend({
 
         var svg = d3.select(obj.container).append("svg")
             .datum(data)
+            .attr("class", "lineChart")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
           .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
+        // title
+        svg.append("svg:text")
+            .attr("x", width/2+"px")
+            .attr("text-anchor", "middle")
+            .style("font-weight","bold")
+            .style("font-size","16px")
+            .text(obj.title);
+
+        // x axis label
+        svg.append("svg:text")
+            .attr("x", width/2+"px")
+            .attr("y", height+29+"px")
+            .attr("text-anchor", "middle")
+            .style("font-weight","bold")
+            .style("font-size","12px")
+            .text(obj.xlabel);
+
+        // y axis label
+        svg.append("svg:text")
+            .attr("x", -height/2+"px")
+            .attr("y", -29+"px")
+            .attr("text-anchor", "middle")
+            .attr("transform","rotate(-90)")
+            .style("font-weight","bold")
+            .style("font-size","12px")
+            .text(obj.ylabel);
+
         svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
             .call(xAxis);
+
 
         svg.append("g")
             .attr("class", "y axis")
@@ -79,23 +112,24 @@ charts.extend({
             .attr("cx", line.x())
             .attr("cy", line.y())
             .attr("r", 3.5);
+
         var style = document.createElement('style');
         document.head.appendChild(style);
         style.innerHTML = 
-            'body {'+
+            '.lineChart {'+
             '  font: 10px sans-serif;'+
             '}'+
-            '.axis path, .axis line {'+
+            '.lineChart .axis path, .lineChart .axis line {'+
             '  fill: none;'+
             '  stroke: #000;'+
             '  shape-rendering: crispEdges;'+
             '}'+
-            '.line {'+
+            '.lineChart .line {'+
             '  fill: none;'+
             '  stroke: '+obj.color+';'+
             '  stroke-width: 1.5px;'+
             '}'+
-            '.dot {'+
+            '.lineChart .dot {'+
             '  fill: white;'+
             '  stroke: '+obj.color+';'+
             '  stroke-width: 1.5px;'+
