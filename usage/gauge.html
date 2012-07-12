@@ -13,47 +13,41 @@
 	<script type="text/javascript" src="../charts.js"></script>
 	<script type="text/javascript" src="../charts/gauge.js"></script>
 	<script>
-	var gauges = [];
-	
-	function createGauge(name, label)
+	function createGauge(config)
 	{
-		var config = 
-		{
-			size: 120,
-			label: label,
-			minorTicks: 5
-		}
-		
+		config.container = (config.container && config.container !== '' && config.container !== 'undefined') ? config.container : 'body';
+		console.log(config.container);
 		config.redZones = [];
-		config.redZones.push({ from: 0, to: 5 });
+		config.redZones.push(config.zones.red);
 
 		config.yellowZones = [];
-		config.yellowZones.push({ from: 5, to: 15 });
-
-		config.greenZones = [];
-		config.greenZones.push({ from: 85, to: 100 });
+		config.yellowZones.push(config.zones.yellow);
 		
-		gauges[name] = charts.gauge(name + "GaugeContainer", config);
-		gauges[name].render();
+		config.greenZones = [];
+		config.greenZones.push(config.zones.green);
+		
+		window.gauge = charts.gauge(config).redraw(50);
 	}
-	
-	function updateGauges()
-	{
-		console.log('update');
-		for (var key in gauges)
-		{
-			gauges[key].redraw(30 + 50 * Math.random() - 30 * Math.random());
-		}
-	}
-	
+
 	window.onload = function()
 	{
-		createGauge("memory", "Memory");
-		setInterval(updateGauges, 1000);
+		createGauge({
+			container: 'mem',
+			value: 50,
+			size: 240,
+			label: 'Memory',
+			minorTicks: 5,
+			majorTicks: 5,
+			zones: {
+				red: { from: 0, to: 5 },
+				yellow: { from: 5, to: 15 },
+				green: { from: 85, to: 100 }
+			}
+		});
 	};
 	</script>
 </head>
 <body>
-	<span id="memoryGaugeContainer"></span>
+	<span id="mem"></span>
 </body>
 </html>

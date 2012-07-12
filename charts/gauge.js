@@ -1,11 +1,13 @@
 charts.extend({
-  gauge: function(placeholderName, configuration) {
-    function Gauge(placeholderName, configuration) {
-      this.placeholderName = placeholderName;
+  gauge: function(configuration) {
+    function Gauge(configuration) {
+      this.placeholderName = configuration.container;
       var self = this; // some internal d3 functions do not "like" the "this" keyword, hence setting a local variable
       this.configure = function (configuration) {
         this.config = configuration;
         this.config.size = this.config.size * 0.9;
+          if(!this.config.size || (this.config.size<=0)) this.config.size = 120*0.9;
+        console.log(this.config.size);
         this.config.raduis = this.config.size * 0.97 / 2;
         this.config.cx = this.config.size / 2;
         this.config.cy = this.config.size / 2;
@@ -55,9 +57,13 @@ charts.extend({
         var pointerContainer = this.body.append("svg:g").attr("class", "pointerContainer");
         this.drawPointer(0);
         pointerContainer.append("svg:circle").attr("cx", this.config.cx).attr("cy", this.config.cy).attr("r", 0.12 * this.config.raduis).style("fill", "#4684EE").style("stroke", "#666").style("opacity", 1);
+
+        return this;
       }
       this.redraw = function (value) {
         this.drawPointer(value);
+
+        return this;
       }
       this.drawBand = function (start, end, color) {
         if (0 >= end - start) return;
@@ -106,6 +112,6 @@ charts.extend({
       this.configure(configuration);
     }
 
-    return new Gauge(placeholderName, configuration);
+    return new Gauge(configuration).render();
   }
 });
