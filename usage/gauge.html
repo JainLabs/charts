@@ -15,8 +15,6 @@
 	<script>
 	function createGauge(config)
 	{
-		config.container = (config.container && config.container !== '' && config.container !== 'undefined') ? config.container : 'body';
-		console.log(config.container);
 		config.redZones = [];
 		config.redZones.push(config.zones.red);
 
@@ -26,7 +24,7 @@
 		config.greenZones = [];
 		config.greenZones.push(config.zones.green);
 		
-		window.gauge = charts.gauge(config).redraw(50);
+		window.gauge = charts.gauge(config);
 	}
 
 	window.onload = function()

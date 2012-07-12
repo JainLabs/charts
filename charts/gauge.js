@@ -1,10 +1,11 @@
 charts.extend({
   gauge: function(configuration) {
     function Gauge(configuration) {
-      this.placeholderName = configuration.container;
+      this.placeholderName = (configuration.container && configuration.container !== '' && configuration.container !== 'undefined') ? configuration.container : 'body';
       var self = this; // some internal d3 functions do not "like" the "this" keyword, hence setting a local variable
       this.configure = function (configuration) {
         this.config = configuration;
+        this.config.value = configuration.value || 0;
         this.config.size = this.config.size * 0.9;
           if(!this.config.size || (this.config.size<=0)) this.config.size = 120*0.9;
         console.log(this.config.size);
@@ -112,6 +113,7 @@ charts.extend({
       this.configure(configuration);
     }
 
-    return new Gauge(configuration).render();
+    var _gauge = new Gauge(configuration).render();
+    return _gauge.redraw(_gauge.config.value);
   }
 });
