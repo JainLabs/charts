@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Gauge Chart</title>
+	<style>
+		body
+		{
+		  	font: 10px arial;
+		}
+	</style>
+	<script type="text/javascript" src="../d3.v2.js"></script>
+	<script type="text/javascript" src="../charts.js"></script>
+	<script type="text/javascript" src="../charts/gauge.js"></script>
+	<script>
+	var gauges = [];
+	
+	function createGauge(name, label)
+	{
+		var config = 
+		{
+			size: 120,
+			label: label,
+			minorTicks: 5
+		}
+		
+		config.redZones = [];
+		config.redZones.push({ from: 0, to: 5 });
+
+		config.yellowZones = [];
+		config.yellowZones.push({ from: 5, to: 15 });
+
+		config.greenZones = [];
+		config.greenZones.push({ from: 85, to: 100 });
+		
+		gauges[name] = charts.gauge(name + "GaugeContainer", config);
+		gauges[name].render();
+	}
+	
+	function updateGauges()
+	{
+		console.log('update');
+		for (var key in gauges)
+		{
+			gauges[key].redraw(30 + 50 * Math.random() - 30 * Math.random());
+		}
+	}
+	
+	window.onload = function()
+	{
+		createGauge("memory", "Memory");
+		setInterval(updateGauges, 1000);
+	};
+	</script>
+</head>
+<body>
+	<span id="memoryGaugeContainer"></span>
+</body>
+</html>

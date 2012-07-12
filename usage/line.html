@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Line Chart</title>
@@ -5,48 +6,35 @@
 	<script type="text/javascript" src="../charts.js"></script>
 	<script type="text/javascript" src="../charts/line.js"></script>
 	<!-- <script type="text/javascript" src="../wrappers/behavior.js"></script> -->
-	<style>
-
-	body {
-	  font: 10px sans-serif;
-	}
-
-	.axis path, .axis line {
-	  fill: none;
-	  stroke: #000;
-	  shape-rendering: crispEdges;
-	}
-
-	.line {
-	  fill: none;
-	  stroke: steelblue;
-	  stroke-width: 1.5px;
-	}
-
-	.dot {
-	  fill: white;
-	  stroke: steelblue;
-	  stroke-width: 1.5px;
-	}
-
-	</style>
 	<script>
 	window.onload = function() {
 		charts.line({
-			data: [
-				{
+			data: [{
 					x: 0,
 					y: .3
 				},
 				{
-					x: 1,
+					x: .5,
 					y: 1
 				},
 				{
-					x: 1.5,
+					x: 1,
 					y: 10
-				}
-			]
+				},
+				{
+					x: 2,
+					y: 100
+				}],
+			container: 'body',
+			width:  500,
+			height: 400,
+			margin: {
+				top: 20,
+				right: 20,
+				bottom: 30,
+				left: 40
+			},
+			color: 'green'
 		});
 
 		// charts.line({

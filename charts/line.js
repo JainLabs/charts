@@ -4,11 +4,22 @@ charts.extend({
         //  return {x: i / 39, y: (Math.sin(i / 3) + 2) / 4};
         //});
 
-        var data = obj.data;
+        var data = obj.data,
+            margin = {};
+        
+        obj.margin = obj.margin || {};
+        margin.top    = typeof obj.margin.top    === 'number' ? obj.margin.top    : 10;
+        margin.right  = typeof obj.margin.right  === 'number' ? obj.margin.right  : 10;
+        margin.bottom = typeof obj.margin.bottom === 'number' ? obj.margin.bottom : 20;
+        margin.left   = typeof obj.margin.left   === 'number' ? obj.margin.left   : 40;
 
-        var margin = {top: 10, right: 10, bottom: 20, left: 40},
-            width = 960 - margin.left - margin.right,
-            height = 500 - margin.top - margin.bottom;
+        obj.container = (obj.container && obj.container !== '' && obj.container !== 'undefined') ? obj.container : 'body';
+        obj.color     = (obj.color && obj.color !== '' && obj.color !== 'undefined') ? obj.color : 'steelblue';
+        console.log(obj.color);
+
+        
+        var width = obj.width - margin.left - margin.right,
+            height = obj.height - margin.top - margin.bottom;
 
         var xMax = 0, yMax = 0;
         (function() {
@@ -41,7 +52,7 @@ charts.extend({
             .x(function(d) { return x(d.x); })
             .y(function(d) { return y(d.y); });
 
-        var svg = d3.select("body").append("svg")
+        var svg = d3.select(obj.container).append("svg")
             .datum(data)
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -68,5 +79,26 @@ charts.extend({
             .attr("cx", line.x())
             .attr("cy", line.y())
             .attr("r", 3.5);
+        var style = document.createElement('style');
+        document.head.appendChild(style);
+        style.innerHTML = 
+            'body {'+
+            '  font: 10px sans-serif;'+
+            '}'+
+            '.axis path, .axis line {'+
+            '  fill: none;'+
+            '  stroke: #000;'+
+            '  shape-rendering: crispEdges;'+
+            '}'+
+            '.line {'+
+            '  fill: none;'+
+            '  stroke: '+obj.color+';'+
+            '  stroke-width: 1.5px;'+
+            '}'+
+            '.dot {'+
+            '  fill: white;'+
+            '  stroke: '+obj.color+';'+
+            '  stroke-width: 1.5px;'+
+            '}'
     }
 });
