@@ -26,15 +26,21 @@ charts.extend({
         var width  = obj.width - margin.left - margin.right,
             height = obj.height - margin.top - margin.bottom;
 
-        var xMax = 0, yMax = 0;
-        (function() {
-            var point = {};
-            for (var i = 0,len = data.length; i < len; i++) {
-                point = data[i];
-                if (point.x > xMax) xMax = point.x;
-                if (point.y > yMax) yMax = point.y;
-            }
-        })();
+        var xMax = (obj.xMax && typeof obj.xMax === 'number') ? obj.xMax : 0,
+            yMax = (obj.yMax && typeof obj.yMax === 'number') ? obj.yMax : 0;
+        if (xMax === 0 || yMax === 0) {
+            (function() {
+                var findXMax = xMax === 0 ? true : false;
+                var findYMax = yMax === 0 ? true : false;
+
+                var point = {};
+                for (var i = 0,len = data.length; i < len; i++) {
+                    point = data[i];
+                    if (findXMax && point.x > xMax) xMax = point.x;
+                    if (findYMax && point.y > yMax) yMax = point.y;
+                }
+            })();
+        }
 
         var x = d3.scale.linear()
             .domain([0, xMax])
