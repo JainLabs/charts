@@ -2,20 +2,33 @@ charts.extend({
   donut: function(obj) {
     //Width, Height and radius of Donut Chart
     var data = [],
-        cats = [];
+        cats = [],
+        colors = [];
+    
+    //New color function using d3 scale.
+    var d3color = d3.scale.category20();
 
     (function() {
       for (var i = 0, _len = obj.sections.length; i < _len; i++) {
-        var d = obj.sections[i].data,
-            label = obj.sections[i].label;
-        label = (label && label !== '' && label !== 'undefined') ? label : '';
+        var _data  = obj.sections[i].data,
+            _label = obj.sections[i].label,
+            _color = obj.sections[i].color;
+
+        // fix inputs
+        _label = (_label && _label !== '' && _label !== 'undefined') ? _label : '';
+        _color = (_color && _color !== '' && _color !== 'undefined') ? _color : d3color(i);
 
         // make sure the section has data (we don't want empty sections)
-        if (typeof d !== 'number' || d === 0) continue;
-        data[i] = d;
-        cats[i] = label;
+        if (typeof _data !== 'number' || _data === 0) {
+          continue;
+        } else {
+          data[i]   = _data;
+          cats[i]   = _label;
+          colors[i] = _color;
+        }
       }
     })();
+    console.log(colors);
 
     var centerLabel = obj.centerLabel || "",
         sel = obj.container || 'body',
@@ -26,8 +39,6 @@ charts.extend({
         arc = d3.svg.arc().innerRadius(1.2*r/3).outerRadius(r);
 
     
-    //New color function using d3 scale.
-    var color = d3.scale.category20();
     
     //Insert an svg element
     
@@ -44,7 +55,7 @@ charts.extend({
     
     g.append("svg:path")
           .attr("d", arc)
-          .style("fill",function(d, i) { return color(i); })
+          .style("fill",function(d, i) { return colors[i]; })
         .style("stroke", '#fff')
         .append("svg:title")
           .text(function(d) {return String(d.data) + " votes";});
