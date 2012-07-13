@@ -9,8 +9,23 @@
 	<script>
 	window.onload = function() {
 		charts.donut({
-			data: [172,136,135,10],
-			labels: ["a", "b", "c", "d"],
+			sections: [{
+				data: 172,
+				label: "a",
+				color:"rgba(0,0,10,1)"
+			}, {
+				data: 136,
+				label: "b",
+				color:"rgba(0,0,10,.8)"
+			}, {
+				data: 135,
+				label: "c",
+				color:"rgba(0,0,10,.6)"
+			}, {
+				data: 10,
+				label: "d",
+				color:"rgba(10,0,0,.8)"
+			}],
 			centerLabel: 'Label',
 			container: 'body',
 			width: 400,

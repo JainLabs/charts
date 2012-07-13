@@ -2,15 +2,16 @@
 
 charts.extend({
 	behavior: function(data,sel,w,h) {
-		var labels = [], values = [], j=0;
+		var values = [];
 		for(var i in data) {
-			labels[j] = i;
-			values[j] = data[i];
-			j++;
+			values.push({
+				data: data[i],
+				label: i
+			});
 		}
+
 		this.donut({
-			data: values,
-			labels: labels,
+			sections: values,
 			centerLabel: 'Behavior',
 			container: sel
 		});

@@ -1,15 +1,28 @@
 charts.extend({
   donut: function(obj) {
     //Width, Height and radius of Donut Chart
-    var data = obj.data,
-        cats = obj.labels || [];
-        centerLabel = obj.centerLabel || "",
+    var data = [],
+        cats = [];
+
+    (function() {
+      for (var i = 0, _len = obj.sections.length; i < _len; i++) {
+        var d = obj.sections[i].data,
+            label = obj.sections[i].label;
+        label = (label && label !== '' && label !== 'undefined') ? label : '';
+
+        // make sure the section has data (we don't want empty sections)
+        if (typeof d !== 'number' || d === 0) continue;
+        data[i] = d;
+        cats[i] = label;
+      }
+    })();
+
+    var centerLabel = obj.centerLabel || "",
         sel = obj.container || 'body',
         w = obj.width || 400,
         h = obj.height || 400,
         r = w / 2,
-        // Scale for the arc length of Chart using D3
-        donut = d3.layout.pie().sort(null),
+        donut = d3.layout.pie().sort(null), // Scale for the arc length of Chart using D3
         arc = d3.svg.arc().innerRadius(1.2*r/3).outerRadius(r);
 
     
@@ -52,7 +65,7 @@ charts.extend({
         .text(centerLabel)
     
       
-    // Computes the label angle of an arc, converting from radians to degrees.
+    // Computes the angle of an arc, converting from radians to degrees.
       function angle(d) {
         var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;
         return a > 90 ? a - 180 : a;
