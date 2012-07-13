@@ -26,6 +26,7 @@ charts.extend({
         var width  = obj.width - margin.left - margin.right,
             height = obj.height - margin.top - margin.bottom;
 
+        // Either set maximums to specified ones, or calculate based on maximum point
         var xMax = (obj.xMax && typeof obj.xMax === 'number') ? obj.xMax : 0,
             yMax = (obj.yMax && typeof obj.yMax === 'number') ? obj.yMax : 0;
         if (xMax === 0 || yMax === 0) {
@@ -41,6 +42,9 @@ charts.extend({
                 }
             })();
         }
+
+        var xMarker = (obj.xMarker && typeof obj.xMarker === 'number') ? obj.xMarker : false,
+            yMarker = (obj.yMarker && typeof obj.yMarker === 'number') ? obj.yMarker : false;
 
         var x = d3.scale.linear()
             .domain([0, xMax])
@@ -96,6 +100,26 @@ charts.extend({
             .style("font-weight","bold")
             .style("font-size","12px")
             .text(obj.ylabel);
+
+        if (xMarker) {
+            var xMarkerPX = (x(xMarker)).toString();
+            svg.append("line")
+                .attr("x1", xMarkerPX)
+                .attr("y1", "0")
+                .attr("x2", xMarkerPX)
+                .attr("y2", height.toString())
+                .style("stroke","black");
+        }
+
+        if (yMarker) {
+            var yMarkerPX = (y(yMarker)).toString();
+            svg.append("line")
+                .attr("x1", "0")
+                .attr("y1", yMarkerPX)
+                .attr("x2", width.toString())
+                .attr("y2", yMarkerPX)
+                .style("stroke","black");
+        }
 
         svg.append("g")
             .attr("class", "x axis")
