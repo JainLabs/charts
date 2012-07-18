@@ -34,7 +34,11 @@ charts.extend({
         var xMarker = (obj.xMarker && typeof obj.xMarker === 'number') ? obj.xMarker : false,
             yMarker = (obj.yMarker && typeof obj.yMarker === 'number') ? obj.yMarker : false;
 
-        if (obj.time) {
+        if (obj.time === true) {
+            // Force dates into miliseconds
+            for (var i = 0,len = data.length; i < len; i++) {
+                data[i].x = parseFloat(new Date(data[i].x).getTime());
+            }
             data.sort(function(curr, next) {
                 var mcurr = new Date(curr.x),
                     mnext = new Date(next.x);

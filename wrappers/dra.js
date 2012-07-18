@@ -70,19 +70,16 @@ charts.extend({
         	return 0;
         })
 
-		this.line({
-			time: false,
+        console.log('data: ', data);
+
+        var lineCall = {
+			time: true,
 			data: data,
 			title: 'Reading Level',
 			xlabel: 'Time',
-			ylabel: 'DRA Score',
-			xMax: xMax,
-			yMax: 60,
-			xMarker: obj.deadline,
-			yMarker: obj.goal,
-			container: obj.container,
-			width:  obj.width,
-			height: obj.height
-		});
+			ylabel: 'DRA Score'
+		};
+		console.log(lineCall);
+		this.line(lineCall);
 	}
 });
