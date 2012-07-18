@@ -30,7 +30,7 @@ charts.extend({
 					console.log(i, j);
 					if (currentBehavior === 'positive') var _color = "rgb(0,"+colorScale(j)+",0)";
 					if (currentBehavior === 'negative') var _color = "rgb("+colorScale(j)+",0,0)";
-					if (currentBehavior === 'neutral' ) var _color = "rgb(0,0,"+colorScale(j)+")";
+					if (currentBehavior === 'neutral' ) var _color = "rgb("+colorScale(j)+","+colorScale(j)+","+colorScale(j)+")";
 
 					values.push({
 						data: data[currentBehavior][i],
