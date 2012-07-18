@@ -28,7 +28,7 @@ charts.extend({
         }
       }
     })();
-    console.log(colors);
+    console.log('colors recieved:', colors);
 
     var centerLabel = obj.centerLabel || "",
         sel = obj.container || 'body',
@@ -65,6 +65,7 @@ charts.extend({
       .attr("text-anchor", "middle")
       .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")rotate(" + angle(d) + ")"; })
           .style("font", r/13+"px sans-serif")
+          .style("fill","white")
       .text(function(d, i) { return cats[i]; });
     
     

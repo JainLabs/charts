@@ -32,11 +32,22 @@
 			height: 400
 		});
 
-		charts.behavior({
-			'participation':1,
-			'productivity':2,
-			'excitment':1
-		}, 'body');
+		charts.behavior(
+			{
+				positive: {
+					'participation':1,
+					'productivity':2,
+					'excitment':1
+				},
+				negative: {
+					'sleeping': 1
+				},
+				neutral: {
+					'restroom breaks': 2,
+					'a': 1,
+					'b': 1
+				}
+			}, 'body');
 	};
 	</script>
 </head>
