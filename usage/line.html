@@ -54,44 +54,10 @@
 			xlabel: 'Time',	// Default: ''
 			ylabel: 'y Label',	// Default: ''
 			xMarker: '2012/07/07',
-			color: "orange"
+			color: "green"
 		});
 
-		/*charts.line({
-		 	time: true,
-		 	data: [{
-		 			x: 0,
-		 			y: .3
-		 		}, {
-		 			x: .5,
-		 			y: 1
-		 		}, {
-		 			x: 1,
-		 			y: 10
-		 		}, {
-		 			x: 2,
-		 			y: 100
-		 		}],
-		 	title: 'Line Chart',// Default: ''
-		 	xlabel: 'x Label',	// Default: ''
-		 	ylabel: 'y Label',	// Default: ''
-		 	xMax: 2.5,			// Default: maximum x coord in data set
-		 	yMax: 120,			// Default: maximum y coord in data set
-		 	xMarker: 1.75,			// Default: no marker
-		 	yMarker: 50,		// Default: no marker
-			container: 'body',	// Default: 'body'
-			width:  900,		// Default: 500s
-			height: 400,		// Default: 400
-			margin: {
-				top: 20,		// Default: 20
-				right: 10,		// Default: 10
-				bottom: 30,		// Default: 30
-				left: 40		// Default: 40
-			},
-			color: 'orange'		// Default: 'steelblue'
-		});*/
-
-		charts.DRA({
+		charts.DRAPlain({
 			scores: {
 				0: 25,
 				.5: 28,
@@ -104,15 +70,15 @@
 			//, width: 1000,
 			// height: 400
 		});
-
-		charts.DRAtime({
+		charts.DRA({
 			scores: {
-				19234123303: 25,
-				29235423503: 28,
-				39456345604: 35,
-				59000000000: 50
+				'2012/06/1': 25,
+				'2012/06/4': 28,
+				'2012/06/7': 35,
+				'2012/06/11': 50
 			},
 			container: 'body',
+			deadline: 3,
 			goal: 50
 			//, width: 1000,
 			// height: 400

@@ -28,22 +28,21 @@ charts.extend({
         	return 0;
         })
 
-		this.line({
-			time: false,
+        console.log('data: ', data);
+
+        var lineCall = {
+			time: true,
 			data: data,
 			title: 'Reading Level',
 			xlabel: 'Time',
-			ylabel: 'DRA Score',
-			xMax: xMax,
-			yMax: 60,
-			xMarker: obj.deadline,
-			yMarker: obj.goal,
-			container: obj.container,
-			width:  obj.width,
-			height: obj.height
-		});
+			ylabel: 'DRA Score'
+		};
+		console.log(lineCall);
+		this.line(lineCall);
 	},
-	DRAtime: function(obj) {
+
+
+	DRAPlain: function(obj) {
 		var xMax = (obj.deadline && typeof obj.deadline === 'number') ? obj.deadline + .5 : undefined,
 	        data = [],
 	        scores = obj.scores;
@@ -70,16 +69,19 @@ charts.extend({
         	return 0;
         })
 
-        console.log('data: ', data);
-
-        var lineCall = {
-			time: true,
+		this.line({
+			time: false,
 			data: data,
 			title: 'Reading Level',
 			xlabel: 'Time',
-			ylabel: 'DRA Score'
-		};
-		console.log(lineCall);
-		this.line(lineCall);
-	}
+			ylabel: 'DRA Score',
+			xMax: xMax,
+			yMax: 60,
+			xMarker: obj.deadline,
+			yMarker: obj.goal,
+			container: obj.container,
+			width:  obj.width,
+			height: obj.height
+		});
+	},
 });
