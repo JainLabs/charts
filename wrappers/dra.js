@@ -46,9 +46,7 @@ charts.extend({
 		this.donut({
 			sections: values,
 			centerLabel: 'Behavior',
-			container: sel,
-			width: w,
-			height: h
+			container: sel
 		});
 	}
 });
