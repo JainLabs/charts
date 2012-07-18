@@ -1,9 +1,11 @@
 charts.extend({
     line: function(obj) {
-        //var data = d3.range(40).map(function(i) {
-        //  return {x: i / 39, y: (Math.sin(i / 3) + 2) / 4};
-        //});
-
+        var moment;
+        if (obj.time && !moment) {
+            var momentScript = document.createElement("script");
+            momentScript.src = "https://raw.github.com/timrwood/moment/1.6.2/min/moment.min.js";
+            document.head.appendChild(momentScript);
+        }
         var data = obj.data,
             margin = {};
 
