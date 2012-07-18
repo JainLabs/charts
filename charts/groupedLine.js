@@ -1,9 +1,5 @@
 charts.extend({
-    line: function(obj) {
-        //var data = d3.range(40).map(function(i) {
-        //  return {x: i / 39, y: (Math.sin(i / 3) + 2) / 4};
-        //});
-
+    groupedLine: function(obj) {
         var data = obj.data,
             margin = {};
 
