@@ -1,13 +1,6 @@
 charts.extend({
     line: function(obj) {
         console.log('obj', obj);
-        //if (obj.time && !moment) {
-        //    console.log('loading moment');
-        //    var momentScript = document.createElement("script");
-        //    momentScript.src = "https://raw.github.com/timrwood/moment/1.6.2/min/moment.min.js";
-        //    document.head.appendChild(momentScript);
-        //    console.log(momentScript);
-        //}
         var data = obj.data,
             margin = {};
 
@@ -30,9 +23,13 @@ charts.extend({
         var width  = obj.width - margin.left - margin.right,
             height = obj.height - margin.top - margin.bottom;
 
+        // Marker on x axis
+        var xMarker = obj.xMarker || false;
+        if (xMarker && typeof xMarker === 'number' && !obj.time) xMarker = obj.xMarker;
+        if (xMarker && obj.time) var xMarker = new Date(obj.xMarker).getTime();
 
-        var xMarker = (obj.xMarker && typeof obj.xMarker === 'number') ? obj.xMarker : false,
-            yMarker = (obj.yMarker && typeof obj.yMarker === 'number') ? obj.yMarker : false;
+        // Marker on y axis
+        var yMarker = (obj.yMarker && typeof obj.yMarker === 'number') ? obj.yMarker : false;
 
         if (obj.time === true) {
             // Force dates into miliseconds
@@ -165,6 +162,8 @@ charts.extend({
 
         if (xMarker) {
             var xMarkerPX = (x(xMarker)).toString();
+            console.log('xMarker: ', xMarker);
+            console.log('xMarkerPX: ', xMarkerPX);
             svg.append("line")
                 .attr("x1", xMarkerPX)
                 .attr("y1", "0")

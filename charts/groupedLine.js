@@ -1,11 +1,12 @@
 charts.extend({
     groupedLine: function(obj) {
+        console.log('obj', obj);
         var data = obj.data,
             margin = {};
 
         obj.margin = obj.margin || {};
         margin.top    = typeof obj.margin.top    === 'number' ? obj.margin.top    : 20;
-        margin.right  = typeof obj.margin.right  === 'number' ? obj.margin.right  : 10;
+        margin.right  = typeof obj.margin.right  === 'number' ? obj.margin.right  : 20;
         margin.bottom = typeof obj.margin.bottom === 'number' ? obj.margin.bottom : 30;
         margin.left   = typeof obj.margin.left   === 'number' ? obj.margin.left   : 40;
 
@@ -22,30 +23,91 @@ charts.extend({
         var width  = obj.width - margin.left - margin.right,
             height = obj.height - margin.top - margin.bottom;
 
-        // Either set maximums to specified ones, or calculate based on maximum point
-        var xMax = (obj.xMax && typeof obj.xMax === 'number') ? obj.xMax : 0,
-            yMax = (obj.yMax && typeof obj.yMax === 'number') ? obj.yMax : 0;
-        if (xMax === 0 || yMax === 0) {
-            (function() {
-                var findXMax = xMax === 0 ? true : false;
-                var findYMax = yMax === 0 ? true : false;
+        // Marker on x axis
+        var xMarker = obj.xMarker || false;
+        if (xMarker && typeof xMarker === 'number' && !obj.time) xMarker = obj.xMarker;
+        if (xMarker && obj.time) var xMarker = new Date(obj.xMarker).getTime();
 
+        // Marker on y axis
+        var yMarker = (obj.yMarker && typeof obj.yMarker === 'number') ? obj.yMarker : false;
+
+        if (obj.time === true) {
+            // Force dates into miliseconds
+            for (var i = 0,len = data.length; i < len; i++) {
+                data[i].x = parseFloat(new Date(data[i].x).getTime());
+            }
+            data.sort(function(curr, next) {
+                var mcurr = new Date(curr.x),
+                    mnext = new Date(next.x);
+                if (mcurr < mnext) return -1; 
+                if (mcurr > mnext) return 1; 
+                return 0;
+            });
+            console.log(data);
+            // Either set maximum/minumum x to specified ones, or calculate based on maximum/minumum x in data
+            console.log('obj.xMax: ', obj.xMax);
+            var xMax = obj.xMax ? new Date(obj.xMax) : 0;
+            if (xMax === 0) {
+                (function() {
+                    xMax = new Date(data[0].x);
+                    var m;
+                    for (var i = 0,len = data.length; i < len; i++) {
+                        m = new Date(data[i].x);
+                        console.log('m: ', m);
+                        if (m > xMax) xMax = m;
+                    }
+                })();
+            }
+            console.log('xMax: ', new Date(xMax));
+
+            console.log('obj.xMin: ', obj.xMin);
+            var xMin = obj.xMin ? new Date(obj.xMin) : 0;
+            if (xMin === 0) {
+                (function() {
+                    xMin = new Date(data[0].x);
+                    var m;
+                    for (var i = 0,len = data.length; i < len; i++) {
+                        m =  new Date(data[i].x);
+                        console.log('m: ', m);
+                        if (m < xMin) xMin = m;
+                    }
+                })();
+            }
+            console.log('xMin: ', new Date(xMin));
+
+            // var x = d3.time.scale().domain([Date.parse('July 1 2012'), Date.parse('July 10 2012')]).range([0,500])
+            var x = d3.time.scale()
+                .domain([new Date(xMin), new Date(xMax)])
+                .range([0, width]);
+        } else {
+            // Either set maximums to specified ones, or calculate based on maximum point
+            var xMax = (obj.xMax && typeof obj.xMax === 'number') ? obj.xMax : 0;
+            if (xMax === 0) {
+                (function() {
+                    var point = {};
+                    for (var i = 0,len = data.length; i < len; i++) {
+                        point = data[i];
+                        if (point.x > xMax) xMax = point.x;
+                    }
+                })();
+            }
+
+            var x = d3.scale.linear()
+                .domain([0, xMax])
+                .range([0, width]);
+
+        }
+        var yMax = (obj.yMax && typeof obj.yMax === 'number') ? obj.yMax : 0;
+        if (yMax === 0) {
+            (function() {
+                var findYMax = yMax === 0 ? true : false;
                 var point = {};
                 for (var i = 0,len = data.length; i < len; i++) {
                     point = data[i];
-                    if (findXMax && point.x > xMax) xMax = point.x;
                     if (findYMax && point.y > yMax) yMax = point.y;
                 }
             })();
         }
-
-        var xMarker = (obj.xMarker && typeof obj.xMarker === 'number') ? obj.xMarker : false,
-            yMarker = (obj.yMarker && typeof obj.yMarker === 'number') ? obj.yMarker : false;
-
-        var x = d3.scale.linear()
-            .domain([0, xMax])
-            .range([0, width]);
-
         var y = d3.scale.linear()
             .domain([0, yMax])
             .range([height, 0]);
@@ -100,6 +162,8 @@ charts.extend({
 
         if (xMarker) {
             var xMarkerPX = (x(xMarker)).toString();
+            console.log('xMarker: ', xMarker);
+            console.log('xMarkerPX: ', xMarkerPX);
             svg.append("line")
                 .attr("x1", xMarkerPX)
                 .attr("y1", "0")

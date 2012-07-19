@@ -9,36 +9,37 @@
 	<script>
 	window.onload = function() {
 		charts.groupedLine({
+			time: true,
 			data: [{
-					x: 0,
+					x: 'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)',
 					y: .3
 				}, {
-					x: .5,
+					x: 'Mon Jul 02 2012 00:00:00 GMT-0700 (PDT)',
 					y: 1
 				}, {
-					x: 1,
+					x: 'Tue Jul 03 2012 00:00:00 GMT-0700 (PDT)',
 					y: 10
 				}, {
-					x: 2,
-					y: 100
+					x: 'Wed Jul 04 2012 00:00:00 GMT-0700 (PDT)',
+					y: 15
 				}],
 			title: 'Grouped Line Chart',// Default: ''
-			xlabel: 'x Label',	// Default: ''
+			xlabel: 'Time',	// Default: ''
 			ylabel: 'y Label',	// Default: ''
-			xMax: 2.5,			// Default: maximum x coord in data set
-			yMax: 120,			// Default: maximum y coord in data set
-			xMarker: 1.75,			// Default: no marker
-			yMarker: 50,		// Default: no marker
-			container: 'body',	// Default: 'body'
-			width:  900,		// Default: 500
-			height: 400,		// Default: 400
-			margin: {
-				top: 20,		// Default: 20
-				right: 10,		// Default: 10
-				bottom: 30,		// Default: 30
-				left: 40		// Default: 40
-			},
-			color: 'orange'		// Default: 'steelblue'
+			xMax: 'Wed Jul 04 2012 10:00:00 GMT-0700 (PDT)',			// Default: maximum x coord in data set
+			yMax: 20,			// Default: maximum y coord in data set
+			xMarker: 'Wed Jul 03 2012 10:00:00 GMT-0700 (PDT)',			// Default: no marker
+			// yMarker: 14,		// Default: no marker
+			// container: 'body',	// Default: 'body'
+			 width:  900,		// Default: 500
+			// height: 400,		// Default: 400
+			// margin: {
+			// 	top: 20,		// Default: 20
+			// 	right: 10,		// Default: 10
+			// 	bottom: 30,		// Default: 30
+			// 	left: 40		// Default: 40
+			// },
+			// color: 'orange'		// Default: 'steelblue'
 		});
 	};
 	</script>
