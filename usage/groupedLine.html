@@ -10,26 +10,19 @@
 	window.onload = function() {
 		charts.groupedLine({
 			time: true,
-			data: [{
-					x: 'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)',
-					y: .3
-				}, {
-					x: 'Mon Jul 02 2012 00:00:00 GMT-0700 (PDT)',
-					y: 1
-				}, {
-					x: 'Tue Jul 03 2012 00:00:00 GMT-0700 (PDT)',
-					y: 10
-				}, {
-					x: 'Wed Jul 04 2012 00:00:00 GMT-0700 (PDT)',
-					y: 15
-				}],
+			data: {
+				'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)': [.3,.5,.6],
+				'Sun Jul 02 2012 00:00:00 GMT-0700 (PDT)': [.6,.8,.9],
+				'Sun Jul 03 2012 00:00:00 GMT-0700 (PDT)': [1.5,2,2.1],
+				'Sun Jul 04 2012 00:00:00 GMT-0700 (PDT)': [2.2,2.3,2.5]
+			},
 			title: 'Grouped Line Chart',// Default: ''
 			xlabel: 'Time',	// Default: ''
 			ylabel: 'y Label',	// Default: ''
 			xMax: 'Wed Jul 04 2012 10:00:00 GMT-0700 (PDT)',			// Default: maximum x coord in data set
-			yMax: 20,			// Default: maximum y coord in data set
+			yMax: 3,			// Default: maximum y coord in data set
 			xMarker: 'Wed Jul 03 2012 10:00:00 GMT-0700 (PDT)',			// Default: no marker
-			// yMarker: 14,		// Default: no marker
+			yMarker: 2,		// Default: no marker
 			// container: 'body',	// Default: 'body'
 			 width:  900,		// Default: 500
 			// height: 400,		// Default: 400

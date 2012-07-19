@@ -1,9 +1,26 @@
 charts.extend({
     groupedLine: function(obj) {
-        console.log('obj', obj);
-        var data = obj.data,
-            margin = {};
-
+        console.log('obj.data', obj.data);
+        var data = [];
+        // Map obj.data to a usable format
+        for (var i in obj.data) {
+            if (obj.data.hasOwnProperty(i)) {
+                if (obj.time) {
+                    var x = new Date(i).getTime();
+                } else {
+                    var x = i;
+                }
+                for (var z in obj.data[i]) {
+                    data.push({
+                        x: x,
+                        y: obj.data[i][z]
+                    });
+                }
+            }
+        }
+        console.log(data);
+        
+        var margin = {};
         obj.margin = obj.margin || {};
         margin.top    = typeof obj.margin.top    === 'number' ? obj.margin.top    : 20;
         margin.right  = typeof obj.margin.right  === 'number' ? obj.margin.right  : 20;
@@ -43,9 +60,7 @@ charts.extend({
                 if (mcurr > mnext) return 1; 
                 return 0;
             });
-            console.log(data);
             // Either set maximum/minumum x to specified ones, or calculate based on maximum/minumum x in data
-            console.log('obj.xMax: ', obj.xMax);
             var xMax = obj.xMax ? new Date(obj.xMax) : 0;
             if (xMax === 0) {
                 (function() {
@@ -53,14 +68,11 @@ charts.extend({
                     var m;
                     for (var i = 0,len = data.length; i < len; i++) {
                         m = new Date(data[i].x);
-                        console.log('m: ', m);
                         if (m > xMax) xMax = m;
                     }
                 })();
             }
-            console.log('xMax: ', new Date(xMax));
 
-            console.log('obj.xMin: ', obj.xMin);
             var xMin = obj.xMin ? new Date(obj.xMin) : 0;
             if (xMin === 0) {
                 (function() {
@@ -68,12 +80,10 @@ charts.extend({
                     var m;
                     for (var i = 0,len = data.length; i < len; i++) {
                         m =  new Date(data[i].x);
-                        console.log('m: ', m);
                         if (m < xMin) xMin = m;
                     }
                 })();
             }
-            console.log('xMin: ', new Date(xMin));
 
             // var x = d3.time.scale().domain([Date.parse('July 1 2012'), Date.parse('July 10 2012')]).range([0,500])
             var x = d3.time.scale()
@@ -162,8 +172,6 @@ charts.extend({
 
         if (xMarker) {
             var xMarkerPX = (x(xMarker)).toString();
-            console.log('xMarker: ', xMarker);
-            console.log('xMarkerPX: ', xMarkerPX);
             svg.append("line")
                 .attr("x1", xMarkerPX)
                 .attr("y1", "0")
@@ -192,12 +200,13 @@ charts.extend({
             .attr("class", "y axis")
             .call(yAxis);
 
-        svg.append("path")
-            .attr("class", "line")
-            .attr("d", line)
-            .style("fill", "none")
-            .style("stroke", obj.color)
-            .style("stroke-width", "1.5px");
+        // Line connecting points
+        //svg.append("path")
+        //    .attr("class", "line")
+        //    .attr("d", line)
+        //    .style("fill", "none")
+        //    .style("stroke", obj.color)
+        //    .style("stroke-width", "1.5px");
 
         svg.selectAll(".dot")
             .data(data)
@@ -207,6 +216,18 @@ charts.extend({
             .attr("cy", line.y())
             .attr("r", 3.5)
             .style("fill", "white")
+            .style("stroke", obj.color)
+            .style("stroke-width", "1.5px");
+
+        svg.selectAll(".box")
+            .data(data)
+            .enter().append("svg:rect")
+            .attr("class", "box")
+            .attr("x", 50)
+            .attr("y", 100)
+            .attr("width", 50)
+            .attr("height", 75)
+            .style("fill", "none")
             .style("stroke", obj.color)
             .style("stroke-width", "1.5px");
 
