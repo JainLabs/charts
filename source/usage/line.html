@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Line Chart</title>
+	<script type="text/javascript" src="../d3.v2.js"></script>
+	<script type="text/javascript" src="../charts.js"></script>
+	<script type="text/javascript" src="../charts/line.js"></script>
+	<script type="text/javascript" src="../wrappers/dra.js"></script>
+	<script>
+	window.onload = function() {
+		charts.line({
+			time: true,
+			data: [{
+					x: 123412333,
+					y: .3
+				}, {
+					x: 223542353,
+					y: 1
+				}, {
+					x: 345634564,
+					y: 10
+				}, {
+					x: 1000000000,
+					y: 40
+				}, {
+					x: 4567494565,
+					y: 100
+				}],
+			title: 'Line Chart with Time',// Default: ''
+			xlabel: 'Time',	// Default: ''
+			ylabel: 'y Label',	// Default: ''
+			xMarker: 3333000000,
+			yMarker: 50,
+			color: "orange"
+		});
+
+		window.line2 = charts.line({
+			time: true,
+			data: [{
+					x: 'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)',
+					y: .3
+				}, {
+					x: 'Mon Jul 02 2012 00:00:00 GMT-0700 (PDT)',
+					y: 1
+				}, {
+					x: 'Tue Jul 03 2012 00:00:00 GMT-0700 (PDT)',
+					y: 10
+				}, {
+					x: 'Wed Jul 04 2012 00:00:00 GMT-0700 (PDT)',
+					y: 15
+				}],
+			title: 'Line Chart with Time',// Default: ''
+			xlabel: 'Time',	// Default: ''
+			ylabel: 'y Label',	// Default: ''
+			xMarker: '2012/07/07',
+			color: "green",
+			width: 1000,
+			height: 400
+		});
+
+		console.log(line2);
+
+		charts.DRAPlain({
+			scores: {
+				0: 25,
+				.5: 28,
+				1: 35,
+				2: 50
+			},
+			container: 'body',
+			deadline: 3,
+			goal: 50
+			//, width: 1000,
+			// height: 400
+		});
+		charts.DRA({
+			scores: {
+				'2012/06/1': 25,
+				'2012/06/4': 28,
+				'2012/06/7': 35,
+				'2012/06/11': 50
+			},
+			container: 'body',
+			deadline: '2012/06/10',
+			goal: 50
+			//, width: 1000,
+			// height: 400
+		});
+	};
+	</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,10 +1,26 @@
 charts.extend({
-    line: function(obj) {
-        console.log('obj', obj);
-        var chartID = "line"+Math.round(Math.random()*1000),
-            data = obj.data,
-            margin = {};
-
+    groupedLine: function(obj) {
+        console.log('obj.data', obj.data);
+        var data = [];
+        // Map obj.data to a usable format
+        for (var i in obj.data) {
+            if (obj.data.hasOwnProperty(i)) {
+                if (obj.time) {
+                    var x = new Date(i).getTime();
+                } else {
+                    var x = i;
+                }
+                for (var z in obj.data[i]) {
+                    data.push({
+                        x: x,
+                        y: obj.data[i][z]
+                    });
+                }
+            }
+        }
+        console.log(data);
+        
+        var margin = {};
         obj.margin = obj.margin || {};
         margin.top    = typeof obj.margin.top    === 'number' ? obj.margin.top    : 20;
         margin.right  = typeof obj.margin.right  === 'number' ? obj.margin.right  : 20;
@@ -44,9 +60,7 @@ charts.extend({
                 if (mcurr > mnext) return 1; 
                 return 0;
             });
-            console.log(data);
             // Either set maximum/minumum x to specified ones, or calculate based on maximum/minumum x in data
-            console.log('obj.xMax: ', obj.xMax);
             var xMax = obj.xMax ? new Date(obj.xMax) : 0;
             if (xMax === 0) {
                 (function() {
@@ -54,14 +68,11 @@ charts.extend({
                     var m;
                     for (var i = 0,len = data.length; i < len; i++) {
                         m = new Date(data[i].x);
-                        console.log('m: ', m);
                         if (m > xMax) xMax = m;
                     }
                 })();
             }
-            console.log('xMax: ', new Date(xMax));
 
-            console.log('obj.xMin: ', obj.xMin);
             var xMin = obj.xMin ? new Date(obj.xMin) : 0;
             if (xMin === 0) {
                 (function() {
@@ -69,12 +80,10 @@ charts.extend({
                     var m;
                     for (var i = 0,len = data.length; i < len; i++) {
                         m =  new Date(data[i].x);
-                        console.log('m: ', m);
                         if (m < xMin) xMin = m;
                     }
                 })();
             }
-            console.log('xMin: ', new Date(xMin));
 
             // var x = d3.time.scale().domain([Date.parse('July 1 2012'), Date.parse('July 10 2012')]).range([0,500])
             var x = d3.time.scale()
@@ -127,7 +136,6 @@ charts.extend({
 
         var svg = d3.select(obj.container).append("svg")
             .datum(data)
-            .attr("id", chartID)
             .attr("class", "lineChart")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -164,8 +172,6 @@ charts.extend({
 
         if (xMarker) {
             var xMarkerPX = (x(xMarker)).toString();
-            console.log('xMarker: ', xMarker);
-            console.log('xMarkerPX: ', xMarkerPX);
             svg.append("line")
                 .attr("x1", xMarkerPX)
                 .attr("y1", "0")
@@ -194,12 +200,13 @@ charts.extend({
             .attr("class", "y axis")
             .call(yAxis);
 
-        svg.append("path")
-            .attr("class", "line")
-            .attr("d", line)
-            .style("fill", "none")
-            .style("stroke", obj.color)
-            .style("stroke-width", "1.5px");
+        // Line connecting points
+        //svg.append("path")
+        //    .attr("class", "line")
+        //    .attr("d", line)
+        //    .style("fill", "none")
+        //    .style("stroke", obj.color)
+        //    .style("stroke-width", "1.5px");
 
         svg.selectAll(".dot")
             .data(data)
@@ -208,9 +215,77 @@ charts.extend({
             .attr("cx", line.x())
             .attr("cy", line.y())
             .attr("r", 3.5)
-            .style("fill", "white")
-            .style("stroke", obj.color)
+            .style("fill", function(d) {
+                console.log(d, yMarker);
+                if (obj.boxColors && yMarker) {
+                    if (d.y < yMarker) {
+                        console.log('belowLine');
+                        return obj.boxColors['belowLine'] || obj.color;
+                    }
+                    if (d.y > yMarker) {
+                        console.log('aboveLine');
+                        return obj.boxColors['aboveLine'] || obj.color;
+                    }
+                    if (d.y = yMarker) {
+                        console.log('onLine');
+                        return obj.boxColors['onLine'] || obj.color;
+                    }
+                }
+                return obj.color;
+            })
+            .style("stroke", function(d) {
+                console.log(d, yMarker);
+                if (obj.boxColors && yMarker) {
+                    if (d.y < yMarker) {
+                        console.log('belowLine');
+                        return obj.boxColors['belowLine'] || obj.color;
+                    }
+                    if (d.y > yMarker) {
+                        console.log('aboveLine');
+                        return obj.boxColors['aboveLine'] || obj.color;
+                    }
+                    if (d.y = yMarker) {
+                        console.log('onLine');
+                        return obj.boxColors['onLine'] || obj.color;
+                    }
+                }
+                return obj.color;
+            })
             .style("stroke-width", "1.5px");
+
+        (function() {
+            for (var group in obj.data) {
+                if (obj.data.hasOwnProperty(group)) {
+                    var groupData = obj.data[group].sort(),
+                        maxData = groupData.pop(),
+                        minData = groupData.shift(),
+                        rectX = x(new Date(group).valueOf()), // x coord of rectangle
+                        rectY = y(maxData), // y coord of rectangle
+                        boxColor;
+                    
+                    // Should we color boxes based off position?
+                    if (obj.boxColors && yMarker) {
+                        // Decide if the box is on, below or above the line
+                        if (maxData < yMarker) var boxPos = 'belowLine';
+                        if (minData > yMarker) var boxPos = 'aboveLine';
+                        if (maxData > yMarker && minData < yMarker) var boxPos = 'onLine';
+                        boxColor = obj.boxColors[boxPos] || obj.color;
+                    } else {
+                        boxColor = obj.color;
+                    }
+
+                    svg.append("svg:rect")
+                        .attr("class", "box")
+                        .attr("x", rectX-5)
+                        .attr("y", rectY-5)
+                        .attr("width", 10)
+                        .attr("height", y(minData)-rectY+10)
+                        .style("fill", "none")
+                        .style("stroke", boxColor)
+                        .style("stroke-width", "1.5px");
+                }
+            }
+        })();
 
 
         var style = document.createElement('style');
@@ -221,13 +296,5 @@ charts.extend({
             '  stroke: #000;'+
             '  shape-rendering: crispEdges;'+
             '}';
-
-        return {
-            id: chartID,
-            obj: obj,
-            redraw: function(data) {
-                origSvg = document.getElementById(this.id).innerHTML;
-            }
-        };
     }
 });
