@@ -229,9 +229,14 @@ charts.extend({
                         rectY = y(maxData), // y coord of rectangle
                         boxColor;
 
-                    // Decide if the box is on, below or above the line
-                    if (obj.colorBoxes) {
-                        boxColor = 'green';
+                    
+                    // Should we color boxes based of position?
+                    if (obj.boxColors && yMarker) {
+                        // Decide if the box is on, below or above the line
+                        if (maxData < yMarker) var boxPos = 'belowLine';
+                        if (minData > yMarker) var boxPos = 'aboveLine';
+                        if (maxData > yMarker && minData < yMarker) var boxPos = 'onLine';
+                        boxColor = obj.color;
                     } else {
                         boxColor = obj.color;
                     }
