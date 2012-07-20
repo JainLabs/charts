@@ -226,7 +226,11 @@ charts.extend({
             id: chartID,
             obj: obj,
             redraw: function(data) {
-                origSvg = document.getElementById(this.id).innerHTML;
+
+            },
+            remove: function() {
+                var oldElem = document.getElementById(this.id);
+                oldElem.parentNode.removeChild(oldElem);
             }
         };
     }
