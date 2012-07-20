@@ -219,17 +219,36 @@ charts.extend({
             .style("stroke", obj.color)
             .style("stroke-width", "1.5px");
 
-        svg.selectAll(".box")
-            .data(data)
-            .enter().append("svg:rect")
-            .attr("class", "box")
-            .attr("x", 50)
-            .attr("y", 100)
-            .attr("width", 50)
-            .attr("height", 75)
-            .style("fill", "none")
-            .style("stroke", obj.color)
-            .style("stroke-width", "1.5px");
+        (function() {
+            for (var group in obj.data) {
+                if (obj.data.hasOwnProperty(group)) {
+                    var groupData = obj.data[group].sort(),
+                        maxData = groupData.pop(),
+                        minData = groupData.shift(),
+                        rectX = x(new Date(group).valueOf()), // x coord of rectangle
+                        rectY = y(maxData), // y coord of rectangle
+                        boxColor;
+
+                    // Decide if the box is on, below or above the line
+                    if (obj.colorBoxes) {
+                        boxColor = 'green';
+                    } else {
+                        boxColor = obj.color;
+                    }
+
+                    console.log(group, groupData, rectX, rectY);
+                    svg.append("svg:rect")
+                        .attr("class", "box")
+                        .attr("x", rectX-5)
+                        .attr("y", rectY-5)
+                        .attr("width", 10)
+                        .attr("height", y(minData)-rectY+10)
+                        .style("fill", "none")
+                        .style("stroke", boxColor)
+                        .style("stroke-width", "1.5px");
+                }
+            }
+        })();
 
 
         var style = document.createElement('style');
