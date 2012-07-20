@@ -215,8 +215,42 @@ charts.extend({
             .attr("cx", line.x())
             .attr("cy", line.y())
             .attr("r", 3.5)
-            .style("fill", "white")
-            .style("stroke", obj.color)
+            .style("fill", function(d) {
+                console.log(d, yMarker);
+                if (obj.boxColors && yMarker) {
+                    if (d.y < yMarker) {
+                        console.log('belowLine');
+                        return obj.boxColors['belowLine'] || obj.color;
+                    }
+                    if (d.y > yMarker) {
+                        console.log('aboveLine');
+                        return obj.boxColors['aboveLine'] || obj.color;
+                    }
+                    if (d.y = yMarker) {
+                        console.log('onLine');
+                        return obj.boxColors['onLine'] || obj.color;
+                    }
+                }
+                return obj.color;
+            })
+            .style("stroke", function(d) {
+                console.log(d, yMarker);
+                if (obj.boxColors && yMarker) {
+                    if (d.y < yMarker) {
+                        console.log('belowLine');
+                        return obj.boxColors['belowLine'] || obj.color;
+                    }
+                    if (d.y > yMarker) {
+                        console.log('aboveLine');
+                        return obj.boxColors['aboveLine'] || obj.color;
+                    }
+                    if (d.y = yMarker) {
+                        console.log('onLine');
+                        return obj.boxColors['onLine'] || obj.color;
+                    }
+                }
+                return obj.color;
+            })
             .style("stroke-width", "1.5px");
 
         (function() {
@@ -228,20 +262,18 @@ charts.extend({
                         rectX = x(new Date(group).valueOf()), // x coord of rectangle
                         rectY = y(maxData), // y coord of rectangle
                         boxColor;
-
                     
-                    // Should we color boxes based of position?
+                    // Should we color boxes based off position?
                     if (obj.boxColors && yMarker) {
                         // Decide if the box is on, below or above the line
                         if (maxData < yMarker) var boxPos = 'belowLine';
                         if (minData > yMarker) var boxPos = 'aboveLine';
                         if (maxData > yMarker && minData < yMarker) var boxPos = 'onLine';
-                        boxColor = obj.color;
+                        boxColor = obj.boxColors[boxPos] || obj.color;
                     } else {
                         boxColor = obj.color;
                     }
 
-                    console.log(group, groupData, rectX, rectY);
                     svg.append("svg:rect")
                         .attr("class", "box")
                         .attr("x", rectX-5)
