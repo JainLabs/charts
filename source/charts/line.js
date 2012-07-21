@@ -205,7 +205,6 @@ charts.extend({
             .style("stroke", obj.color)
             .style("stroke-width", "1.5px");
 
-
         var style = document.createElement('style');
         document.head.appendChild(style);
         style.innerHTML = 
@@ -218,13 +217,6 @@ charts.extend({
         return {
             id: chartID,
             obj: obj,
-            redraw: function(data) {
-                this.remove();
-                this.obj.data = data;
-                this.obj.container = '#'+this.id;
-
-                return charts.line(this.obj);
-            },
             remove: function() {
                 var oldElem = document.getElementById(this.id),
                     placeholder = document.createElement('div');
@@ -232,6 +224,16 @@ charts.extend({
 
                 oldElem.parentNode.replaceChild(placeholder, oldElem);
                 return this;
+            },
+            redraw: function(data) {
+                this.remove();
+                this.obj.data = data;
+                this.obj.container = '#'+this.id;
+
+                return charts.line(this.obj);
+            },
+            add: function(data) {
+                this.redraw(this.obj.data.concat(data));
             }
         };
     }
