@@ -8,6 +8,9 @@
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
 
+  <script src="http://d3js.org/d3.v2.js"></script>  
+  <script src="http://jainlabs.github.com/charts/cdn/charts.min.js"></script>
+  <script type="text/javascript">window.onload=function(){window.gauge=charts.gauge({container:"#mem",value:50,size:240,label:"Memory",minorTicks:5,majorTicks:5,zones:{red:{from:0,to:5},yellow:{from:5,to:15},green:{from:85,to:100}}}),gauge.redraw(60)}</script>
     <title>Charts</title>
   </head>
 
@@ -32,20 +35,51 @@
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
         <h1>Charts</h1>
+          <h2>What is charts.js</h2>
+          <p>charts.js is meant to be an easy to use library to pair complex online charting libraries like d3 or Google's Charting API with easy to use code. The library includes specialization to specific fields like education.</p>
 
-<h2>What is charts.js</h2>
+          <h2>Get charts.js in 5 minutes</h2>
 
-<p>charts.js is meant to be an easy to use library to pair complex online charting libraries like d3 or Google's Charting API with easy to use code. The library includes specialization to specific fields like education.</p>
+          <pre><code>
+&lt;html&gt;  
+  &lt;head&gt;  
+    &lt;script src="http://d3js.org/d3.v2.js"&gt;&lt;/script&gt;  
+    &lt;script src="http://jainlabs.github.com/charts/cdn/charts.min.js"&gt;&lt;/script&gt;
+    &lt;!-- CDN HOSTED VERSION OF charts.js --&gt;    
+  &lt;/head&gt;   
+  &lt;body&gt;  
+    &lt;div id="chart_area"&gt;&lt;/div&gt;  
+    &lt;script&gt;  
+        charts.gauge({  
+            container: '#chart_area',  
+            value: 50,  
+            size: 240,  
+            label: 'Memory',  
+            minorTicks: 5,  
+            majorTicks: 5,  
+            zones: {  
+                red: { from: 0, to: 5 },  
+                yellow: { from: 5, to: 15 },  
+                green: { from: 85, to: 100 }  
+            }  
+        });  
+    &lt;/script&gt;
+  &lt;/body&gt;  
+&lt;/html&gt;
+          </code></pre>
 
-<h2>Get charts.js in 5 minutes</h2>
+          <p>produces:  </p>
+          <div id="chart_area"></div>  
+
+          <h2>More charting examples</h2>
       </section>
     </div>
 
     <!-- FOOTER  -->
     <div id="footer_wrap" class="outer">
       <footer class="inner">
-        <p class="copyright">Charts maintained by <a href="https://github.com/JainLabs">JainLabs</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+        <p class="copyright">charts.js maintained by <a href="https://github.com/JainLabs">JainLabs</a></p>
+        <p class="copyright">By <a href="https://github.com/parasjain">parasjain</a> and <a href="https://github.com/ajayjain">ajayjain</a></p>
       </footer>
     </div>
 
