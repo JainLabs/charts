@@ -7,11 +7,8 @@
     <meta name="description" content="Charts : Built on d3js. charts.js is meant to be an easy to use library to pair complex online charting libraries with easy to use code with reusable charting formats." />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-  <script src="http://d3js.org/d3.v2.js"></script>  
-  <script src="http://jainlabs.github.com/charts/cdn/charts.min.js"></script>
-  <script type="text/javascript">window.onload=function(){window.gauge=charts.gauge({container:"#mem",value:50,size:240,label:"Memory",minorTicks:5,majorTicks:5,zones:{red:{from:0,to:5},yellow:{from:5,to:15},green:{from:85,to:100}}}),gauge.redraw(60)}</script>
-    <title>Charts</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/buttons.css">
+    <title>charts.js</title>
   </head>
 
   <body>
@@ -21,7 +18,7 @@
         <header class="inner">
           <a id="forkme_banner" href="https://github.com/JainLabs/charts">View on GitHub</a>
 
-          <h1 id="project_title">Charts</h1>
+          <h1 id="project_title">charts.js</h1>
           <h2 id="project_tagline">Built on d3js. charts.js is meant to be an easy to use library to pair complex online charting libraries with easy to use code with reusable charting formats.</h2>
 
             <section id="downloads">
@@ -34,14 +31,12 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h1>Charts</h1>
-          <h2>What is charts.js</h2>
-          <p>charts.js is meant to be an easy to use library to pair complex online charting libraries like d3 or Google's Charting API with easy to use code. The library includes specialization to specific fields like education.</p>
+        <h2>What is charts.js</h2>
+        <p>charts.js is meant to be an easy to use library to pair complex online charting libraries like d3 or Google's Charting API with easy to use code. The library includes specialization to specific fields like education.</p>
 
-          <h2>Get charts.js in 5 minutes</h2>
+        <h2>Get charts.js in 5 minutes</h2>
 
-          <pre><code>
-&lt;html&gt;  
+<pre><code>&lt;html&gt;  
   &lt;head&gt;  
     &lt;script src="http://d3js.org/d3.v2.js"&gt;&lt;/script&gt;  
     &lt;script src="http://jainlabs.github.com/charts/cdn/charts.min.js"&gt;&lt;/script&gt;
@@ -65,13 +60,21 @@
         });  
     &lt;/script&gt;
   &lt;/body&gt;  
-&lt;/html&gt;
-          </code></pre>
+&lt;/html&gt;</code></pre>
 
           <p>produces:  </p>
-          <div id="chart_area"></div>  
-
+          <div id="chart_area_demo"></div>  
+          <button class="cupid-green" onclick="gauge.redraw(Math.floor(Math.random()*100))">Redraw</button>
           <h2>More charting examples</h2>
+          What do you want to see:<select id="chart_selector">
+            <option value="line">line</option>
+            <option value="grouped_line">grouped line</option>
+            <option value="gauge">gauge</option>
+            <option value="donut">donut</option>
+          </select><br /><br />
+          <div id="chart_area"></div><br />
+<pre><code><div id="code_block"></div>
+</code></pre>
       </section>
     </div>
 
@@ -83,17 +86,69 @@
       </footer>
     </div>
 
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-33549931-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
+    <!-- SCRIPTS -->
+    <script src="http://d3js.org/d3.v2.js"></script>  
+    <script src="http://jainlabs.github.com/charts/cdn/charts.min.js"></script>
+    <script>window.onload=function(){window.gauge=charts.gauge({container:"#chart_area_demo",value:60,size:240,label:"Memory",minorTicks:5,majorTicks:5,zones:{red:{from:0,to:5},yellow:{from:5,to:15},green:{from:85,to:100}}})}</script>
+    
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
+    <script type="text/javascript">
+      $('#chart_selector').change(function() {
+        var chart_type = $('#chart_selector').val();
+        console.log('Displaying chart: ' + chart_type);
+        switch(chart_type) {
+        case 'donut':
+          $('#code_block').text("charts.donut({<br/>&amp;nbsp;&amp;nbsp;sections:&amp;nbsp;[{<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;data:&amp;nbsp;172,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;label:&amp;nbsp;&amp;amp;quot;a&amp;amp;quot;,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;color:&amp;amp;quot;rgb(0,200,0)&amp;amp;quot;<br/>&amp;nbsp;&amp;nbsp;},&amp;nbsp;{<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;data:&amp;nbsp;136,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;label:&amp;nbsp;&amp;amp;quot;b&amp;amp;quot;,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;color:&amp;amp;quot;rgb(0,150,0)&amp;amp;quot;<br/>&amp;nbsp;&amp;nbsp;},&amp;nbsp;{<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;data:&amp;nbsp;135,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;label:&amp;nbsp;&amp;amp;quot;c&amp;amp;quot;,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;color:&amp;amp;quot;rgb(0,100,0)&amp;amp;quot;<br/>&amp;nbsp;&amp;nbsp;},&amp;nbsp;{<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;data:&amp;nbsp;10,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;label:&amp;nbsp;&amp;amp;quot;d&amp;amp;quot;,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;color:&amp;amp;quot;rgb(100,0,0)&amp;amp;quot;<br/>&amp;nbsp;&amp;nbsp;}],<br/>&amp;nbsp;&amp;nbsp;centerLabel:&amp;nbsp;'Label',<br/>&amp;nbsp;&amp;nbsp;container:&amp;nbsp;'#chart_area',<br/>&amp;nbsp;&amp;nbsp;width:&amp;nbsp;252,<br/>&amp;nbsp;&amp;nbsp;height:&amp;nbsp;252<br/>});");
+            charts.donut({
+              sections: [{
+                data: 172,
+                label: "a",
+                color:"rgb(0,200,0)"
+              }, {
+                data: 136,
+                label: "b",
+                color:"rgb(0,150,0)"
+              }, {
+                data: 135,
+                label: "c",
+                color:"rgb(0,100,0)"
+              }, {
+                data: 10,
+                label: "d",
+                color:"rgb(100,0,0)"
+              }],
+              centerLabel: 'Label',
+              container: '#chart_area',
+              width: 252,
+              height: 252
+            });
+          break;
+        }
+      });
 
+/*      String.prototype.escapeHTML = function () {                                        
+        return(                                                                 
+          this.replace(/>/g,'&gt;').
+               replace(/</g,'&lt;').
+               replace(/"/g,'&quot;')
+        );
+      };
+      var codeEl = document.getElementById('code_block');
+      if (codeEl) {
+        codeEl.innerHTML = codeEl.innerHTML.escapeHTML();
+      } */
+    </script>
+
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      try {
+        var pageTracker = _gat._getTracker("UA-33549931-1");
+      pageTracker._trackPageview();
+      } catch(err) {}
+    </script>
   </body>
 </html>
