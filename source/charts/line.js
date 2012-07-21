@@ -1,7 +1,7 @@
 charts.extend({
     line: function(obj) {
         console.log('obj', obj);
-        var chartID = "line"+Math.round(Math.random()*1000),
+        var chartID = "line"+Math.round(Math.random()*1000000), // random id for SVG
             data = obj.data,
             margin = {};
 
@@ -54,14 +54,11 @@ charts.extend({
                     var m;
                     for (var i = 0,len = data.length; i < len; i++) {
                         m = new Date(data[i].x);
-                        console.log('m: ', m);
                         if (m > xMax) xMax = m;
                     }
                 })();
             }
-            console.log('xMax: ', new Date(xMax));
 
-            console.log('obj.xMin: ', obj.xMin);
             var xMin = obj.xMin ? new Date(obj.xMin) : 0;
             if (xMin === 0) {
                 (function() {
@@ -69,12 +66,10 @@ charts.extend({
                     var m;
                     for (var i = 0,len = data.length; i < len; i++) {
                         m =  new Date(data[i].x);
-                        console.log('m: ', m);
                         if (m < xMin) xMin = m;
                     }
                 })();
             }
-            console.log('xMin: ', new Date(xMin));
 
             // var x = d3.time.scale().domain([Date.parse('July 1 2012'), Date.parse('July 10 2012')]).range([0,500])
             var x = d3.time.scale()
@@ -164,8 +159,6 @@ charts.extend({
 
         if (xMarker) {
             var xMarkerPX = (x(xMarker)).toString();
-            console.log('xMarker: ', xMarker);
-            console.log('xMarkerPX: ', xMarkerPX);
             svg.append("line")
                 .attr("x1", xMarkerPX)
                 .attr("y1", "0")
@@ -226,11 +219,19 @@ charts.extend({
             id: chartID,
             obj: obj,
             redraw: function(data) {
+                this.remove();
+                this.obj.data = data;
+                this.obj.container = '#'+this.id;
 
+                return charts.line(this.obj);
             },
             remove: function() {
-                var oldElem = document.getElementById(this.id);
-                oldElem.parentNode.removeChild(oldElem);
+                var oldElem = document.getElementById(this.id),
+                    placeholder = document.createElement('div');
+                placeholder.setAttribute('id',this.id);
+
+                oldElem.parentNode.replaceChild(placeholder, oldElem);
+                return this;
             }
         };
     }
