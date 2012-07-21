@@ -38,50 +38,24 @@ charts.extend({
 			ylabel: 'DRA Score'
 		};
 		console.log(lineCall);
-		this.line(lineCall);
-	},
 
+		var returnChart = this.line(lineCall);
+		returnChart.obj = obj;
+		returnChart.redraw = function(data) {
+            this.remove();
+            this.obj.scores = data;
+            this.obj.container = '#'+this.id;
+            console.log('this.obj', JSON.stringify(this.obj));
 
-	DRAPlain: function(obj) {
-		var xMax = (obj.deadline && typeof obj.deadline === 'number') ? obj.deadline + .5 : undefined,
-	        data = [],
-	        scores = obj.scores;
+            // returnChart = charts.DRA(this.obj);
+			return charts.DRA(this.obj);
+        };
+        returnChart.add = function(data) {
+			this.redraw(charts.extend(this.obj.scores,data));
+		};
 
-		obj.container = (obj.container && obj.container !== '' && obj.container !== 'undefined') ? obj.container : 'body';
-		obj.width     = (obj.width && typeof obj.width === 'number') ? obj.width : undefined;
-        obj.height    = (obj.height && typeof obj.height === 'number') ? obj.height : undefined;
+		console.log('returnChart: ',returnChart);
 
-        // Map scores to a usable format
-        for (var i in scores) {
-        	if (scores.hasOwnProperty(i)) {
-        		console.log(i, scores[i]);
-        		data.push({
-        			x: i,
-        			y: scores[i]
-        		});
-        	}
-        }
-
-        // sort data
-        data.sort(function(curr,next) {
-        	if (curr.x < next.x) return -1;
-        	if (curr.x > next.x) return 1;
-        	return 0;
-        })
-
-		this.line({
-			time: false,
-			data: data,
-			title: 'Reading Level',
-			xlabel: 'Time',
-			ylabel: 'DRA Score',
-			xMax: xMax,
-			yMax: 60,
-			xMarker: obj.deadline,
-			yMarker: obj.goal,
-			container: obj.container,
-			width:  obj.width,
-			height: obj.height
-		});
-	},
+		return returnChart;
+	}
 });

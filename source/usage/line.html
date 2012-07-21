@@ -34,7 +34,7 @@
 			color: "orange"
 		});
 
-		window.line2 = charts.line({
+		charts.line({
 			time: true,
 			data: [{
 					x: 'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)',
@@ -58,21 +58,19 @@
 			height: 400
 		});
 
-		console.log(line2);
-
-		charts.DRAPlain({
-			scores: {
-				0: 25,
-				.5: 28,
-				1: 35,
-				2: 50
-			},
-			container: 'body',
-			deadline: 3,
-			goal: 50
-			//, width: 1000,
-			// height: 400
-		});
+		// charts.DRAPlain({
+		// 	scores: {
+		// 		0: 25,
+		// 		.5: 28,
+		// 		1: 35,
+		// 		2: 50
+		// 	},
+		// 	container: 'body',
+		// 	deadline: 3,
+		// 	goal: 50
+		// 	//, width: 1000,
+		// 	// height: 400
+		// });
 		charts.DRA({
 			scores: {
 				'2012/06/1': 25,

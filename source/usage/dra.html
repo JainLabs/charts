@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DRA Chart</title>
+	<script type="text/javascript" src="../d3.v2.js"></script>
+	<script type="text/javascript" src="../charts.js"></script>
+	<script type="text/javascript" src="../charts/line.js"></script>
+	<script type="text/javascript" src="../wrappers/DRA.js"></script>
+	<script>
+	window.onload = function() {
+		window.d = charts.DRA({
+			scores: {
+				'2012/06/1': 25,
+				'2012/06/4': 28,
+				'2012/06/7': 35,
+				'2012/06/11': 50
+			},
+			container: 'body',
+			deadline: '2012/06/10',
+			goal: 50
+			//, width: 1000,
+			// height: 400
+		});
+	};
+	</script>
+</head>
+<body>
+</body>
+</html>
