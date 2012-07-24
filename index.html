@@ -99,26 +99,40 @@
         console.log('Displaying chart: ' + chart_type);
         switch(chart_type) {
         case 'donut':
-          $('#code_block').text("charts.donut({<br/>&amp;nbsp;&amp;nbsp;sections:&amp;nbsp;[{<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;data:&amp;nbsp;172,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;label:&amp;nbsp;&amp;amp;quot;a&amp;amp;quot;,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;color:&amp;amp;quot;rgb(0,200,0)&amp;amp;quot;<br/>&amp;nbsp;&amp;nbsp;},&amp;nbsp;{<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;data:&amp;nbsp;136,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;label:&amp;nbsp;&amp;amp;quot;b&amp;amp;quot;,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;color:&amp;amp;quot;rgb(0,150,0)&amp;amp;quot;<br/>&amp;nbsp;&amp;nbsp;},&amp;nbsp;{<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;data:&amp;nbsp;135,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;label:&amp;nbsp;&amp;amp;quot;c&amp;amp;quot;,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;color:&amp;amp;quot;rgb(0,100,0)&amp;amp;quot;<br/>&amp;nbsp;&amp;nbsp;},&amp;nbsp;{<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;data:&amp;nbsp;10,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;label:&amp;nbsp;&amp;amp;quot;d&amp;amp;quot;,<br/>&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;color:&amp;amp;quot;rgb(100,0,0)&amp;amp;quot;<br/>&amp;nbsp;&amp;nbsp;}],<br/>&amp;nbsp;&amp;nbsp;centerLabel:&amp;nbsp;'Label',<br/>&amp;nbsp;&amp;nbsp;container:&amp;nbsp;'#chart_area',<br/>&amp;nbsp;&amp;nbsp;width:&amp;nbsp;252,<br/>&amp;nbsp;&amp;nbsp;height:&amp;nbsp;252<br/>});");
+          $('#code_block').text("charts.donut({\n\
+              sections: [{\n\
+                  data: 2,\n\
+                  label: 'eating',\n\
+                }, {\n\
+                  data: 8,\n\
+                  label: 'sleeping',\n\
+                }, {\n\
+                  data: 1.5,\n\
+                  label: 'Hacker News',\n\
+                }, {\n\
+                  data: 4,\n\
+                  label: 'coding',\n\
+                }],\n\
+                centerLabel: 'My day',\n\
+                container: '#chart_area',\n\
+                width: 252,\n\
+                height: 252\n\
+              });");
             charts.donut({
               sections: [{
-                data: 172,
-                label: "a",
-                color:"rgb(0,200,0)"
+                data: 2,
+                label: "eating",
               }, {
-                data: 136,
-                label: "b",
-                color:"rgb(0,150,0)"
+                data: 8,
+                label: "sleeping",
               }, {
-                data: 135,
-                label: "c",
-                color:"rgb(0,100,0)"
+                data: 1.5,
+                label: "hacker news",
               }, {
-                data: 10,
-                label: "d",
-                color:"rgb(100,0,0)"
+                data: 4,
+                label: "coding",
               }],
-              centerLabel: 'Label',
+              centerLabel: 'My day',
               container: '#chart_area',
               width: 252,
               height: 252
