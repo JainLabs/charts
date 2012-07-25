@@ -83,8 +83,8 @@
                 <td><div id="behavior_chart" style="display: block; width: 300px; float: left"></div></td>
               </tr>
               <tr class="labels">
-                <td>Base donut (<a href="#">example code</a>)</td>
-                <td>Behavioral (<a href="#">example code</a>)</td>
+                <td>Base donut (<a href="#donut" onclick="$('#behavior_code').hide(); $('#donut_code').show()">example code</a>)</td>
+                <td>Behavior chart (<a href="#donut" onclick="$('#donut_code').hide(); $('#behavior_code').show()">example code</a>)</td>
               </tr>
             </table>
 <div id="donut_code"><pre><code>charts.donut({
@@ -106,18 +106,73 @@
   width: 300,
   height: 300
 });</code></pre></div>
+
+<div id="behavior_code" style="display:none"><pre><code>charts.behavior({
+  positive: {
+    'participation':3,
+    'productivity':2,
+    'excitment':1
+  },
+  negative: {
+    'sleeping': 1,
+    'distracted': 1
+  },
+  neutral: {
+    'restroom breaks': 2
+  }
+}, '#behavior_chart', 300, 300);</code></pre></div>
+
             <br />
           </div>
-          <br />
-          <select id="chart_selector">
-            <option value="line">line</option>
-            <option value="grouped_line">grouped line</option>
-            <option value="gauge">gauge</option>
-            <option value="donut">donut</option>
-          </select><br /><br />
-          <div id="chart_area"></div><br />
-<pre><code><div id="code_block"></div>
-</code></pre>
+          <div id="line">
+            <h3>Donut Chart</h3>
+            <table class="chart-types noborder">
+              <tr>
+                <td><div id="line_chart" style="display: block; width: 300px; float: left"></div></td>
+                <td><div id="DRA_chart" style="display: block; width: 300px; float: left"></div></td>
+              </tr>
+              <tr class="labels">
+                <td>Base line (<a href="#line" onclick="$('#behavior_code').hide(); $('#donut_code').show()">example code</a>)</td>
+                <td>DRA chart (<a href="#line" onclick="$('#donut_code').hide(); $('#behavior_code').show()">example code</a>)</td>
+              </tr>
+            </table>
+<div id="line_code"><pre><code>charts.donut({
+  sections: [{
+    data: 2,
+    label: 'eating',
+  }, {
+    data: 8,
+    label: 'sleeping',
+  }, {
+    data: 1.5,
+    label: 'Hacker News',
+  }, {
+    data: 4,
+    label: 'coding',
+  }],
+  centerLabel: 'My day',
+  container: '#chart_area',
+  width: 300,
+  height: 300
+});</code></pre></div>
+
+<div id="DRA_code" style="display:none"><pre><code>charts.behavior({
+  positive: {
+    'participation':3,
+    'productivity':2,
+    'excitment':1
+  },
+  negative: {
+    'sleeping': 1,
+    'distracted': 1
+  },
+  neutral: {
+    'restroom breaks': 2
+  }
+}, '#behavior_chart', 300, 300);</code></pre></div>
+
+            <br />
+          </div>
       </section>
     </div>
 
@@ -135,109 +190,15 @@
     <script>window.onload=function(){window.gauge=charts.gauge({container:"#chart_area_demo",value:60,size:240,label:"Memory",minorTicks:5,majorTicks:5,zones:{red:{from:0,to:5},yellow:{from:5,to:15},green:{from:85,to:100}}})}</script>
     
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script type="text/javascript">
-      $('#chart_selector').change(function() {
-        var chart_type = $('#chart_selector').val();
-        console.log('Displaying chart: ' + chart_type);
-        switch(chart_type) {
-        case 'donut':
-          $('#code_block').text("charts.donut({\n\
-              sections: [{\n\
-                  data: 2,\n\
-                  label: 'eating',\n\
-                }, {\n\
-                  data: 8,\n\
-                  label: 'sleeping',\n\
-                }, {\n\
-                  data: 1.5,\n\
-                  label: 'Hacker News',\n\
-                }, {\n\
-                  data: 4,\n\
-                  label: 'coding',\n\
-                }],\n\
-                centerLabel: 'My day',\n\
-                container: '#chart_area',\n\
-                width: 300,\n\
-                height: 300\n\
-              });");
-            charts.donut({
-              sections: [{
-                data: 2,
-                label: "eating",
-              }, {
-                data: 8,
-                label: "sleeping",
-              }, {
-                data: 1.5,
-                label: "hacker news",
-              }, {
-                data: 4,
-                label: "coding",
-              }],
-              centerLabel: 'My day',
-              container: '#chart_area',
-              width: 300,
-              height: 300
-            });
-          break;
-        }
-      });
-      charts.donut({
-        sections: [{
-          data: 2,
-          label: "eating",
-        }, {
-          data: 8,
-          label: "sleeping",
-        }, {
-          data: 1.5,
-          label: "hacker news",
-        }, {
-          data: 4,
-          label: "coding",
-        }],
-        centerLabel: 'My day',
-        container: '#donut_chart',
-        width: 300,
-        height: 300
-      });
-      charts.behavior(
-      {
-        positive: {
-          'participation':3,
-          'productivity':2,
-          'excitment':1
-        },
-        negative: {
-          'sleeping': 1,
-          'distracted': 1
-        },
-        neutral: {
-          'restroom breaks': 2
-        }
-      }, '#behavior_chart', 300, 300);
-
-/*      String.prototype.escapeHTML = function () {                                        
-        return(                                                                 
-          this.replace(/>/g,'&gt;').
-               replace(/</g,'&lt;').
-               replace(/"/g,'&quot;')
-        );
-      };
-      var codeEl = document.getElementById('code_block');
-      if (codeEl) {
-        codeEl.innerHTML = codeEl.innerHTML.escapeHTML();
-      } */
-    </script>
+    <script type="text/javascript" src="./javascripts/renderCharts.js"></script>
 
     <script type="text/javascript">
       var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
       document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
+
       try {
         var pageTracker = _gat._getTracker("UA-33549931-1");
-      pageTracker._trackPageview();
+        pageTracker._trackPageview();
       } catch(err) {}
     </script>
   </body>
