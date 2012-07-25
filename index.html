@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/buttons.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/subnav.css">
     <title>charts.js</title>
   </head>
 
@@ -66,7 +67,16 @@
           <div id="chart_area_demo"></div>  
           <button class="cupid-green" onclick="gauge.redraw(Math.floor(Math.random()*100))">Redraw</button>
           <h2>More charting examples</h2>
-          What do you want to see:<select id="chart_selector">
+          <div class="subnav">
+            <ul class="nav nav-pills">
+              <li><a href="#line">line</a></li>
+              <li><a href="#grouped line">grouped line</a></li>
+              <li><a href="#gauge">gauge</a></li>
+              <li><a href="#donut">donut</a></li>
+            </ul>
+          </div>
+          <br />
+          <select id="chart_selector">
             <option value="line">line</option>
             <option value="grouped_line">grouped line</option>
             <option value="gauge">gauge</option>
