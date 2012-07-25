@@ -35,7 +35,8 @@ charts.extend({
 			data: data,
 			title: 'Reading Level',
 			xlabel: 'Time',
-			ylabel: 'DRA Score'
+			ylabel: 'DRA Score',
+            container: obj.container
 		};
 		console.log(lineCall);
 
