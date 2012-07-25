@@ -69,11 +69,44 @@
           <h2>More charting examples</h2>
           <div class="subnav">
             <ul class="nav nav-pills">
+              <li><a href="#donut">donut</a></li>
               <li><a href="#line">line</a></li>
               <li><a href="#grouped line">grouped line</a></li>
               <li><a href="#gauge">gauge</a></li>
-              <li><a href="#donut">donut</a></li>
             </ul>
+          </div>
+          <div id="donut">
+            <h3>Donut Chart</h3>
+            <table class="chart-types noborder">
+              <tr>
+                <td><div id="donut_chart" style="display: block; width: 300px; float: left"></div></td>
+                <td><div id="behavior_chart" style="display: block; width: 300px; float: left"></div></td>
+              </tr>
+              <tr class="labels">
+                <td>Base donut (<a href="#">example code</a>)</td>
+                <td>Behavioral (<a href="#">example code</a>)</td>
+              </tr>
+            </table>
+<div id="donut_code"><pre><code>charts.donut({
+  sections: [{
+    data: 2,
+    label: 'eating',
+  }, {
+    data: 8,
+    label: 'sleeping',
+  }, {
+    data: 1.5,
+    label: 'Hacker News',
+  }, {
+    data: 4,
+    label: 'coding',
+  }],
+  centerLabel: 'My day',
+  container: '#chart_area',
+  width: 300,
+  height: 300
+});</code></pre></div>
+            <br />
           </div>
           <br />
           <select id="chart_selector">
@@ -102,7 +135,6 @@
     <script>window.onload=function(){window.gauge=charts.gauge({container:"#chart_area_demo",value:60,size:240,label:"Memory",minorTicks:5,majorTicks:5,zones:{red:{from:0,to:5},yellow:{from:5,to:15},green:{from:85,to:100}}})}</script>
     
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-
     <script type="text/javascript">
       $('#chart_selector').change(function() {
         var chart_type = $('#chart_selector').val();
@@ -125,8 +157,8 @@
                 }],\n\
                 centerLabel: 'My day',\n\
                 container: '#chart_area',\n\
-                width: 252,\n\
-                height: 252\n\
+                width: 300,\n\
+                height: 300\n\
               });");
             charts.donut({
               sections: [{
@@ -144,12 +176,46 @@
               }],
               centerLabel: 'My day',
               container: '#chart_area',
-              width: 252,
-              height: 252
+              width: 300,
+              height: 300
             });
           break;
         }
       });
+      charts.donut({
+        sections: [{
+          data: 2,
+          label: "eating",
+        }, {
+          data: 8,
+          label: "sleeping",
+        }, {
+          data: 1.5,
+          label: "hacker news",
+        }, {
+          data: 4,
+          label: "coding",
+        }],
+        centerLabel: 'My day',
+        container: '#donut_chart',
+        width: 300,
+        height: 300
+      });
+      charts.behavior(
+      {
+        positive: {
+          'participation':3,
+          'productivity':2,
+          'excitment':1
+        },
+        negative: {
+          'sleeping': 1,
+          'distracted': 1
+        },
+        neutral: {
+          'restroom breaks': 2
+        }
+      }, '#behavior_chart', 300, 300);
 
 /*      String.prototype.escapeHTML = function () {                                        
         return(                                                                 

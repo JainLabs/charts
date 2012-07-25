@@ -429,3 +429,23 @@ Small Device Styles
   }
 
 }
+
+
+
+
+
+/* CUSTOM STYLES */
+
+/* chart type tables styles */
+table.chart-types {
+  width: 100%;
+  border: none;
+}
+table.chart-types td {
+  border: none;
+}
+
+table.chart-types tr.labels td {
+  font-weight: bold;
+  text-align: center;
+}

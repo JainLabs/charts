@@ -11,6 +11,8 @@
 
 .nav > li > a {
   display: block;
+  text-shadow: rgba(0,0,0,0) 0px 0px 0px !important;
+  
   transition: text-shadow 0s ease;
   transition: color 0s ease;
 
@@ -28,6 +30,7 @@
 .nav > li > a:hover {
   text-decoration: none;
   background-color: #eeeeee;
+  text-shadow: rgba(0,0,0,0) 0px 0px 0px !important;
 }
 
 .nav > .pull-right {
