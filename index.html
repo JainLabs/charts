@@ -124,17 +124,11 @@
             <br />
           </div>
           <div id="line">
-            <h3>Donut Chart</h3>
-            <table class="chart-types noborder">
-              <tr>
-                <td><div id="line_chart" style="display: block; width: 400px; float: left"></div></td>
-                <td><div id="DRA_chart" style="display: block; width: 300px; float: left"></div></td>
-              </tr>
-              <tr class="labels">
-                <td>Base line (<a href="#" onclick="$('#DRA_code').hide(); $('#line_code').show(); return false;">example code</a>)</td>
-                <td>DRA chart (<a href="#" onclick="$('#line_code').hide(); $('#DRA_code').show(); return false;">example code</a>)</td>
-              </tr>
-            </table>
+            <h3>Line Chart</h3>
+            <div id="line_chart" style="display: block; width: 600px; margin: auto;"></div>
+            <strong style="display: block; text-align: center;">Base line (<a href="#" onclick="$('#DRA_code').hide(); $('#line_code').show(); return false;">example code</a>)</strong>
+            <div id="DRA_chart" style="display: block; width: 600px; margin: auto;"></div>
+            <strong style="display: block; text-align: center;">DRA chart (<a href="#" onclick="$('#line_code').hide(); $('#DRA_code').show(); return false;">example code</a>)</strong>
 <div id="line_code"><pre><code>charts.line({
   time: true,
   data: [{
@@ -155,7 +149,7 @@
   ylabel: 'y Label',
   xMarker: '2012/07/07',
   color: "green",
-  width: 400,
+  width: 600,
   height: 300,
   container: "#line_chart"
 });</code></pre></div>
@@ -170,7 +164,7 @@
   container: '#DRA_chart',
   deadline: '2012/06/10',
   goal: 50,
-  width: 300,
+  width: 600,
   height: 300
 });</code></pre></div>
 

@@ -55,7 +55,7 @@ charts.line({
   ylabel: 'y Label',
   xMarker: '2012/07/07',
   color: "green",
-  width: 400,
+  width: 600,
   height: 300,
   container: "#line_chart"
 });
@@ -70,6 +70,6 @@ charts.DRA({
   container: '#DRA_chart',
   deadline: '2012/06/10',
   goal: 50,
-  width: 300,
+  width: 600,
   height: 300
 });
