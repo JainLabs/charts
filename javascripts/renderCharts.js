@@ -60,6 +60,14 @@ var lineChart = charts.line({
   container: "#line_chart"
 });
 
+$('#line_customize').submit(function() {
+  var d = $(this).serializeArray();
+  console.log(d);
+  lineChart.remove();
+  
+  return false;
+});
+
 $('#line_addData').submit(function() {
   var d = $(this).serializeArray();
   console.log(d);
@@ -69,6 +77,8 @@ $('#line_addData').submit(function() {
     }]);
   return false;
 });
+
+
 
 var DRAChart = charts.DRA({
   scores: {

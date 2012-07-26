@@ -125,16 +125,23 @@
           </div>
           <div id="line">
             <h3>Line Chart</h3>
-            <div id="line_chart" style="display: block; width: 600px; margin: auto;"></div>
-              <strong style="display: block; text-align: center;">Base line (<a href="#" onclick="$('#DRA_code').hide(); $('#line_code').show(); return false;">example code</a>)</strong>
-
+            
             <strong>Customize the line chart</strong>
+            <form action="#" id="line_customize">
+              New data point:
+              <input type="number" name="line_y" placeholder="data"/>
+              <input type="date" name="line_x" placeholder="date"/>
+              <input type="submit">
+            </form>
             <form action="#" id="line_addData">
               New data point:
               <input type="number" name="line_y" placeholder="data"/>
               <input type="date" name="line_x" placeholder="date"/>
               <input type="submit">
             </form>
+            <div id="line_chart" style="display: block; width: 600px; margin: auto;"></div>
+              <strong style="display: block; text-align: center;">Base line (<a href="#" onclick="$('#DRA_code').hide(); $('#line_code').show(); return false;">example code</a>)</strong>
+
 
             <div id="DRA_chart" style="display: block; width: 600px; margin: auto;"></div>
               <strong style="display: block; text-align: center;">DRA chart (<a href="#" onclick="$('#line_code').hide(); $('#DRA_code').show(); return false;">example code</a>)</strong>
