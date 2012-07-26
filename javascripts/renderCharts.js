@@ -35,7 +35,7 @@ charts.behavior(
 }, '#behavior_chart', 300, 300);
 
 // LINE CHARTS
-var lineChart =charts.line({
+var lineChart = charts.line({
   time: true,
   data: [{
       x: 'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)',
@@ -53,11 +53,21 @@ var lineChart =charts.line({
   title: 'Line Chart with Time',
   xlabel: 'Time',
   ylabel: 'y Label',
-  xMarker: '2012/07/07',
+  xMarker: '2012/07/03',
   color: "green",
   width: 600,
   height: 300,
   container: "#line_chart"
+});
+
+$('#line_addData').submit(function() {
+  var d = $(this).serializeArray();
+  console.log(d);
+  lineChart.add([{
+      x: d[1].value,
+      y: parseFloat(d[0].value),
+    }]);
+  return false;
 });
 
 var DRAChart = charts.DRA({
@@ -69,7 +79,7 @@ var DRAChart = charts.DRA({
   },
   container: '#DRA_chart',
   deadline: '2012/06/10',
-  goal: 50,
+  goal: 40,
   width: 600,
   height: 300
 });
