@@ -234,6 +234,7 @@ charts.extend({
             },
             add: function(data) {
                 this.redraw(this.obj.data.concat(data));
+                return this;
             }
         };
     }
