@@ -35,7 +35,7 @@ charts.behavior(
 }, '#behavior_chart', 300, 300);
 
 // LINE CHARTS
-charts.line({
+var lineChart =charts.line({
   time: true,
   data: [{
       x: 'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)',
@@ -60,7 +60,7 @@ charts.line({
   container: "#line_chart"
 });
 
-charts.DRA({
+var DRAChart = charts.DRA({
   scores: {
     '2012/06/1': 25,
     '2012/06/4': 28,
