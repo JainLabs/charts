@@ -37,30 +37,24 @@
 
         <h2>Get charts.js in 5 minutes</h2>
 
-<pre><code>&lt;html&gt;  
-  &lt;head&gt;  
-    &lt;script src="http://d3js.org/d3.v2.js"&gt;&lt;/script&gt;  
-    &lt;script src="https://raw.github.com/JainLabs/charts/master/charts.min.js"&gt;&lt;/script&gt;<!--     &lt;script src="http://jainlabs.github.com/charts/cdn/charts.min.js"&gt;&lt;/script&gt; --><!--     &lt;!-- CDN HOSTED VERSION OF charts.js --&gt;     -->
-  &lt;/head&gt;   
-  &lt;body&gt;  
-    &lt;div id="chart_area"&gt;&lt;/div&gt;  
-    &lt;script&gt;  
-        charts.gauge({  
-            container: '#chart_area',  
-            value: 50,  
-            size: 240,  
-            label: 'Memory',  
-            minorTicks: 5,  
-            majorTicks: 5,  
-            zones: {  
-                red: { from: 0, to: 5 },  
-                yellow: { from: 5, to: 15 },  
-                green: { from: 85, to: 100 }  
-            }  
-        });  
-    &lt;/script&gt;
-  &lt;/body&gt;  
-&lt;/html&gt;</code></pre>
+<pre><code>&lt;script src="http://d3js.org/d3.v2.js"&gt;&lt;/script&gt;  
+&lt;script src="https://raw.github.com/JainLabs/charts/master/charts.min.js"&gt;&lt;/script&gt;
+&lt;div id="chart_area"&gt;&lt;/div&gt;  
+&lt;script&gt;  
+    charts.gauge({  
+        container: '#chart_area',  
+        value: 50,  
+        size: 240,  
+        label: 'Memory',  
+        minorTicks: 5,  
+        majorTicks: 5,  
+        zones: {  
+            red: { from: 0, to: 5 },  
+            yellow: { from: 5, to: 15 },  
+            green: { from: 85, to: 100 }  
+        }  
+    });  
+&lt;/script&gt;</code></pre>
 
           <p>produces:  </p>
           <div id="chart_area_demo"></div>  
