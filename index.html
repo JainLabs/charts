@@ -37,7 +37,7 @@
 
         <h2>Get charts.js in 5 minutes</h2>
 
-<pre><code>&lt;script src="//d3js.org/d3.v2.js"&gt;&lt;/script&gt;  
+<pre><code><!--&lt;script src="//d3js.org/d3.v2.js"&gt;&lt;/script&gt;  
 &lt;script src="//jainlabs.github.com/charts/cdn/charts.min.js"&gt;&lt;/script&gt;
 &lt;div id="chart_area"&gt;&lt;/div&gt;  
 &lt;script&gt;  
@@ -54,7 +54,24 @@
             green: { from: 85, to: 100 }  
         }  
     });  
-&lt;/script&gt;</code></pre>
+&lt;/script&gt;--><div class="javascript"><span style="color: #339933;">&lt;</span>script src<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;//d3js.org/d3.v2.js&quot;</span><span style="color: #339933;">&gt;&lt;/</span>script<span style="color: #339933;">&gt;</span> &nbsp;
+<span style="color: #339933;">&lt;</span>script src<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;//jainlabs.github.com/charts/cdn/charts.min.js&quot;</span><span style="color: #339933;">&gt;&lt;/</span>script<span style="color: #339933;">&gt;</span>
+<span style="color: #339933;">&lt;</span>div id<span style="color: #339933;">=</span><span style="color: #3366CC;">&quot;chart_area&quot;</span><span style="color: #339933;">&gt;&lt;/</span>div<span style="color: #339933;">&gt;</span> &nbsp;
+<span style="color: #339933;">&lt;</span>script<span style="color: #339933;">&gt;</span> &nbsp;
+&nbsp; &nbsp; charts.<span style="color: #660066;">gauge</span><span style="color: #009900;">&#40;</span><span style="color: #009900;">&#123;</span> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; container<span style="color: #339933;">:</span> <span style="color: #3366CC;">'#chart_area'</span><span style="color: #339933;">,</span> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; value<span style="color: #339933;">:</span> <span style="color: #CC0000;">50</span><span style="color: #339933;">,</span> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; size<span style="color: #339933;">:</span> <span style="color: #CC0000;">240</span><span style="color: #339933;">,</span> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; label<span style="color: #339933;">:</span> <span style="color: #3366CC;">'Memory'</span><span style="color: #339933;">,</span> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; minorTicks<span style="color: #339933;">:</span> <span style="color: #CC0000;">5</span><span style="color: #339933;">,</span> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; majorTicks<span style="color: #339933;">:</span> <span style="color: #CC0000;">5</span><span style="color: #339933;">,</span> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; zones<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; red<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span> from<span style="color: #339933;">:</span> <span style="color: #CC0000;">0</span><span style="color: #339933;">,</span> to<span style="color: #339933;">:</span> <span style="color: #CC0000;">5</span> <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; yellow<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span> from<span style="color: #339933;">:</span> <span style="color: #CC0000;">5</span><span style="color: #339933;">,</span> to<span style="color: #339933;">:</span> <span style="color: #CC0000;">15</span> <span style="color: #009900;">&#125;</span><span style="color: #339933;">,</span> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; green<span style="color: #339933;">:</span> <span style="color: #009900;">&#123;</span> from<span style="color: #339933;">:</span> <span style="color: #CC0000;">85</span><span style="color: #339933;">,</span> to<span style="color: #339933;">:</span> <span style="color: #CC0000;">100</span> <span style="color: #009900;">&#125;</span> &nbsp;
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #009900;">&#125;</span> &nbsp;
+&nbsp; &nbsp; <span style="color: #009900;">&#125;</span><span style="color: #009900;">&#41;</span><span style="color: #339933;">;</span> &nbsp;
+<span style="color: #339933;">&lt;/</span>script<span style="color: #339933;">&gt;</span></div></code></pre>
 
           <p>produces:  </p>
           <div id="chart_area_demo"></div>  
