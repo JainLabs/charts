@@ -63,8 +63,8 @@
 &lt;/html&gt;</code></pre>
 
           <p>produces:  </p>
-          <div id="chart_area_demo"></div>  
-          <button class="cupid-green" onclick="gauge.redraw(Math.floor(Math.random()*100))">Redraw</button>
+            <div id="chart_area_demo"></div>
+            <button class="cupid-green" onclick="gauge.redraw(Math.floor(Math.random()*100))">Redraw</button>
           <h2>More charting examples</h2>
           <div class="subnav">
             <ul class="nav nav-pills">
@@ -125,7 +125,8 @@
           </div>
           <div id="line">
             <h3>Line Chart</h3>
-            
+            <h5>Base line (<a href="#" onclick="$('#DRA_code').hide(); $('#line_code').toggle(); return false;">example code</a>):</h5>
+
             <strong>Customize the line chart</strong>
             <form action="#" id="line_customize">
               New data point:
@@ -140,11 +141,7 @@
               <input type="submit">
             </form>
             <div id="line_chart" style="display: block; width: 600px; margin: auto;"></div>
-              <strong style="display: block; text-align: center;">Base line (<a href="#" onclick="$('#DRA_code').hide(); $('#line_code').show(); return false;">example code</a>)</strong>
 
-
-            <div id="DRA_chart" style="display: block; width: 600px; margin: auto;"></div>
-              <strong style="display: block; text-align: center;">DRA chart (<a href="#" onclick="$('#line_code').hide(); $('#DRA_code').show(); return false;">example code</a>)</strong>
 <div id="line_code" style="display:none"><pre><code>charts.line({
   time: true,
   data: [{
@@ -164,11 +161,15 @@
   xlabel: 'Time',
   ylabel: 'y Label',
   xMarker: '2012/07/07',
-  color: "green",
+  color: "#0A0",
   width: 600,
   height: 300,
   container: "#line_chart"
 });</code></pre></div>
+            
+            <hr />
+            <h5>DRA chart (<a href="#" onclick="$('#line_code').hide(); $('#DRA_code').toggle(); return false;">example code</a>)</h5>
+            <div id="DRA_chart" style="display: block; width: 600px; margin: auto;"></div>
 
 <div id="DRA_code" style="display:none"><pre><code>charts.DRA({
   scores: {

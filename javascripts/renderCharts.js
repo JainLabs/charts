@@ -31,7 +31,7 @@ charts.behavior(
   },
   neutral: {
     'restroom breaks': 2
-  }
+  },
 }, '#behavior_chart', 300, 300);
 
 // LINE CHARTS
@@ -54,7 +54,7 @@ var lineChart = charts.line({
   xlabel: 'Time',
   ylabel: 'y Label',
   xMarker: '2012/07/03',
-  color: "green",
+  color: "#0A0",
   width: 600,
   height: 300,
   container: "#line_chart"
