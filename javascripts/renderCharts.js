@@ -204,3 +204,48 @@ $('#DRA_addData').submit(function(e) {
   DRAChart.add(o);
   return false;
 });
+
+
+// GROUPED LINE CHART
+
+charts.groupedLine({
+  time: true,
+  data: {
+    'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)': [.3,.42,.5,.6],
+    'Sun Jul 02 2012 00:00:00 GMT-0700 (PDT)': [.6,.8,.9],
+    'Sun Jul 03 2012 00:00:00 GMT-0700 (PDT)': [1.5,2,2.1],
+    'Sun Jul 04 2012 00:00:00 GMT-0700 (PDT)': [2.2,2.3,2.5]
+  },
+  title: 'Grouped Line Chart',
+  xlabel: 'Time',
+  ylabel: 'y Label',
+  xMax: 'Wed Jul 04 2012 10:00:00 GMT-0700 (PDT)',
+  yMax: 3,
+  xMarker: 'Wed Jul 03 2012 10:00:00 GMT-0700 (PDT)',
+  yMarker: 2,
+  container: '#grouped_line_chart',
+  width:  600,
+  height: 300,
+  boxColors: {
+    belowLine: 'red',
+    onLine: 'orange',
+    aboveLine: 'green'
+  }
+});
+
+
+// GAUGE CHART
+
+charts.gauge({
+  container: '#gauge_chart',
+  value: 90,
+  size: 240,
+  label: 'Power',
+  minorTicks: 5,
+  majorTicks: 5,
+  zones: {
+    red: { from: 0, to: 5 },
+    yellow: { from: 5, to: 15 },
+    green: { from: 85, to: 100 }
+  }
+});
