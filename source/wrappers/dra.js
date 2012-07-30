@@ -2,11 +2,12 @@
 
 charts.extend({
 	DRA: function(obj) {
-		var xMax = (obj.deadline && typeof obj.deadline === 'number') ? obj.deadline + .5 : undefined,
-	        data = [],
+		// var xMax = (obj.deadline && typeof obj.deadline === 'number') ? obj.deadline + .5 : undefined,
+        var data = [],
 	        scores = obj.scores;
 
-		obj.container = (obj.container && obj.container !== '' && obj.container !== 'undefined') ? obj.container : 'body';
+        obj.container = (obj.container && obj.container !== '' && obj.container !== 'undefined') ? obj.container : 'body';
+		obj.color = (obj.color && obj.color !== '' && obj.color !== 'undefined') ? obj.color : '';
 		obj.width     = (obj.width && typeof obj.width === 'number') ? obj.width : undefined;
         obj.height    = (obj.height && typeof obj.height === 'number') ? obj.height : undefined;
 
@@ -33,9 +34,12 @@ charts.extend({
 			title: 'Reading Level',
 			xlabel: 'Time',
 			ylabel: 'DRA Score',
+            xMarker: obj.deadline,
+            yMarker: obj.goal,
             container: obj.container,
             width: obj.width,
-            height: obj.height
+            height: obj.height,
+            color: obj.color
 		};
 
 		var returnChart = this.line(lineCall);
