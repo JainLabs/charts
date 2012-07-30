@@ -25,17 +25,23 @@ window.gauge = charts.gauge({
 // DONUT CHARTS
 charts.donut({
   sections: [{
-    data: 2,
-    label: "eating",
-  }, {
     data: 8,
-    label: "sleeping",
+    label: "sleeping"
   }, {
-    data: 1.5,
-    label: "hacker news",
+    data: 5,
+    label: "coding"
   }, {
-    data: 4,
-    label: "coding",
+    data: 2,
+    label: "games"
+  }, {
+    data: 2,
+    label: "hacker news"
+  }, {
+    data: 2,
+    label: "eating"
+  }, {
+    data: 5,
+    label: "other"
   }],
   centerLabel: 'My day',
   container: '#donut_chart',
@@ -90,7 +96,7 @@ $('#line_customize').append(
   'y marker: <input type="date" name="yMarker" value="'+lineChart.obj.yMarker+'" /><br />'+
   'x label: <input type="text" name="xlabel" value="'+lineChart.obj.xlabel+'" /><br />'+
   'y label: <input type="text" name="ylabel" value="'+lineChart.obj.ylabel+'" /><br />'+
-  'Clear data: <input type="checkbox" name="defaultData" /><br />'+
+  'Clear data: <input type="checkbox" name="clearData" /><br />'+
   'Height: <input type="number" name="height" value="'+lineChart.obj.height+'" /><br />'+
   'Width: <input type="number" name="width" value="'+lineChart.obj.width+'" /><br />'+
   'Color: <input type="color" name="color" value="'+lineChart.obj.color+'" /><br />'+
@@ -114,12 +120,15 @@ $('#line_customize').submit(function(e) {
       x: 'Wed Jul 04 2012 00:00:00 GMT-0700 (PDT)',
       y: 15
     }];
-  console.log('d[6]: ',d[6]);
 
-  if (d[5].value === "on") data = [];
+  console.log(d);
+
+  if ($('form#line_customize input[name=clearData]').is(':checked')) data = [];
 
   lineChart.remove();
-  lineChart = charts.line({
+  document.getElementById('line_chart').innerHTML = '';
+  lineChart = undefined;
+  window.lineChart = charts.line({
     time: true,
     data: data,
     title: d[0].value || "",
@@ -127,15 +136,16 @@ $('#line_customize').submit(function(e) {
     ylabel: d[4].value || "",
     xMarker: d[1].value || "",
     color: d[7].value || "steelblue",
-    width: d[6].value || 600,
-    height: d[5].value || 300,
+    width: parseFloat(d[6].value) || 600,
+    height: parseFloat(d[5].value) || 300,
     container: "#line_chart"
   });
 
   return false;
 });
 
-$('#line_addData').submit(function() {
+$('#line_addData').submit(function(e) {
+  e.preventDefault();
   var d = $(this).serializeArray();
   lineChart.add([{
       x: d[1].value,
