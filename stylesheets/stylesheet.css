@@ -436,6 +436,10 @@ Small Device Styles
 
 /* CUSTOM STYLES */
 
+chart-type-heading {
+  text-decoration: underline;
+}
+
 /* chart type tables styles */
 table.chart-types {
   width: 100%;
@@ -446,6 +450,6 @@ table.chart-types td {
 }
 
 table.chart-types tr.labels td {
-  font-weight: bold;
+  /*font-weight: bold;*/
   text-align: center;
 }

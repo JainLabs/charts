@@ -6,13 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="Charts : Built on d3js. charts.js is meant to be an easy to use library to pair complex online charting libraries with easy to use code with reusable charting formats." />
 
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/prettify.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/buttons.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/subnav.css">
     <title>charts.js</title>
   </head>
 
-  <body>
+  <body onLoad="prettyPrint()">
 
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
@@ -81,23 +82,23 @@
             <ul class="nav nav-pills">
               <li><a href="#donut">donut</a></li>
               <li><a href="#line">line</a></li>
-              <li><a href="#grouped line">grouped line</a></li>
+              <li><a href="#grouped-line">grouped line</a></li>
               <li><a href="#gauge">gauge</a></li>
             </ul>
           </div>
           <div id="donut">
-            <h3>Donut Chart</h3>
+            <h3 class="chart-type-heading">Donut Chart</h3>
             <table class="chart-types noborder">
+              <tr class="labels">
+                <td><h5>Base donut (<a href="#" onclick="$('#behavior_code').hide(); $('#donut_code').show(); return false;">example code</a>)</h5></td>
+                <td><h5>Behavior chart (<a href="#" onclick="$('#donut_code').hide(); $('#behavior_code').show(); return false;">example code</a>)</h5></td>
+              </tr>
               <tr>
                 <td><div id="donut_chart" style="display: block; width: 300px; float: left"></div></td>
                 <td><div id="behavior_chart" style="display: block; width: 300px; float: left"></div></td>
               </tr>
-              <tr class="labels">
-                <td>Base donut (<a href="#" onclick="$('#behavior_code').hide(); $('#donut_code').show(); return false;">example code</a>)</td>
-                <td>Behavior chart (<a href="#" onclick="$('#donut_code').hide(); $('#behavior_code').show(); return false;">example code</a>)</td>
-              </tr>
             </table>
-<div id="donut_code" style="display:none"><pre><code>charts.donut({
+<div id="donut_code" style="display:none"><pre class="prettyprint"><code>charts.donut({
   sections: [{
     data: 2,
     label: 'eating',
@@ -117,7 +118,7 @@
   height: 300
 });</code></pre></div>
 
-<div id="behavior_code" style="display:none"><pre><code>charts.behavior({
+<div id="behavior_code" style="display:none"><pre class="prettyprint"><code>charts.behavior({
   positive: {
     'participation':3,
     'productivity':2,
@@ -135,16 +136,16 @@
             <br />
           </div>
           <div id="line">
-            <h3>Line Chart</h3>
-            <h5>Base line (<a href="#" onclick="$('#DRA_code').hide(); $('#line_code').toggle(); return false;">example code</a>):</h5>
+            <h3 class="chart-type-heading">Line Chart</h3>
+            <h5>Base line (<a href="#" onclick="$('#line_code').toggle(); return false;">example code</a>):</h5>
 
-            <strong>Customize the line chart</strong>
-            <form action="#" id="line_customize">
+            <strong>Customize</strong>
+            <!-- <form action="#" id="line_customize">
               New data point:
               <input type="number" name="line_y" placeholder="data"/>
               <input type="date" name="line_x" placeholder="date"/>
               <input type="submit">
-            </form>
+            </form> -->
             <form action="#" id="line_addData">
               New data point:
               <input type="number" name="line_y" placeholder="data"/>
@@ -153,7 +154,7 @@
             </form>
             <div id="line_chart" style="display: block; width: 600px; margin: auto;"></div>
 
-<div id="line_code" style="display:none"><pre><code>charts.line({
+<div id="line_code" style="display:none"><pre class="prettyprint"><code>charts.line({
   time: true,
   data: [{
       x: 'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)',
@@ -179,10 +180,10 @@
 });</code></pre></div>
             
             <hr />
-            <h5>DRA chart (<a href="#" onclick="$('#line_code').hide(); $('#DRA_code').toggle(); return false;">example code</a>)</h5>
+            <h5>DRA chart (<a href="#" onclick="$('#DRA_code').toggle(); return false;">example code</a>)</h5>
             <div id="DRA_chart" style="display: block; width: 600px; margin: auto;"></div>
 
-<div id="DRA_code" style="display:none"><pre><code>charts.DRA({
+<div id="DRA_code" style="display:none"><pre class="prettyprint"><code>charts.DRA({
   scores: {
     '2012/06/1': 25,
     '2012/06/4': 28,
@@ -198,6 +199,14 @@
 
             <br />
           </div>
+
+          <div id="grouped-line">
+            <h3 class="chart-type-heading">Grouped Line Chart</h3>
+          </div>
+
+          <div id="gauge">
+            <h3 class="chart-type-heading">Gauge Chart</h3>
+          </div>
       </section>
     </div>
 
@@ -210,13 +219,13 @@
     </div>
 
     <!-- SCRIPTS -->
-    <script src="//d3js.org/d3.v2.js"></script>  
-    <script type="text/javascript" src="//jainlabs.github.com/charts/cdn/charts.min.js"></script>
+    <script src="//d3js.org/d3.v2.min.js"></script>  
+    <script type="text/javascript" src="https://raw.github.com/JainLabs/charts/master/charts.min.js"></script>
     <!-- <script src="http://jainlabs.github.com/charts/cdn/charts.min.js"></script> -->
-    <script>window.onload=function(){window.gauge=charts.gauge({container:"#chart_area_demo",value:60,size:240,label:"Memory",minorTicks:5,majorTicks:5,zones:{red:{from:0,to:5},yellow:{from:5,to:15},green:{from:85,to:100}}})}</script>
     
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script type="text/javascript" src="./javascripts/renderCharts.js"></script>
+    <script type="text/javascript" src="javascripts/prettify.js"></script>
 
     <script type="text/javascript">
       var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

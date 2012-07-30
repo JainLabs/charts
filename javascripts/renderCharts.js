@@ -1,3 +1,27 @@
+// GAUGE CHARTS
+window.gauge = charts.gauge({
+  container: "#chart_area_demo",
+  value: 60,
+  size: 240,
+  label: "Memory",
+  minorTicks: 5,
+  majorTicks: 5,
+  zones: {
+    red: {
+      from: 0,
+      to: 5
+    },
+    yellow: {
+      from: 5,
+      to: 15
+    },
+    green: {
+      from: 85,
+      to: 100
+    }
+  }
+})
+
 // DONUT CHARTS
 charts.donut({
   sections: [{
