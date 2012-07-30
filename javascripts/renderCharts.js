@@ -96,10 +96,10 @@ $('#line_customize').append(
   'y marker: <input type="date" name="yMarker" value="'+lineChart.obj.yMarker+'" /><br />'+
   'x label: <input type="text" name="xlabel" value="'+lineChart.obj.xlabel+'" /><br />'+
   'y label: <input type="text" name="ylabel" value="'+lineChart.obj.ylabel+'" /><br />'+
-  'Clear data: <input type="checkbox" name="clearData" /><br />'+
   'Height: <input type="number" name="height" value="'+lineChart.obj.height+'" /><br />'+
   'Width: <input type="number" name="width" value="'+lineChart.obj.width+'" /><br />'+
   'Color: <input type="color" name="color" value="'+lineChart.obj.color+'" /><br />'+
+  'Data: <br /><textarea name="data">'+JSON.stringify(lineChart.obj.data,null,2)+'</textarea><br />'+
   // '<input type="date" name="line_x" placeholder="date"/>'+
   '<input type="submit" class="cupid-green" style="margin-top:10px" value="Customize">'
 );
@@ -107,27 +107,16 @@ $('#line_customize').append(
 $('#line_customize').submit(function(e) {
   e.preventDefault();
   var d = $(this).serializeArray(),
-      data = [{
-      x: 'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)',
-      y: .3
-    }, {
-      x: 'Mon Jul 02 2012 00:00:00 GMT-0700 (PDT)',
-      y: 1
-    }, {
-      x: 'Tue Jul 03 2012 00:00:00 GMT-0700 (PDT)',
-      y: 10
-    }, {
-      x: 'Wed Jul 04 2012 00:00:00 GMT-0700 (PDT)',
-      y: 15
-    }];
+      data = d[8].value ? JSON.parse(d[8].value) : [];
+  window.lineCustomizeData = d;
+  console.log(d, data);
 
-  console.log(d);
-
-  if ($('form#line_customize input[name=clearData]').is(':checked')) data = [];
+  // if ($('form#line_customize input[name=clearData]').is(':checked')) data = [];
 
   lineChart.remove();
   document.getElementById('line_chart').innerHTML = '';
   lineChart = undefined;
+
   window.lineChart = charts.line({
     time: true,
     data: data,
@@ -147,10 +136,29 @@ $('#line_customize').submit(function(e) {
 $('#line_addData').submit(function(e) {
   e.preventDefault();
   var d = $(this).serializeArray();
-  lineChart.add([{
-      x: d[1].value,
-      y: parseFloat(d[0].value),
-    }]);
+  if (lineChart) {
+    lineChart.add([{
+        x: d[1].value,
+        y: parseFloat(d[0].value),
+      }]);
+  } else {
+    var d = window.lineCustomizeData;
+    window.lineChart = charts.line({
+      time: true,
+      data: [{
+        x: d[1].value,
+        y: parseFloat(d[0].value),
+      }],
+      title: d[0].value || "",
+      xlabel: d[3].value || "",
+      ylabel: d[4].value || "",
+      xMarker: d[1].value || "",
+      color: d[7].value || "steelblue",
+      width: parseFloat(d[6].value) || 600,
+      height: parseFloat(d[5].value) || 300,
+      container: "#line_chart"
+    });
+  }
   return false;
 });
 
