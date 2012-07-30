@@ -84,18 +84,26 @@ var lineChart = charts.line({
   xlabel: 'Time',
   ylabel: 'y Label',
   xMarker: '2012/07/03',
+  trendLine: {
+    start: [0,'July...'],
+    end: [20,'Aug...']
+  },
   color: "#0A0",
   width: 600,
   height: 300,
-  container: "#line_chart"
+  container: "#line_chart",
+  xMax: 'Wed Jul 04 2012 12:00:00 GMT-0700 (PDT)',
+  yMax: 20
 });
 
 $('#line_customize').append(
   'Title: <input type="text" name="title" value="'+lineChart.obj.title+'" /><br />'+
   'x marker: <input type="date" name="xMarker" value="'+lineChart.obj.xMarker+'" /><br />'+
-  'y marker: <input type="date" name="yMarker" value="'+lineChart.obj.yMarker+'" /><br />'+
+  'y marker: <input type="number" name="yMarker" value="'+lineChart.obj.yMarker+'" /><br />'+
   'x label: <input type="text" name="xlabel" value="'+lineChart.obj.xlabel+'" /><br />'+
   'y label: <input type="text" name="ylabel" value="'+lineChart.obj.ylabel+'" /><br />'+
+  'x max: <input type="date" name="xMax" value="'+lineChart.obj.xMax+'" /><br />'+
+  'y max: <input type="number" name="yMax" value="'+lineChart.obj.yMax+'" /><br />'+
   'Height: <input type="number" name="height" value="'+lineChart.obj.height+'" /><br />'+
   'Width: <input type="number" name="width" value="'+lineChart.obj.width+'" /><br />'+
   'Color: <input type="color" name="color" value="'+lineChart.obj.color+'" /><br />'+
@@ -107,7 +115,7 @@ $('#line_customize').append(
 $('#line_customize').submit(function(e) {
   e.preventDefault();
   var d = $(this).serializeArray(),
-      data = d[8].value ? JSON.parse(d[8].value) : [];
+      data = d[10].value ? JSON.parse(d[10].value) : [];
   window.lineCustomizeData = d;
   console.log(d, data);
 
@@ -124,9 +132,12 @@ $('#line_customize').submit(function(e) {
     xlabel: d[3].value || "",
     ylabel: d[4].value || "",
     xMarker: d[1].value || "",
-    color: d[7].value || "steelblue",
-    width: parseFloat(d[6].value) || 600,
-    height: parseFloat(d[5].value) || 300,
+    yMarker: d[2].value || "",
+    xMax: d[5].value || "",
+    yMax: parseFloat(d[6].value) || undefined,
+    color: d[9].value || "",
+    width: parseFloat(d[8].value) || 600,
+    height: parseFloat(d[7].value) || 300,
     container: "#line_chart"
   });
 
