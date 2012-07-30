@@ -1,6 +1,5 @@
 charts.extend({
     groupedLine: function(obj) {
-        console.log('obj.data', obj.data);
         var data = [];
         // Map obj.data to a usable format
         for (var i in obj.data) {
@@ -18,7 +17,6 @@ charts.extend({
                 }
             }
         }
-        console.log(data);
         
         var margin = {};
         obj.margin = obj.margin || {};
@@ -216,36 +214,28 @@ charts.extend({
             .attr("cy", line.y())
             .attr("r", 3.5)
             .style("fill", function(d) {
-                console.log(d, yMarker);
                 if (obj.boxColors && yMarker) {
                     if (d.y < yMarker) {
-                        console.log('belowLine');
                         return obj.boxColors['belowLine'] || obj.color;
                     }
                     if (d.y > yMarker) {
-                        console.log('aboveLine');
                         return obj.boxColors['aboveLine'] || obj.color;
                     }
                     if (d.y = yMarker) {
-                        console.log('onLine');
                         return obj.boxColors['onLine'] || obj.color;
                     }
                 }
                 return obj.color;
             })
             .style("stroke", function(d) {
-                console.log(d, yMarker);
                 if (obj.boxColors && yMarker) {
                     if (d.y < yMarker) {
-                        console.log('belowLine');
                         return obj.boxColors['belowLine'] || obj.color;
                     }
                     if (d.y > yMarker) {
-                        console.log('aboveLine');
                         return obj.boxColors['aboveLine'] || obj.color;
                     }
                     if (d.y = yMarker) {
-                        console.log('onLine');
                         return obj.boxColors['onLine'] || obj.color;
                     }
                 }

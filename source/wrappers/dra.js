@@ -13,7 +13,6 @@ charts.extend({
         // Map scores to a usable format
         for (var i in scores) {
         	if (scores.hasOwnProperty(i)) {
-        		console.log(i, scores[i]);
         		data.push({
         			x: i,
         			y: scores[i]
@@ -28,8 +27,6 @@ charts.extend({
         	return 0;
         })
 
-        console.log('data: ', data);
-
         var lineCall = {
 			time: true,
 			data: data,
@@ -40,7 +37,6 @@ charts.extend({
             width: obj.width,
             height: obj.height
 		};
-		console.log(lineCall);
 
 		var returnChart = this.line(lineCall);
 		returnChart.obj = obj;
@@ -48,7 +44,6 @@ charts.extend({
             this.remove();
             this.obj.scores = data;
             this.obj.container = '#'+this.id;
-            console.log('this.obj', JSON.stringify(this.obj));
 
             // returnChart = charts.DRA(this.obj);
 			return charts.DRA(this.obj);
@@ -56,8 +51,6 @@ charts.extend({
         returnChart.add = function(data) {
 			this.redraw(charts.extend(this.obj.scores,data));
 		};
-
-		console.log('returnChart: ',returnChart);
 
 		return returnChart;
 	}

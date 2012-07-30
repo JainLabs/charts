@@ -8,7 +8,6 @@ charts.extend({
         this.config.value = configuration.value || 0;
         this.config.size = this.config.size * 0.9;
           if(!this.config.size || (this.config.size<=0)) this.config.size = 120*0.9;
-        console.log(this.config.size);
         this.config.raduis = this.config.size * 0.97 / 2;
         this.config.cx = this.config.size / 2;
         this.config.cy = this.config.size / 2;

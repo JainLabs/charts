@@ -28,7 +28,6 @@ charts.extend({
         }
       }
     })();
-    console.log('colors recieved:', colors);
 
     var centerLabel = obj.centerLabel || "",
         sel = obj.container || 'body',

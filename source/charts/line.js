@@ -1,6 +1,5 @@
 charts.extend({
     line: function(obj) {
-        console.log('obj', obj);
         var chartID = "line"+Math.round(Math.random()*1000000), // random id for SVG
             data = obj.data,
             margin = {};
@@ -44,9 +43,7 @@ charts.extend({
                 if (mcurr > mnext) return 1; 
                 return 0;
             });
-            console.log(data);
             // Either set maximum/minumum x to specified ones, or calculate based on maximum/minumum x in data
-            console.log('obj.xMax: ', obj.xMax);
             var xMax = obj.xMax ? new Date(obj.xMax) : 0;
             if (xMax === 0) {
                 (function() {
