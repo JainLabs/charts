@@ -199,6 +199,8 @@ $('#DRA_customize').submit(function(e) {
 
 $('#DRA_addData').submit(function(e) {
   e.preventDefault();
-
+  var d = $(this).serializeArray(), o = {};
+  o[d[1].value] = d[0].value;
+  DRAChart.add(o);
   return false;
 });
