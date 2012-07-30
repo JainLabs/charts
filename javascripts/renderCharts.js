@@ -84,17 +84,59 @@ var lineChart = charts.line({
   container: "#line_chart"
 });
 
-$('#line_customize').submit(function() {
-  var d = $(this).serializeArray();
-  console.log(d);
+$('#line_customize').append(
+  'Title: <input type="text" name="title" value="'+lineChart.obj.title+'" /><br />'+
+  'x marker: <input type="date" name="xMarker" value="'+lineChart.obj.xMarker+'" /><br />'+
+  'y marker: <input type="date" name="yMarker" value="'+lineChart.obj.yMarker+'" /><br />'+
+  'x label: <input type="text" name="xlabel" value="'+lineChart.obj.xlabel+'" /><br />'+
+  'y label: <input type="text" name="ylabel" value="'+lineChart.obj.ylabel+'" /><br />'+
+  'Clear data: <input type="checkbox" name="defaultData" /><br />'+
+  'Height: <input type="number" name="height" value="'+lineChart.obj.height+'" /><br />'+
+  'Width: <input type="number" name="width" value="'+lineChart.obj.width+'" /><br />'+
+  'Color: <input type="color" name="color" value="'+lineChart.obj.color+'" /><br />'+
+  // '<input type="date" name="line_x" placeholder="date"/>'+
+  '<input type="submit" class="cupid-green" style="margin-top:10px" value="Customize">'
+);
+
+$('#line_customize').submit(function(e) {
+  e.preventDefault();
+  var d = $(this).serializeArray(),
+      data = [{
+      x: 'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)',
+      y: .3
+    }, {
+      x: 'Mon Jul 02 2012 00:00:00 GMT-0700 (PDT)',
+      y: 1
+    }, {
+      x: 'Tue Jul 03 2012 00:00:00 GMT-0700 (PDT)',
+      y: 10
+    }, {
+      x: 'Wed Jul 04 2012 00:00:00 GMT-0700 (PDT)',
+      y: 15
+    }];
+  console.log('d[6]: ',d[6]);
+
+  if (d[5].value === "on") data = [];
+
   lineChart.remove();
-  
+  lineChart = charts.line({
+    time: true,
+    data: data,
+    title: d[0].value || "",
+    xlabel: d[3].value || "",
+    ylabel: d[4].value || "",
+    xMarker: d[1].value || "",
+    color: d[7].value || "steelblue",
+    width: d[6].value || 600,
+    height: d[5].value || 300,
+    container: "#line_chart"
+  });
+
   return false;
 });
 
 $('#line_addData').submit(function() {
   var d = $(this).serializeArray();
-  console.log(d);
   lineChart.add([{
       x: d[1].value,
       y: parseFloat(d[0].value),

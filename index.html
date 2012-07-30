@@ -137,20 +137,13 @@
           </div>
           <div id="line">
             <h3 class="chart-type-heading">Line Chart</h3>
-            <h5>Base line (<a href="#" onclick="$('#line_code').toggle(); return false;">example code</a>):</h5>
+            <h5 style="margin-bottom:-15px">Base line (<a href="#" onclick="$('#line_code').toggle(); return false;">example code</a>):</h5>
 
-            <strong>Customize</strong>
-            <!-- <form action="#" id="line_customize">
-              New data point:
-              <input type="number" name="line_y" placeholder="data"/>
-              <input type="date" name="line_x" placeholder="date"/>
-              <input type="submit">
-            </form> -->
+            <form action="#" id="line_customize"></form>
             <form action="#" id="line_addData">
-              New data point:
-              <input type="number" name="line_y" placeholder="data"/>
-              <input type="date" name="line_x" placeholder="date"/>
-              <input type="submit">
+              <input type="number" name="line_y" placeholder="data"/><br />
+              <input type="date" name="line_x" placeholder="date"/><br />
+              <input type="submit" value="Add Data" class="cupid-green" style="margin-top: 15px">
             </form>
             <div id="line_chart" style="display: block; width: 600px; margin: auto;"></div>
 
