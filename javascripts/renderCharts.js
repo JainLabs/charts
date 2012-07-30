@@ -175,5 +175,30 @@ var DRAChart = charts.DRA({
   deadline: '2012/06/10',
   goal: 40,
   width: 600,
-  height: 300
+  height: 300,
+  color: 'green'
+});
+
+$('#DRA_customize').append(
+  'Title: <input type="text" name="title" value="'+DRAChart.obj.title+'" /><br />'+
+  'Deadline: <input type="date" name="xMarker" value="'+DRAChart.obj.xMarker+'" /><br />'+
+  'Goal: <input type="date" name="yMarker" value="'+DRAChart.obj.yMarker+'" /><br />'+
+  'Height: <input type="number" name="height" value="'+DRAChart.obj.height+'" /><br />'+
+  'Width: <input type="number" name="width" value="'+DRAChart.obj.width+'" /><br />'+
+  'Color: <input type="color" name="color" value="'+DRAChart.obj.color+'" /><br />'+
+  'Data: <br /><textarea name="data">'+JSON.stringify(DRAChart.obj.data,null,2)+'</textarea><br />'+
+  // '<input type="date" name="line_x" placeholder="date"/>'+
+  '<input type="submit" class="cupid-green" style="margin-top:10px" value="Customize">'
+);
+
+$('#DRA_customize').submit(function(e) {
+  e.preventDefault()
+  
+  return false;
+});
+
+$('#DRA_addData').submit(function(e) {
+  e.preventDefault();
+
+  return false;
 });
