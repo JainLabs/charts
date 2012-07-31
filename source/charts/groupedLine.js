@@ -1,8 +1,11 @@
 charts.extend({
     groupedLine: function(obj) {
-        var data = [];
+        console.log(obj.data);
+        var chartID = "groupedLine"+Math.round(Math.random()*1000000),
+            data = [];
         // Map obj.data to a usable format
         for (var i in obj.data) {
+            console.log(i,obj.data[i],obj.data[i].length);
             if (obj.data.hasOwnProperty(i)) {
                 if (obj.time) {
                     var x = new Date(i).getTime();
@@ -17,6 +20,7 @@ charts.extend({
                 }
             }
         }
+        console.log(data.length)
         
         var margin = {};
         obj.margin = obj.margin || {};
@@ -134,6 +138,7 @@ charts.extend({
 
         var svg = d3.select(obj.container).append("svg")
             .datum(data)
+            .attr("id", chartID)
             .attr("class", "lineChart")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
@@ -221,7 +226,7 @@ charts.extend({
                     if (d.y > yMarker) {
                         return obj.boxColors['aboveLine'] || obj.color;
                     }
-                    if (d.y = yMarker) {
+                    if (d.y == yMarker) {
                         return obj.boxColors['onLine'] || obj.color;
                     }
                 }
@@ -235,7 +240,7 @@ charts.extend({
                     if (d.y > yMarker) {
                         return obj.boxColors['aboveLine'] || obj.color;
                     }
-                    if (d.y = yMarker) {
+                    if (d.y == yMarker) {
                         return obj.boxColors['onLine'] || obj.color;
                     }
                 }
@@ -247,8 +252,8 @@ charts.extend({
             for (var group in obj.data) {
                 if (obj.data.hasOwnProperty(group)) {
                     var groupData = obj.data[group].sort(),
-                        maxData = groupData.pop(),
-                        minData = groupData.shift(),
+                        maxData = groupData[groupData.length-1],
+                        minData = groupData[0],
                         rectX = x(new Date(group).valueOf()), // x coord of rectangle
                         rectY = y(maxData), // y coord of rectangle
                         boxColor;
@@ -286,5 +291,32 @@ charts.extend({
             '  stroke: #000;'+
             '  shape-rendering: crispEdges;'+
             '}';
+
+        console.log(data);
+        console.log(obj.data);
+        return {
+            id: chartID,
+            obj: obj,
+            remove: function() {
+                var oldElem = document.getElementById(this.id),
+                    placeholder = document.createElement('div');
+                placeholder.setAttribute('id',this.id);
+
+                oldElem.parentNode.replaceChild(placeholder, oldElem);
+                return this;
+            },
+            redraw: function(data) {
+                this.remove();
+                this.obj.data = data;
+                this.obj.container = '#'+this.id;
+
+                console.log(this.obj.data);
+                // return charts.groupedLine(this.obj);
+            },
+            add: function(data) {
+                this.redraw(charts.extend(this.obj.data,data));
+                return this;
+            }
+        };
     }
 });
