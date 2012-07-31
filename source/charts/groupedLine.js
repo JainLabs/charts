@@ -1,11 +1,9 @@
 charts.extend({
     groupedLine: function(obj) {
-        console.log(obj.data);
         var chartID = "groupedLine"+Math.round(Math.random()*1000000),
             data = [];
         // Map obj.data to a usable format
         for (var i in obj.data) {
-            console.log(i,obj.data[i],obj.data[i].length);
             if (obj.data.hasOwnProperty(i)) {
                 if (obj.time) {
                     var x = new Date(i).getTime();
@@ -20,7 +18,6 @@ charts.extend({
                 }
             }
         }
-        console.log(data.length)
         
         var margin = {};
         obj.margin = obj.margin || {};
@@ -292,8 +289,6 @@ charts.extend({
             '  shape-rendering: crispEdges;'+
             '}';
 
-        console.log(data);
-        console.log(obj.data);
         return {
             id: chartID,
             obj: obj,
@@ -310,8 +305,8 @@ charts.extend({
                 this.obj.data = data;
                 this.obj.container = '#'+this.id;
 
-                console.log(this.obj.data);
-                // return charts.groupedLine(this.obj);
+                console.log(this.obj);
+                return charts.groupedLine(this.obj);
             },
             add: function(data) {
                 this.redraw(charts.extend(this.obj.data,data));
