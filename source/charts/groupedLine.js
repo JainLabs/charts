@@ -38,27 +38,32 @@ charts.extend({
         var eliminateDuplicates = function(arr) {
             var i,
                 len = arr.length,
-                out = [],
+                noDupe = [],
                 dupe = [],
                 sorted_arr = arr.sort();
 
             for (i = 0; i < len - 1; i++) {
                 if ((sorted_arr[i + 1].y !== sorted_arr[i].y) || (sorted_arr[i + 1].x !== sorted_arr[i].x)) {
-                    out.push(arr[i]);
+                    noDupe.push(arr[i]);
                 }
             }
-            out.push(arr[--len]);
-            dupe = arr.filter(function(i) {
-                return !(out.indexOf(i) > -1);
-            });
-            return { noDupe: out, dupe: dupe };
+            noDupe.push(arr[--len]);
+            // dupe = arr.filter(function(i) {
+            //     return !(noDupe.indexOf(i) > -1);
+            // }); 
+            console.log(noDupe.sort());
+            for(var i=0;i<len;i++) { 
+                if(!(noDupe.indexOf(arr[i]) > -1)) { 
+                    dupe.push(arr[i]); 
+                }
+            }
+            return { noDupe: noDupe, dupe: dupe };
         };
 
         var data = eliminateDuplicates(mapData(obj.data)),
             dataOverlap = data.dupe;
         console.log(data);
         data = data.noDupe;
-        console.log(data);
         
         var margin = {};
         obj.margin = obj.margin || {};
