@@ -1,23 +1,51 @@
 charts.extend({
     groupedLine: function(obj) {
-        var chartID = "groupedLine"+Math.round(Math.random()*1000000),
-            data = [];
+        var chartID = "groupedLine"+Math.round(Math.random()*1000000);
         // Map obj.data to a usable format
-        for (var i in obj.data) {
-            if (obj.data.hasOwnProperty(i)) {
-                if (obj.time) {
-                    var x = new Date(i).getTime();
-                } else {
-                    var x = i;
-                }
-                for (var z in obj.data[i]) {
-                    data.push({
-                        x: x,
-                        y: obj.data[i][z]
-                    });
+        var mapData = function(d) {
+            var result = [];
+            for (var i in d) {
+                if (d.hasOwnProperty(i)) {
+                    d[i] = d[i].sort();
+                    if (obj.time) {
+                        var x = new Date(i).getTime();
+                    } else {
+                        var x = i;
+                    }
+                    for (var z in d[i]) {
+                        result.push({
+                            x: x,
+                            y: d[i][z]
+                        });
+                    }   
                 }
             }
-        }
+            return result;
+        };
+        var eliminateDuplicates = function(arr) {
+            var i,
+                len = arr.length,
+                out = [],
+                dupe = [],
+                sorted_arr = arr.sort();
+
+            for (i = 0; i < len - 1; i++) {
+                if ((sorted_arr[i + 1].y !== sorted_arr[i].y) || (sorted_arr[i + 1].x !== sorted_arr[i].x)) {
+                    out.push(arr[i]);
+                }
+            }
+            out.push(arr[--len]);
+            dupe = arr.filter(function(i) {
+                return !(out.indexOf(i) > -1);
+            });
+            return { noDupe: out, dupe: dupe };
+        };
+
+        var data = eliminateDuplicates(mapData(obj.data)),
+            dataOverlap = data.dupe;
+        console.log(data);
+        data = data.noDupe;
+        console.log(data);
         
         var margin = {};
         obj.margin = obj.margin || {};
@@ -253,6 +281,38 @@ charts.extend({
                     return obj.color;
                 })
                 .style("stroke-width", "1.5px");
+
+            svg.selectAll(".circle")
+                .data(dataOverlap)
+              .enter().append("circle")
+                .attr("class", "dot")
+                .attr("cx", line.x())
+                .attr("cy", line.y())
+                .attr("r", 6.5)
+                .attr("rel", "popover")
+                .attr("data-title", function(d){
+                    return d.y;
+                })
+                .attr("data-content", function(d){
+                    return obj.xlabel+': '+ (new Date(d.x).toLocaleDateString()) +'<br>'+
+                        obj.ylabel+': '+d.y;
+                })
+                .style("fill", "none")
+                .style("stroke", function(d) {
+                    if (obj.boxColors && yMarker) {
+                        if (d.y < yMarker) {
+                            return obj.boxColors['belowLine'] || obj.color;
+                        }
+                        if (d.y > yMarker) {
+                            return obj.boxColors['aboveLine'] || obj.color;
+                        }
+                        if (d.y == yMarker) {
+                            return obj.boxColors['onLine'] || obj.color;
+                        }
+                    }
+                    return obj.color;
+                })
+                .style("stroke-width", "2px");
             jQuery('circle').popover();
         } else {
             svg.selectAll(".dot")
@@ -291,6 +351,30 @@ charts.extend({
                     return obj.color;
                 })
                 .style("stroke-width", "1.5px");
+
+            svg.selectAll(".circle")
+                .data(dataOverlap)
+              .enter().append("circle")
+                .attr("class", "dot")
+                .attr("cx", line.x())
+                .attr("cy", line.y())
+                .attr("r", 6.5)
+                .style("fill", "none")
+                .style("stroke", function(d) {
+                    if (obj.boxColors && yMarker) {
+                        if (d.y < yMarker) {
+                            return obj.boxColors['belowLine'] || obj.color;
+                        }
+                        if (d.y > yMarker) {
+                            return obj.boxColors['aboveLine'] || obj.color;
+                        }
+                        if (d.y == yMarker) {
+                            return obj.boxColors['onLine'] || obj.color;
+                        }
+                    }
+                    return obj.color;
+                })
+                .style("stroke-width", "2px");
         }
 
         // RECTANGLES/BOXES/GROUPS
