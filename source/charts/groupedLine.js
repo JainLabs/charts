@@ -201,12 +201,12 @@ charts.extend({
             .call(yAxis);
 
         // Line connecting points
-        //svg.append("path")
-        //    .attr("class", "line")
-        //    .attr("d", line)
-        //    .style("fill", "none")
-        //    .style("stroke", obj.color)
-        //    .style("stroke-width", "1.5px");
+        // svg.append("path")
+        //     .attr("class", "line")
+        //     .attr("d", line)
+        //     .style("fill", "none")
+        //     .style("stroke", obj.color)
+        //     .style("stroke-width", "1.5px");
 
         if (obj.popover && jQuery) {
             svg.selectAll(".dot")
@@ -293,6 +293,7 @@ charts.extend({
                 .style("stroke-width", "1.5px");
         }
 
+        // RECTANGLES/BOXES/GROUPS
         (function() {
             for (var group in obj.data) {
                 if (obj.data.hasOwnProperty(group)) {
