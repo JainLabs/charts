@@ -1,31 +1,48 @@
 document.addEventListener('DOMContentLoaded', function () {
-	var gzl = charts.groupedLine({
+	window.gl = charts.groupedLine({
 		time: true,
 		data: {
-			'02/20/2011': [1,1,1,2,0],
-			'03/01/2011': [1,2,2,2,2],
-			'04/16/2011': [4,4,4,4,3],
-			'08/05/2011': [5,5,5,5,3],
-			'08/15/2011': [4,6,6,6,6],
-			'08/26/2011': [7,7,7,7,6],
-			'09/07/2011': [7,7,7,7,8]
+			'02/20/2011': [10,10,10,20,00],
+			'03/01/2011': [10,20,20,20,20],
+			'04/16/2011': [40,40,40,40,30],
+			'08/05/2011': [50,50,50,50,30],
+			'08/15/2011': [40,60,60,60,60],
+			'08/26/2011': [70,70,70,70,60]
 		},
-		title: 'Questions Correct Over Time',
-		xlabel: 'Time',
-		ylabel: 'Questions Correct',
+		title: 'Percent Correct Over Time',
+		xlabel: 'Date',
+		ylabel: 'Percent Correct',
 		xMin: '02/01/2011',
-		xMax: '05/28/2012',
-		yMax: 10,
-		xMarker: 'Wed Jul 03 2012 10:00:00 GMT-0700 (PDT)',
-		yMarker: 9,
+		xMax: '07/30/2012',
+		yMax: 100,
+		xMarker: '06/10/2012',
+		yMarker: 70,
 		container: '#chartContainer',
 		width: 630,
 		height: 270,
 		boxColors: {
 			belowLine: '#999999',
-			onLine: 'orange',
+			onLine: 'steelblue',
 			aboveLine: 'green'
 		},
 		popover: true
 	});
+	$('#chart_share').on('click', function(e) {
+		e.preventDefault();
+		var date = new Date($('input[name="effective[year]"]').val(),$('input[name="effective[month]"]').val(),$('input[name="effective[day]"]').val()),
+			data = [],
+			session = {};
+
+		jQuery.each([1,2,3,4,5],function(i,d) {
+			data.push(parseFloat($('select[name="trial'+d+'"]').val()));
+		})
+		session[date.toDateString()] = data;
+		// console.log(JSON.stringify(session));
+		gl.add(session);
+		return false;
+	});
 });
+
+// gl.add({
+// 	'09/07/2011': [70,80,80,80,80]
+// });
