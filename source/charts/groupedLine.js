@@ -208,42 +208,81 @@ charts.extend({
         //    .style("stroke", obj.color)
         //    .style("stroke-width", "1.5px");
 
-        svg.selectAll(".dot")
-            .data(data)
-          .enter().append("circle")
-            .attr("class", "dot")
-            .attr("cx", line.x())
-            .attr("cy", line.y())
-            .attr("r", 3.5)
-            .style("fill", function(d) {
-                if (obj.boxColors && yMarker) {
-                    if (d.y < yMarker) {
-                        return obj.boxColors['belowLine'] || obj.color;
+        if (obj.popover) {
+            svg.selectAll(".dot")
+                .data(data)
+              .enter().append("circle")
+                .attr("class", "dot")
+                .attr("cx", line.x())
+                .attr("cy", line.y())
+                .attr("r", 3.5)
+                .style("fill", function(d) {
+                    if (obj.boxColors && yMarker) {
+                        if (d.y < yMarker) {
+                            return obj.boxColors['belowLine'] || obj.color;
+                        }
+                        if (d.y > yMarker) {
+                            return obj.boxColors['aboveLine'] || obj.color;
+                        }
+                        if (d.y == yMarker) {
+                            return obj.boxColors['onLine'] || obj.color;
+                        }
                     }
-                    if (d.y > yMarker) {
-                        return obj.boxColors['aboveLine'] || obj.color;
+                    return obj.color;
+                })
+                .style("stroke", function(d) {
+                    if (obj.boxColors && yMarker) {
+                        if (d.y < yMarker) {
+                            return obj.boxColors['belowLine'] || obj.color;
+                        }
+                        if (d.y > yMarker) {
+                            return obj.boxColors['aboveLine'] || obj.color;
+                        }
+                        if (d.y == yMarker) {
+                            return obj.boxColors['onLine'] || obj.color;
+                        }
                     }
-                    if (d.y == yMarker) {
-                        return obj.boxColors['onLine'] || obj.color;
+                    return obj.color;
+                })
+                .style("stroke-width", "1.5px");
+        } else {
+            svg.selectAll(".dot")
+                .data(data)
+              .enter().append("circle")
+                .attr("class", "dot")
+                .attr("cx", line.x())
+                .attr("cy", line.y())
+                .attr("r", 3.5)
+                .style("fill", function(d) {
+                    if (obj.boxColors && yMarker) {
+                        if (d.y < yMarker) {
+                            return obj.boxColors['belowLine'] || obj.color;
+                        }
+                        if (d.y > yMarker) {
+                            return obj.boxColors['aboveLine'] || obj.color;
+                        }
+                        if (d.y == yMarker) {
+                            return obj.boxColors['onLine'] || obj.color;
+                        }
                     }
-                }
-                return obj.color;
-            })
-            .style("stroke", function(d) {
-                if (obj.boxColors && yMarker) {
-                    if (d.y < yMarker) {
-                        return obj.boxColors['belowLine'] || obj.color;
+                    return obj.color;
+                })
+                .style("stroke", function(d) {
+                    if (obj.boxColors && yMarker) {
+                        if (d.y < yMarker) {
+                            return obj.boxColors['belowLine'] || obj.color;
+                        }
+                        if (d.y > yMarker) {
+                            return obj.boxColors['aboveLine'] || obj.color;
+                        }
+                        if (d.y == yMarker) {
+                            return obj.boxColors['onLine'] || obj.color;
+                        }
                     }
-                    if (d.y > yMarker) {
-                        return obj.boxColors['aboveLine'] || obj.color;
-                    }
-                    if (d.y == yMarker) {
-                        return obj.boxColors['onLine'] || obj.color;
-                    }
-                }
-                return obj.color;
-            })
-            .style("stroke-width", "1.5px");
+                    return obj.color;
+                })
+                .style("stroke-width", "1.5px");
+        }
 
         (function() {
             for (var group in obj.data) {
