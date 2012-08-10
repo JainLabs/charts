@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			belowLine: '#999999',
 			onLine: 'orange',
 			aboveLine: 'green'
-		}
-		// popover: true
+		},
+		popover: true
 	});
 });
