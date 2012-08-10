@@ -208,7 +208,7 @@ charts.extend({
         //    .style("stroke", obj.color)
         //    .style("stroke-width", "1.5px");
 
-        if (obj.popover) {
+        if (obj.popover && jQuery) {
             svg.selectAll(".dot")
                 .data(data)
               .enter().append("circle")
@@ -216,6 +216,14 @@ charts.extend({
                 .attr("cx", line.x())
                 .attr("cy", line.y())
                 .attr("r", 3.5)
+                .attr("rel", "popover")
+                .attr("data-title", function(d){
+                    return d.y;
+                })
+                .attr("data-content", function(d){
+                    return obj.xlabel+': '+ (new Date(d.x).toLocaleDateString()) +'<br>'+
+                        obj.ylabel+': '+d.y;
+                })
                 .style("fill", function(d) {
                     if (obj.boxColors && yMarker) {
                         if (d.y < yMarker) {
@@ -245,6 +253,7 @@ charts.extend({
                     return obj.color;
                 })
                 .style("stroke-width", "1.5px");
+            jQuery('circle').popover();
         } else {
             svg.selectAll(".dot")
                 .data(data)
