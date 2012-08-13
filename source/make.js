@@ -25,6 +25,9 @@ fs.readdir('charts', function(e, files){
 				code += fs.readFileSync('wrappers/' + file, 'ascii')+'\n';
 			}
 		});
+		fs.writeFile('../charts.js', comment+"\n"+code, function(){
+                        console.log('charts.js created.');
+                });
 		var ast = parser.parse(code);
 		ast = uglify.ast_mangle(ast);
 		ast = uglify.ast_squeeze(ast);
