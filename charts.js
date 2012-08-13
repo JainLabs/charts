@@ -582,9 +582,9 @@ charts.extend({
                         .attr("class", "dot")
                         .attr("cx", line.x())
                         .attr("cy", line.y())
-                        .attr("r", baseRadius+3*runs+'px')
+                        .attr("r", baseRadius+4*runs+'px')
                         .style("fill", function(d) {
-                            if (obj.boxColors && yMarker) {
+                            if (obj.boxColors && yMarker && runs === 0) {
                                 if (d.y < yMarker) {
                                     return obj.boxColors['belowLine'] || obj.color;
                                 }
@@ -594,8 +594,9 @@ charts.extend({
                                 if (d.y == yMarker) {
                                     return obj.boxColors['onLine'] || obj.color;
                                 }
+                            } else {
+                                return "none";
                             }
-                            return obj.color;
                         })
                         .style("stroke", function(d) {
                             if (obj.boxColors && yMarker) {
