@@ -5,10 +5,11 @@
 	<script type="text/javascript" src="../d3.v2.js"></script>
 	<script type="text/javascript" src="../charts.js"></script>
 	<script type="text/javascript" src="../charts/groupedLine.js"></script>
+	<!-- jQuery required for popovers -->
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script>
 	window.onload = function() {
-		window.gl = charts.groupedLine({
+		charts.groupedLine({
 			time: true,
 			data: {
 				'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)': [0.3,0.42,0.5,0.6,0.6],

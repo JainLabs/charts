@@ -297,8 +297,8 @@ charts.extend({
                             return d.y;
                         })
                         .attr("data-content", function(d){
-                            return obj.xlabel+': '+ (new Date(d.x).toLocaleDateString()) +'<br>'+
-                                obj.ylabel+': '+d.y;
+                            return '<div style="margin-top:-15px"><strong>'+obj.xlabel+':</strong> '+ (new Date(d.x).toLocaleDateString()) +'<br>'+
+                                '<strong>'+obj.ylabel+':</strong> '+d.y+'</strong></div>';
                         });
 
 				// Remove rendered dots from data
@@ -308,8 +308,6 @@ charts.extend({
                 }
                 // Remove undefined values from d
                 d = _d; _d = [];
-                console.log(d.length, d);
-                console.log(baseRadius+3*runs);
                 ++runs;
 				if (d.length === 0) done = true;
 			}
@@ -368,8 +366,6 @@ charts.extend({
 				this.remove();
 				this.obj.data = data;
 				this.obj.container = '#'+this.id;
-
-				console.log(this.obj);
 				return charts.groupedLine(this.obj);
 			},
 			add: function(data) {
