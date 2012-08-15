@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 	window.dra = charts.DRA({
 		scores: {
-			'2012/06/1': 25,
+			'2011/12/11': 30,
 			'2012/06/4': 28,
 			'2012/06/7': 35,
 			'2012/06/11': 50
@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		container: '#chartContainer',
 		deadline: '2012/11/11',
 		goal: 40,
+		xMax: '2012/11/15',
+		yMax: 60,
+		xMin: '2011/11/11',
 		width: 630,
 		height: 270,
 		popover: true
