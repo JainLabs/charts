@@ -2,32 +2,28 @@ document.addEventListener('DOMContentLoaded', function () {
 	window.dra = charts.DRA({
 		scores: {
 			'2011/12/11': 30,
-			'2012/06/4': 28,
-			'2012/06/7': 35,
-			'2012/06/11': 50
+			'2012/02/24': 40,
+			'2012/05/28': 30
 		},
 		container: '#chartContainer',
 		deadline: '2012/11/11',
 		goal: 40,
-		xMax: '2012/11/15',
-		yMax: 60,
+		xMax: '2012/11/20',
+		yMax: 50,
 		xMin: '2011/11/11',
 		width: 630,
 		height: 270,
-		popover: true
+		popover: true,
+		color: '#006400'
 	});
 	$('#chart_share').on('click', function(e) {
 		e.preventDefault();
 		var date = new Date($('input[name="effective[year]"]').val(),$('input[name="effective[month]"]').val(),$('input[name="effective[day]"]').val()),
-			data = [],
-			session = {};
-
-		jQuery.each([1,2,3,4,5],function(i,d) {
-			data.push(parseFloat($('select[name="trial'+d+'"]').val()));
-		})
-		session[date.toDateString()] = data;
-		// console.log(JSON.stringify(session));
-		gl.add(session);
+			data = parseFloat($('input[name="completion"]').val()),
+			point = {};
+		point[date.toDateString()] = data;
+		console.log(point);
+		dra.add(point);
 		return false;
 	});
 });
