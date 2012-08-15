@@ -39,6 +39,8 @@ charts.extend({
             yMarker: obj.goal,
             xMax: obj.xMax,
             yMax: obj.yMax,
+            xMin: obj.xMin,
+            yMin: obj.yMin,
             container: obj.container,
             width: obj.width,
             height: obj.height,
