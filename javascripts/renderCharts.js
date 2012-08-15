@@ -1,5 +1,21 @@
 // GAUGE CHARTS
-window.gauge = charts.gauge({
+var headerchart = charts.gauge({  
+    container: '#chartheader',  
+    value: 0,  
+    size: 200,  
+    label: 'RAM',  
+    minorTicks: 5,  
+    majorTicks: 5,  
+    zones: {  
+        red: { from: 90, to: 100 },  
+        yellow: { from: 75, to: 90 },  
+        green: { from: 0, to: 20 }  
+    }  
+});
+var val = 0;
+window.setInterval(function(){ headerchart.redraw(Math.floor(Math.random()*10)+25) }, 100);
+
+var gauge = charts.gauge({
   container: "#chart_area_demo",
   value: 60,
   size: 240,
