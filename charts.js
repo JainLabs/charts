@@ -1043,6 +1043,8 @@ charts.extend({
 			ylabel: 'DRA Score',
             xMarker: obj.deadline,
             yMarker: obj.goal,
+            xMax: obj.xMax || obj.deadline,
+            yMax: obj.yMax || obj.goal,
             container: obj.container,
             width: obj.width,
             height: obj.height,
