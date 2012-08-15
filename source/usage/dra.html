@@ -6,6 +6,8 @@
 	<script type="text/javascript" src="../charts.js"></script>
 	<script type="text/javascript" src="../charts/line.js"></script>
 	<script type="text/javascript" src="../wrappers/DRA.js"></script>
+	<!-- jQuery required for popovers -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script>
 	window.onload = function() {
 		window.d = charts.DRA({
@@ -19,7 +21,8 @@
 			deadline: '2012/06/10',
 			goal: 40,
 			width: 1000,
-			height: 400
+			height: 400,
+			popover: true
 		});
 	};
 	</script>

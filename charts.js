@@ -1016,6 +1016,7 @@ charts.extend({
 		obj.color = (obj.color && obj.color !== '' && obj.color !== 'undefined') ? obj.color : '';
 		obj.width     = (obj.width && typeof obj.width === 'number') ? obj.width : undefined;
         obj.height    = (obj.height && typeof obj.height === 'number') ? obj.height : undefined;
+        obj.popover    = obj.popover === true ? true : false;
 
         // Map scores to a usable format
         for (var i in scores) {
@@ -1045,7 +1046,8 @@ charts.extend({
             container: obj.container,
             width: obj.width,
             height: obj.height,
-            color: obj.color
+            color: obj.color,
+            popover: obj.popover
 		};
 
 		var returnChart = this.line(lineCall);
