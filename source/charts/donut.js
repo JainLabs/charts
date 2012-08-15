@@ -3,7 +3,8 @@ charts.extend({
     //Width, Height and radius of Donut Chart
     var data = [],
         cats = [],
-        colors = [];
+        colors = [],
+        chartID = "donut"+Math.round(Math.random()*1000000); // random id for SVG
     
     //New color function using d3 scale.
     var d3color = d3.scale.category20();
@@ -42,6 +43,7 @@ charts.extend({
     //Insert an svg element
     
     var svg = d3.select(sel).append("svg:svg")
+      .attr("id", chartID)
       .attr("width", w)
       .attr("height", h)
       .append("svg:g")  
@@ -81,5 +83,29 @@ charts.extend({
         var a = (d.startAngle + d.endAngle) * 90 / Math.PI - 90;
         return a > 90 ? a - 180 : a;
       }
+
+    return {
+      id: chartID,
+      obj: obj,
+      remove: function() {
+        var oldElem = document.getElementById(this.id),
+            placeholder = document.createElement('div');
+        placeholder.setAttribute('id',this.id);
+
+        oldElem.parentNode.replaceChild(placeholder, oldElem);
+        return this;
+      },
+      redraw: function(data) {
+        this.remove();
+        this.obj.sections = data;
+        this.obj.container = '#'+this.id;
+
+        return charts.donut(this.obj);
+      },
+      add: function(data) {
+        this.redraw(this.obj.sections.concat(data));
+        return this;
+      }
+    };
   }
 });

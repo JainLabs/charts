@@ -8,7 +8,7 @@
 	<script type="text/javascript" src="../wrappers/behavior.js"></script>
 	<script>
 	window.onload = function() {
-		charts.donut({
+		window.donutChart = charts.donut({
 			sections: [{
 				data: 172,
 				label: "a",
@@ -32,7 +32,7 @@
 			height: 400
 		});
 
-		charts.behavior(
+		window.behaviorChart = charts.behavior(
 			{
 				positive: {
 					'participation':3,
