@@ -1,3 +1,5 @@
+// Gauge adapted from Tomer Doron's D3 gauge code: https://gist.github.com/1499279
+
 charts.extend({
   gauge: function(configuration) {
     function Gauge(configuration) {
