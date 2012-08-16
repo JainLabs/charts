@@ -57,9 +57,7 @@ charts.extend({
     g.append("svg:path")
           .attr("d", arc)
           .style("fill",function(d, i) { return colors[i]; })
-        .style("stroke", '#fff')
-        .append("svg:title")
-          .text(function(d) {return String(d.data) + " votes";});
+        .style("stroke", '#fff');
     
     g.append("svg:text")
       .attr("dy", "0.35em")
