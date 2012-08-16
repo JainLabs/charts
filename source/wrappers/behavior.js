@@ -39,12 +39,23 @@ charts.extend({
 			}
 		})();
 
-		this.donut({
+		var returnChart = this.donut({
 			sections: values,
 			centerLabel: 'Behavior',
 			container: sel,
 			width: w,
 			height: h
 		});
+		returnChart.data = data;
+		returnChart.redraw = function(data) {
+            this.remove();
+            this.data = data;
+            this.container = '#'+this.id;
+
+			return charts.behavior(this.data,this.container,w,h);
+        };
+		delete returnChart.add;
+
+		return returnChart;
 	}
 });
