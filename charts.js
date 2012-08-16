@@ -1028,15 +1028,15 @@ charts.extend({
 			width: w,
 			height: h
 		});
-		returnChart.obj = obj;
+		returnChart.data = data;
 		returnChart.redraw = function(data) {
             this.remove();
-            this.obj.data = data;
-            this.obj.container = '#'+this.id;
+            this.data = data;
+            this.container = '#'+this.id;
 
-			return charts.behavior(this.obj.data,this.obj.container,w,h);
+			return charts.behavior(this.data,this.container,w,h);
         };
-        returnChart.add = undefined;
+		delete returnChart.add;
 
 		return returnChart;
 	}
