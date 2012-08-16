@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/buttons.css">
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/subnav.css">
     <script src="//d3js.org/d3.v2.min.js"></script>
-    <script type="text/javascript" src="https://raw.github.com/JainLabs/charts/master/charts.min.js"></script>
+    <script type="text/javascript" src="http://jainlabs.github.com/charts/cdn/charts.min.js"></script>
     <title>charts.js</title>
   </head>
 
@@ -85,7 +85,7 @@
 
           <p>produces:  </p>
             <div id="chart_area_demo"></div>
-            <button class="cupid-green" onclick="gauge.redraw(Math.floor(Math.random()*100))">Redraw</button>
+            <button class="cupid-green" style="float:right;margin-top:-170px;margin-right:90px;width:200px;height:100px;font-size:30px" onclick="gauge.redraw(Math.floor(Math.random()*100))">Redraw</button>
           <h2>More charting examples</h2>
           <div class="subnav">
             <ul class="nav nav-pills">
@@ -170,7 +170,8 @@
     belowLine: '#999999',
     onLine: 'steelblue',
     aboveLine: 'green'
-  }
+  },
+  popover: true
 });</code></pre></div>
 
           </div>
@@ -202,7 +203,7 @@
               </form>
             </h5>
 
-            <form action="#" id="line_customize" class="customize"></form>
+            <form action="#" id="line_customize" style="margin-top:-35px;width:100%"></form>
             <div id="line_chart" style="display: block; width: 600px; margin: auto;"></div>
 
 <div id="line_code" style="display:none"><pre class="prettyprint"><code>charts.line({
@@ -227,7 +228,8 @@
   color: "#0A0",
   width: 600,
   height: 300,
-  container: "#line_chart"
+  container: "#line_chart",
+  popover: true
 });</code></pre></div>
             
             <hr style="width:100%" />
@@ -253,7 +255,8 @@
   deadline: '2012/06/10',
   goal: 40,
   width: 600,
-  height: 300
+  height: 300,
+  popover: true
 });</code></pre></div>
 
             <br />

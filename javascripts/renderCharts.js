@@ -114,19 +114,26 @@ var lineChart = charts.line({
 });
 
 $('#line_customize').append(
-  'Title: <input type="text" name="title" value="'+lineChart.obj.title+'" /><br />'+
-  'x marker: <input type="date" name="xMarker" value="'+lineChart.obj.xMarker+'" /><br />'+
-  'y marker: <input type="number" name="yMarker" value="'+lineChart.obj.yMarker+'" /><br />'+
-  'x label: <input type="text" name="xlabel" value="'+lineChart.obj.xlabel+'" /><br />'+
-  'y label: <input type="text" name="ylabel" value="'+lineChart.obj.ylabel+'" /><br />'+
-  'x max: <input type="date" name="xMax" value="'+lineChart.obj.xMax+'" /><br />'+
-  'y max: <input type="number" name="yMax" value="'+lineChart.obj.yMax+'" /><br />'+
-  'Height: <input type="number" name="height" value="'+lineChart.obj.height+'" /><br />'+
-  'Width: <input type="number" name="width" value="'+lineChart.obj.width+'" /><br />'+
-  'Color: <input type="color" name="color" value="'+lineChart.obj.color+'" /><br />'+
-  'Data: <br /><textarea name="data">'+JSON.stringify(lineChart.obj.data,null,2)+'</textarea><br />'+
+  '<table style="width:100%;border:none"><tr>'+
+  '<td style="border:none">'+
+    'Title: <input type="text" name="title" value="'+lineChart.obj.title+'" /><br />'+
+    'x marker: <input type="date" name="xMarker" value="'+lineChart.obj.xMarker+'" /><br />'+
+    'y marker: <input type="number" name="yMarker" value="'+lineChart.obj.yMarker+'" /><br />'+
+    'x label: <input type="text" name="xlabel" value="'+lineChart.obj.xlabel+'" /><br />'+
+    'y label: <input type="text" name="ylabel" value="'+lineChart.obj.ylabel+'" /><br />'+
+    'x max: <input type="date" name="xMax" value="'+lineChart.obj.xMax+'" /><br />'+
+    'y max: <input type="number" name="yMax" value="'+lineChart.obj.yMax+'" /><br />'+
+  '</td>'+
+  '<td style="border:none">'+
+    'Height: <input type="number" name="height" value="'+lineChart.obj.height+'" /><br />'+
+    'Width: <input type="number" name="width" value="'+lineChart.obj.width+'" /><br />'+
+    'Color: <input type="color" name="color" value="'+lineChart.obj.color+'" /><br />'+
+    'Data: <br /><textarea name="data">'+JSON.stringify(lineChart.obj.data,null,2)+'</textarea><br />'+
+  '</td>'+  
+  '</tr></table>'+
+  '<input type="submit" class="cupid-green" style="display:block;margin:auto;margin-top:-20px" value="Customize">'
   // '<input type="date" name="line_x" placeholder="date"/>'+
-  '<input type="submit" class="cupid-green" style="margin-top:10px" value="Customize">'
+
 );
 
 $('#line_customize').submit(function(e) {

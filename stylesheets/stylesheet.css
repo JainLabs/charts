@@ -453,19 +453,3 @@ table.chart-types tr.labels td {
   /*font-weight: bold;*/
   text-align: center;
 }
-
-form.customize {
-  display: block;
-  margin-top: 15px;
-  padding: 0;
-  width: 50%;
-  float: left;
-}
-
-form.addData {
-  display: block;
-  padding: 0;
-  margin-top: 15px;
-  width: 50%;
-  float: right;
-}
