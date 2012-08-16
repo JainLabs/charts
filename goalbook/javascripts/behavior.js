@@ -1,26 +1,23 @@
 document.addEventListener('DOMContentLoaded', function () {
 	window.behaviorChart = charts.behavior({
 	  positive: {
-	    '2 remiders':2,
-	    '0-1 remiders':3
+	    '0-1 remiders':3,
+	    '2 remiders':2
 	  },
 	  negative: {
-	    'directions ignored': 1,
-	    '3+ remiders': 1
+	    '3+ remiders': 1,
+	    'directions ignored': 1
 	  }
 	}, '#chartContainer', 270, 270);
 	$('#chart_share').on('click', function(e) {
 		e.preventDefault();
-		var date = new Date($('input[name="effective[year]"]').val(),$('input[name="effective[month]"]').val(),$('input[name="effective[day]"]').val()),
-			data = parseFloat($('input[name="completion"]').val()),
-			point = {};
-		point[date.toDateString()] = data;
-		console.log(point);
-		// dra.add(point);
+		switch($('select[name="reminders"]').val()) {
+			case '0-1': ++behaviorChart.data.positive['0-1 remiders']; break;
+			case '2': ++behaviorChart.data.positive['2 remiders']; break;
+			case '3 or more': ++behaviorChart.data.negative['3+ remiders']; break;
+			case 'directions ignored': ++behaviorChart.data.negative['directions ignored']; break;
+		}
+		behaviorChart.redraw(behaviorChart.data);
 		return false;
 	});
 });
-
-// gl.add({
-// 	'09/07/2011': [70,80,80,80,80]
-// });
