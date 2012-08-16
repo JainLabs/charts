@@ -10,7 +10,7 @@ var headerchart = charts.gauge({
         red: { from: 90, to: 100 },  
         yellow: { from: 75, to: 90 },  
         green: { from: 0, to: 20 }  
-    }  
+    }
 });
 var val = 0;
 window.setInterval(function(){ headerchart.redraw(Math.floor(Math.random()*10)+25) }, 100);
@@ -109,7 +109,8 @@ var lineChart = charts.line({
   height: 300,
   container: "#line_chart",
   xMax: 'Wed Jul 04 2012 12:00:00 GMT-0700 (PDT)',
-  yMax: 20
+  yMax: 20,
+  popover: true
 });
 
 $('#line_customize').append(
@@ -154,7 +155,8 @@ $('#line_customize').submit(function(e) {
     color: d[9].value || "",
     width: parseFloat(d[8].value) || 600,
     height: parseFloat(d[7].value) || 300,
-    container: "#line_chart"
+    container: "#line_chart",
+    popover: true
   });
 
   return false;
@@ -203,26 +205,28 @@ var DRAChart = charts.DRA({
   goal: 40,
   width: 600,
   height: 300,
-  color: 'green'
+  color: 'green',
+  popover: true
 });
 
-$('#DRA_customize').append(
-  'Title: <input type="text" name="title" value="'+DRAChart.obj.title+'" /><br />'+
-  'Deadline: <input type="date" name="xMarker" value="'+DRAChart.obj.xMarker+'" /><br />'+
-  'Goal: <input type="date" name="yMarker" value="'+DRAChart.obj.yMarker+'" /><br />'+
-  'Height: <input type="number" name="height" value="'+DRAChart.obj.height+'" /><br />'+
-  'Width: <input type="number" name="width" value="'+DRAChart.obj.width+'" /><br />'+
-  'Color: <input type="color" name="color" value="'+DRAChart.obj.color+'" /><br />'+
-  'Data: <br /><textarea name="data">'+JSON.stringify(DRAChart.obj.data,null,2)+'</textarea><br />'+
-  // '<input type="date" name="line_x" placeholder="date"/>'+
-  '<input type="submit" class="cupid-green" style="margin-top:10px" value="Customize">'
-);
+// Code to add DRA customization form
+// $('#DRA_customize').append(
+//   'Title: <input type="text" name="title" value="'+DRAChart.obj.title+'" /><br />'+
+//   'Deadline: <input type="date" name="xMarker" value="'+DRAChart.obj.xMarker+'" /><br />'+
+//   'Goal: <input type="date" name="yMarker" value="'+DRAChart.obj.yMarker+'" /><br />'+
+//   'Height: <input type="number" name="height" value="'+DRAChart.obj.height+'" /><br />'+
+//   'Width: <input type="number" name="width" value="'+DRAChart.obj.width+'" /><br />'+
+//   'Color: <input type="color" name="color" value="'+DRAChart.obj.color+'" /><br />'+
+//   'Data: <br /><textarea name="data">'+JSON.stringify(DRAChart.obj.data,null,2)+'</textarea><br />'+
+//   // '<input type="date" name="line_x" placeholder="date"/>'+
+//   '<input type="submit" class="cupid-green" style="margin-top:10px" value="Customize">'
+// );
 
-$('#DRA_customize').submit(function(e) {
-  e.preventDefault()
+// $('#DRA_customize').submit(function(e) {
+//   e.preventDefault()
   
-  return false;
-});
+//   return false;
+// });
 
 $('#DRA_addData').submit(function(e) {
   e.preventDefault();
@@ -238,10 +242,10 @@ $('#DRA_addData').submit(function(e) {
 charts.groupedLine({
   time: true,
   data: {
-    'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)': [.3,.42,.5,.6],
+    'Sun Jul 01 2012 00:00:00 GMT-0700 (PDT)': [.3,.3,.42,.5,.6],
     'Sun Jul 02 2012 00:00:00 GMT-0700 (PDT)': [.6,.8,.9],
-    'Sun Jul 03 2012 00:00:00 GMT-0700 (PDT)': [1.5,2,2.1],
-    'Sun Jul 04 2012 00:00:00 GMT-0700 (PDT)': [2.2,2.3,2.5]
+    'Sun Jul 03 2012 00:00:00 GMT-0700 (PDT)': [1.5,1.5,1.5,2,2.1],
+    'Sun Jul 04 2012 00:00:00 GMT-0700 (PDT)': [2.2,2.3,2.5,2.5]
   },
   title: 'Grouped Line Chart',
   xlabel: 'Time',
@@ -254,10 +258,11 @@ charts.groupedLine({
   width:  600,
   height: 300,
   boxColors: {
-    belowLine: 'red',
-    onLine: 'orange',
+    belowLine: '#999999',
+    onLine: 'steelblue',
     aboveLine: 'green'
-  }
+  },
+  popover: true
 });
 
 
