@@ -8,27 +8,26 @@
 	<script>
 	window.onload = function() {
 		window.donutChart = charts.donut({
-			sections: [{
-				data: 172,
-				label: "a",
-				color:"rgb(0,200,0)"
-			}, {
-				data: 136,
-				label: "b",
-				color:"rgb(0,150,0)"
-			}, {
-				data: 135,
-				label: "c",
-				color:"rgb(0,100,0)"
-			}, {
-				data: 10,
-				label: "d",
-				color:"rgb(100,0,0)"
-			}],
-			centerLabel: 'Label',
-			container: 'body',
-			width: 400,
-			height: 400
+		  sections: [{
+		    data: 2,
+		    label: 'eating',
+		  }, {
+		    data: 8,
+		    label: 'sleeping',
+		  }, {
+		    data: 1.5,
+		    label: 'Hacker News',
+		  }, {
+		    data: 5,
+		    label: 'coding',
+		  }, {
+		    data: 7.5,
+		    label: 'other',
+		  }],
+		  centerLabel: 'My day',
+		  container: 'body',
+		  width: 400,
+		  height: 400
 		});
 
 		window.behaviorChart = charts.behavior(
