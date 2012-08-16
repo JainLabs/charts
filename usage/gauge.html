@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Gauge Chart</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+	<script src="//d3js.org/d3.v2.js"></script>
+	<script src="https://raw.github.com/JainLabs/charts/master/charts.min.js"></script>
+	<script>
+	window.onload = function()
+	{
+		window.gauge = charts.gauge({
+			container: '#mem',
+			value: 50,
+			size: 240,
+			label: 'Memory',
+			minorTicks: 5,
+			majorTicks: 5,
+			zones: {
+				red: { from: 0, to: 5 },
+				yellow: { from: 5, to: 15 },
+				green: { from: 85, to: 100 }
+			}
+		});
+		gauge.redraw(60);
+	};
+	</script>
+</head>
+<body>
+	<span id="mem"></span>
+</body>
+</html>

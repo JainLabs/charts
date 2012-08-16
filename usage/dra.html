@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DRA Chart</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+	<script src="//d3js.org/d3.v2.js"></script>
+	<script src="https://raw.github.com/JainLabs/charts/master/charts.min.js"></script>
+	<!-- jQuery required for popovers -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script>
+	window.onload = function() {
+		window.d = charts.DRA({
+			scores: {
+				'2012/06/1': 25,
+				'2012/06/4': 28,
+				'2012/06/7': 35,
+				'2012/06/11': 50
+			},
+			container: 'body',
+			deadline: '2012/06/10',
+			goal: 40,
+			width: 1000,
+			height: 400,
+			popover: true
+		});
+	};
+	</script>
+</head>
+<body>
+</body>
+</html>

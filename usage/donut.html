@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Donut Chart</title>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+	<script src="//d3js.org/d3.v2.js"></script>
+	<script src="https://raw.github.com/JainLabs/charts/master/charts.min.js"></script>
+	<script>
+	window.onload = function() {
+		window.donutChart = charts.donut({
+			sections: [{
+				data: 172,
+				label: "a",
+				color:"rgb(0,200,0)"
+			}, {
+				data: 136,
+				label: "b",
+				color:"rgb(0,150,0)"
+			}, {
+				data: 135,
+				label: "c",
+				color:"rgb(0,100,0)"
+			}, {
+				data: 10,
+				label: "d",
+				color:"rgb(100,0,0)"
+			}],
+			centerLabel: 'Label',
+			container: 'body',
+			width: 400,
+			height: 400
+		});
+
+		window.behaviorChart = charts.behavior(
+			{
+				positive: {
+					'participation':3,
+					'productivity':2,
+					'excitment':1
+				},
+				negative: {
+					'sleeping': 1,
+					'distracted': 1
+				},
+				neutral: {
+					'restroom breaks': 2,
+					'xyz': 1,
+				}
+			}, 'body', 350, 350);
+	};
+	</script>
+</head>
+<body>
+</body>
+</html>
