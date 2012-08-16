@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
 	window.behaviorChart = charts.behavior({
 	  positive: {
-	    '0-1 remiders':1,
-	    '2 remiders':2
+	    '2 remiders':2,
+	    '0-1 remiders':3
 	  },
 	  negative: {
-	    '2 remiders': 2,
-	    'directions ignored': 2
+	    'directions ignored': 1,
+	    '3+ remiders': 1
 	  }
 	}, '#chartContainer', 270, 270);
 	$('#chart_share').on('click', function(e) {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			point = {};
 		point[date.toDateString()] = data;
 		console.log(point);
-		dra.add(point);
+		// dra.add(point);
 		return false;
 	});
 });

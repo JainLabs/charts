@@ -4,9 +4,8 @@
 		<link rel="shortcut icon" href="/goals/images/favicon.ico">
 		<link rel="stylesheet" href="stylesheets/goalbook.css">
 
-		<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
 		<script src="//d3js.org/d3.v2.js"></script>
-		<script src="https://raw.github.com/JainLabs/charts/master/charts.min.js"></script>
+		<script src="https://raw.github.com/JainLabs/charts/master/charts.js"></script>
 		<script type="text/javascript" src="javascripts/behavior.js"></script>
 
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -163,7 +162,7 @@
 								title="Goal pending and due on Nov 11, 2012">
 								<span style="font-weight:bold">GOAL:</span>Student will follow directions given by teacher or staff or other adults in 90% of opportunities in a given after given two or less verbal/non-verfrequency, for three consecutive days, as measured by teacher observation and measurement.</p>
 							<div id="container" style="height:270px;width:630px;margin-left:-15px;">
-								<div id="chartContainer"></div>
+								<div id="chartContainer" style="display:block;width:270px;margin:auto"></div>
 							</div>
 							<h2>Messages for Goal</h2>
 							<div class="new-message-container rounded-corners shadow_box">
@@ -187,50 +186,23 @@
 											<input type="hidden" class="status_71ea6b24-0c93-11e1-b194-12313f049853"
 											value="PENDING">
 											<div class="row">
-												<div class="prompt">DRA:</div>
+												<div class="prompt">Reminders required:</div>
 												<div class="field" style="position:relative;">
-													<div class="meter" style="position:absolute;left:80px;">
-														<div class="progress" style="width: 96.42857142857144px; ">&nbsp;</div>
-														<div>
-															<div style="float:left;font-size:10px;">12</div>
-															<div style="float:right;font-size:10px;">40</div>
-														</div>
-													</div>
-													<input type="text" name="completion" class="completion-select" style="width:50px;"
-													value="30">
+													<select name="reminders">
+														<option value="0">0-1</option>
+														<option value="5">2</option>
+														<option value="10">3 or more</option>
+														<option value="15">ignored direction</option>
+													</select>
 													<br>
 												</div>
 											</div>
-											<div class="row" style="margin-top:-15px">
-												<div class="prompt">On:</div>
-												<div class="field">
-													<div class="effective" style="position:relative;">
-														<div style="float:left;">
-															<input name="effective[month]" class="month-input hasDatepicker" type="text"
-															style="text-align:center;" size="2" maxlength="2" value="8" id="dp1345055073318">
-															<img class="ui-datepicker-trigger" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACSUlEQVR42qWQ2U9TQRyF/b+ML7z45AvBHawLJgSFytIoJKAxBExFIAKVJey4gC0USoMW2QQpWEBZwiLgwt57gbaXylJiPscpaTHxxfBw7pmZnPPN/O4J4FiSn7r3nszaXs9SVc8mFV0qZe9UTA43he1rFNhXyW1d5lHzIlnm7zxoWCDj+TzpdV8+hgA1vVuqf/eA/1Fq9fReCFDZvSEPqb8JdbFQfRUqY6D0ApiioOAMPD4NWRFw/5TM6ssnCQHKO9VDgCh3pkGHAd4mwZsEsMWB9Rq8vgQvBSzjpMzGPxsLA0oc7r9fUHsdakSpSgcV0VAmyiXnoVgAiiJlNrZwNAwoal+Thy/63AA09K9LbxwI7s3O4N46GHTVt4su3xUG5LetoO0EZMH8R04Fi9NN05Abq1CS9TaJzfEkWOKwD6/zdU3jonEwDMhtWcK3ExAFJXjTodtcbukpLXqKx/PQN98CYG7Fx9nsgTAgp+kHXn+AVpeCbVgh3W4gzZ7KvbYU2kcVDLY7pLbqSW5JpEmMMTStEJXdHwY8bPyGZ3tfhgEJKJ8skhAAxydFjHiAdzuAa0ZlYVVD9+TICJmvFiTA8VmlQ0gAQuocU7GPKPKFw7Mqc8s+fGIdbTwyQnr9LFsC0DWuAtA9EfSeQ7c4FUZmN2TZK3IebR9d7hGAoWaaTW0PxbvL6uYOi4pf/OltWZhZ9DI4pTC/oiFulgDtZ4AY44dfIUBy5VR/YumEP840xo2no1zJc3HZOMS5HCeRWX3/VMTdDmsIcBz9BjjfNq7vxU1jAAAAAElFTkSuQmCC"
-															alt="..." title="...">
-															<div class="note" style="text-align:center;margin-top:5px;">MM</div>
-														</div>
-														<div style="float:left;margin-left:5px;">
-															<input name="effective[day]" class="day-input" type="text" style="text-align:center;"
-															size="2" maxlength="2" value="15">
-															<div class="note" style="text-align:center;margin-top:5px;">DD</div>
-														</div>
-														<div style="float:left;margin-left:5px;">
-															<input name="effective[year]" class="year-input" type="text" style="text-align:center;"
-															size="4" maxlength="4" value="2012">
-															<div class="note" style="text-align:center;margin-top:5px;">YYYY</div>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="row" style="margin-top:-15px;">
+											<!-- <div class="row" style="margin-top:-15px;">
 												<div class="prompt">Message:</div>
 												<div class="field">
 													<textarea class="message-textarea" style="width:400px;"></textarea>
 												</div>
-											</div>
+											</div> -->
 											<div class="row" style="margin-top:-25px;">
 												<div class="prompt">&nbsp;</div>
 												<div class="field">
@@ -778,7 +750,7 @@
 									</div>
 								</li>
 								<li>
-									<div class="goal rounded-corners g71ea6b24-0c93-11e1-b194-12313f049853 selected"
+									<div class="goal rounded-corners g71ea6b24-0c93-11e1-b194-12313f049853"
 									style="position:relative;height:15px;padding:4px;width:300px;margin-left:-2px;">
 										<div style="position:absolute;top:4px;left:2px;">
 											<div class="meter" style="width:80px">
