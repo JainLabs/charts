@@ -20,6 +20,9 @@ charts.js is meant to be an easy to use library to pair complex online charting 
 
 ---
 
+## Extending charts.js
+Copy one of the charts under `source/charts` to create a customized visualization. If you make an interesting chart, please send a pull request to add it to the main project.
+
 ## Core Charts (charts/)
 ### Donut (donut.js)
 ```
